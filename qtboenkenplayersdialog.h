@@ -32,6 +32,7 @@ namespace Ui {
 }
 
 namespace ribi {
+namespace bnkn {
 
 ///Dialog to connect sprites to their controllers\n
 ///A controller can be\n
@@ -51,6 +52,7 @@ private:
   Ui::QtBoenkenPlayersDialog *ui;
 };
 
+} //~namespace bnkn
 } //~namespace ribi
 
 #endif // QTBOENKENPLAYERSDIALOG_H

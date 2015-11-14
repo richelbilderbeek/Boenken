@@ -29,8 +29,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 namespace ribi {
-
-namespace Boenken {
+namespace bnkn {
 
 struct SpriteMoving;
 
@@ -61,8 +60,7 @@ struct SpriteNonMoving final : public Sprite
   #endif
 };
 
-} //~namespace Boenken
-
+} //~namespace bnkn
 } //~namespace ribi
 
 #endif // BOENKENSPRITENONMOVING_H

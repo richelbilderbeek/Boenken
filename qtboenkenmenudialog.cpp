@@ -49,7 +49,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma GCC diagnostic pop
 
-ribi::QtBoenkenMenuDialog::QtBoenkenMenuDialog(QWidget *parent)
+ribi::bnkn::QtBoenkenMenuDialog::QtBoenkenMenuDialog(QWidget *parent)
   : QtHideAndShowDialog(parent),
     ui(new Ui::QtBoenkenMenuDialog),
     m_controls(new QtBoenkenControlsDialog),
@@ -60,25 +60,24 @@ ribi::QtBoenkenMenuDialog::QtBoenkenMenuDialog(QWidget *parent)
   #ifndef NDEBUG
   Test();
   #endif
-  QObject::connect(ui->button_set_controls,&QAbstractButton::clicked,this,&ribi::QtBoenkenMenuDialog::onControlsClick);
-  QObject::connect(ui->button_set_players ,&QAbstractButton::clicked,this,&ribi::QtBoenkenMenuDialog::onPlayersClick );
-  QObject::connect(ui->button_set_arena   ,&QAbstractButton::clicked,this,&ribi::QtBoenkenMenuDialog::onArenaClick   );
-  QObject::connect(ui->button_start       ,&QAbstractButton::clicked,this,&ribi::QtBoenkenMenuDialog::onStartClick   );
-  QObject::connect(ui->button_train       ,&QAbstractButton::clicked,this,&ribi::QtBoenkenMenuDialog::onTrainClick   );
-  QObject::connect(ui->button_about       ,&QAbstractButton::clicked,this,&ribi::QtBoenkenMenuDialog::onAboutClick   );
-  QObject::connect(ui->button_quit        ,&QAbstractButton::clicked,this,&ribi::QtBoenkenMenuDialog::close          );
+  QObject::connect(ui->button_set_controls,&QAbstractButton::clicked,this,&ribi::bnkn::QtBoenkenMenuDialog::onControlsClick);
+  QObject::connect(ui->button_set_players ,&QAbstractButton::clicked,this,&ribi::bnkn::QtBoenkenMenuDialog::onPlayersClick );
+  QObject::connect(ui->button_set_arena   ,&QAbstractButton::clicked,this,&ribi::bnkn::QtBoenkenMenuDialog::onArenaClick   );
+  QObject::connect(ui->button_start       ,&QAbstractButton::clicked,this,&ribi::bnkn::QtBoenkenMenuDialog::onStartClick   );
+  QObject::connect(ui->button_about       ,&QAbstractButton::clicked,this,&ribi::bnkn::QtBoenkenMenuDialog::onAboutClick   );
+  QObject::connect(ui->button_quit        ,&QAbstractButton::clicked,this,&ribi::bnkn::QtBoenkenMenuDialog::close          );
 }
 
-ribi::QtBoenkenMenuDialog::~QtBoenkenMenuDialog() noexcept
+ribi::bnkn::QtBoenkenMenuDialog::~QtBoenkenMenuDialog() noexcept
 {
   delete ui;
 }
 
-const std::vector<boost::shared_ptr<ribi::Boenken::SpritePlayer> > ribi::QtBoenkenMenuDialog::CreatePlayers(
-  const Boenken::ArenaSettings& a)
+const std::vector<boost::shared_ptr<ribi::bnkn::SpritePlayer> > ribi::bnkn::QtBoenkenMenuDialog::CreatePlayers(
+  const bnkn::ArenaSettings& a)
 {
   //Create two
-  std::vector<boost::shared_ptr<Boenken::SpritePlayer> > v;
+  std::vector<boost::shared_ptr<bnkn::SpritePlayer> > v;
   const int n_players = 2;
   const int size = 32;
 
@@ -87,7 +86,7 @@ const std::vector<boost::shared_ptr<ribi::Boenken::SpritePlayer> > ribi::QtBoenk
   const double mid_y
     = boost::numeric_cast<double>(a.screen_size.second) / 2.0;
 
-  if (a.formation==Boenken::straight_line)
+  if (a.formation == Formation::straight_line)
   {
     const int x_left  = (1 * (a.width() / 4) ) - (size / 2);
     const int x_right = (3 * (a.width() / 4) ) - (size / 2);
@@ -101,8 +100,8 @@ const std::vector<boost::shared_ptr<ribi::Boenken::SpritePlayer> > ribi::QtBoenk
       const unsigned char r = (i % 2 ?   0 : 255);
       const unsigned char g = (i % 2 ?   0 :   0);
       const unsigned char b = (i % 2 ? 255 :   0);
-      boost::shared_ptr<Boenken::SpritePlayer> p(
-        new Boenken::SpritePlayer(x,y,face_angle,size,r,g,b));
+      boost::shared_ptr<bnkn::SpritePlayer> p(
+        new bnkn::SpritePlayer(x,y,face_angle,size,r,g,b));
       assert(p);
       v.push_back(p);
     }
@@ -110,7 +109,7 @@ const std::vector<boost::shared_ptr<ribi::Boenken::SpritePlayer> > ribi::QtBoenk
   }
   else
   {
-    assert(a.formation==Boenken::circle_inward || a.formation==Boenken::circle_outward);
+    assert(a.formation == Formation::circle_inward || a.formation == Formation::circle_outward);
     const double ray_x = mid_x / 2.0;
     const double ray_y = mid_y / 2.0;
     const double pi = boost::math::constants::pi<double>();
@@ -129,10 +128,10 @@ const std::vector<boost::shared_ptr<ribi::Boenken::SpritePlayer> > ribi::QtBoenk
       const unsigned char g = (i % 2 ?   0 :   0);
       const unsigned char b = (i % 2 ? 255 :   0);
       const double face_angle = angle
-        + (a.formation==Boenken::circle_inward ? pi : 0.0);
+        + (a.formation == Formation::circle_inward ? pi : 0.0);
 
-      boost::shared_ptr<Boenken::SpritePlayer> p(
-        new Boenken::SpritePlayer(x,y,face_angle,size,r,g,b));
+      boost::shared_ptr<SpritePlayer> p(
+        new SpritePlayer(x,y,face_angle,size,r,g,b));
       assert(p);
       v.push_back(p);
     }
@@ -141,15 +140,15 @@ const std::vector<boost::shared_ptr<ribi::Boenken::SpritePlayer> > ribi::QtBoenk
   return v;
 }
 
-const std::vector<boost::shared_ptr<ribi::Boenken::SpriteBall> > ribi::QtBoenkenMenuDialog::CreateBalls(
-  const Boenken::ArenaSettings& a)
+const std::vector<boost::shared_ptr<ribi::bnkn::SpriteBall> > ribi::bnkn::QtBoenkenMenuDialog::CreateBalls(
+  const bnkn::ArenaSettings& a)
 {
   const int size = 32;
   //A ball is always green
   const unsigned char r =   0;
   const unsigned char g = 255;
   const unsigned char b =   0;
-  std::vector<boost::shared_ptr<Boenken::SpriteBall> > v;
+  std::vector<boost::shared_ptr<bnkn::SpriteBall> > v;
   switch (a.n_balls)
   {
     case 1:
@@ -158,8 +157,8 @@ const std::vector<boost::shared_ptr<ribi::Boenken::SpriteBall> > ribi::QtBoenken
         = a.screen_size.first / 2 - (size / 2);
       const int y
         = a.screen_size.second / 2 - (size / 2);
-      boost::shared_ptr<Boenken::SpriteBall> s(
-        new Boenken::SpriteBall(x,y,size,r,g,b));
+      boost::shared_ptr<bnkn::SpriteBall> s(
+        new bnkn::SpriteBall(x,y,size,r,g,b));
       assert(s);
       v.push_back(s);
     }
@@ -173,10 +172,10 @@ const std::vector<boost::shared_ptr<ribi::Boenken::SpriteBall> > ribi::QtBoenken
       const int y
         = (a.screen_size.second / 2)
         - (size / 2);
-      boost::shared_ptr<Boenken::SpriteBall> s1(
-        new Boenken::SpriteBall(x1,y,size,r,g,b));
-      boost::shared_ptr<Boenken::SpriteBall> s2(
-        new Boenken::SpriteBall(x2,y,size,r,g,b));
+      boost::shared_ptr<bnkn::SpriteBall> s1(
+        new bnkn::SpriteBall(x1,y,size,r,g,b));
+      boost::shared_ptr<bnkn::SpriteBall> s2(
+        new bnkn::SpriteBall(x2,y,size,r,g,b));
       assert(s1);
       assert(s2);
       v.push_back(s1);
@@ -190,8 +189,8 @@ const std::vector<boost::shared_ptr<ribi::Boenken::SpriteBall> > ribi::QtBoenken
 }
 
 ///Always creates the four goalposts
-const std::vector<boost::shared_ptr<ribi::Boenken::SpriteNonMoving> > ribi::QtBoenkenMenuDialog::CreateObstacles(
-  const Boenken::ArenaSettings& a)
+const std::vector<boost::shared_ptr<ribi::bnkn::SpriteNonMoving> > ribi::bnkn::QtBoenkenMenuDialog::CreateObstacles(
+  const bnkn::ArenaSettings& a)
 {
   const int size = 32;
   //A obstacle is always grey
@@ -199,21 +198,21 @@ const std::vector<boost::shared_ptr<ribi::Boenken::SpriteNonMoving> > ribi::QtBo
   const unsigned char g = 255;
   const unsigned char b = 255;
 
-  std::vector<boost::shared_ptr<Boenken::SpriteNonMoving> > v;
+  std::vector<boost::shared_ptr<bnkn::SpriteNonMoving> > v;
   {
     //Top-left goalpost
     const int x = 0;
     const int y = a.screen_size.second / 4;
-    boost::shared_ptr<Boenken::SpriteNonMoving> s(
-      new Boenken::SpriteNonMoving(x,y,size,r,g,b));
+    boost::shared_ptr<bnkn::SpriteNonMoving> s(
+      new bnkn::SpriteNonMoving(x,y,size,r,g,b));
     v.push_back(s);
   }
   {
     //Bottom-left goalpost
     const int x = 0;
     const int y = 3 * a.screen_size.second / 4;
-    boost::shared_ptr<Boenken::SpriteNonMoving> s(
-      new Boenken::SpriteNonMoving(x,y,size,r,g,b));
+    boost::shared_ptr<bnkn::SpriteNonMoving> s(
+      new bnkn::SpriteNonMoving(x,y,size,r,g,b));
     assert(s);
     v.push_back(s);
   }
@@ -221,8 +220,8 @@ const std::vector<boost::shared_ptr<ribi::Boenken::SpriteNonMoving> > ribi::QtBo
     //Top-left goalpost
     const int x = a.screen_size.first - size;
     const int y = a.screen_size.second / 4;
-    boost::shared_ptr<Boenken::SpriteNonMoving> s(
-      new Boenken::SpriteNonMoving(x,y,size,r,g,b));
+    boost::shared_ptr<bnkn::SpriteNonMoving> s(
+      new bnkn::SpriteNonMoving(x,y,size,r,g,b));
     assert(s);
     v.push_back(s);
   }
@@ -230,8 +229,8 @@ const std::vector<boost::shared_ptr<ribi::Boenken::SpriteNonMoving> > ribi::QtBo
     //Bottom-left goalpost
     const int x = a.screen_size.first - size;
     const int y = 3 * a.screen_size.second / 4;
-    boost::shared_ptr<Boenken::SpriteNonMoving> s(
-      new Boenken::SpriteNonMoving(x,y,size,r,g,b));
+    boost::shared_ptr<bnkn::SpriteNonMoving> s(
+      new bnkn::SpriteNonMoving(x,y,size,r,g,b));
     assert(s);
     v.push_back(s);
   }
@@ -241,8 +240,8 @@ const std::vector<boost::shared_ptr<ribi::Boenken::SpriteNonMoving> > ribi::QtBo
       //Left obstacle
       const int x = ( (1 * a.width() ) / 8) - (size / 2);
       const int y = ( (1 * a.height()) / 2) - (size / 2);
-      boost::shared_ptr<Boenken::SpriteNonMoving> s(
-        new Boenken::SpriteNonMoving(x,y,size,r,g,b));
+      boost::shared_ptr<bnkn::SpriteNonMoving> s(
+        new bnkn::SpriteNonMoving(x,y,size,r,g,b));
       assert(s);
       v.push_back(s);
     }
@@ -250,8 +249,8 @@ const std::vector<boost::shared_ptr<ribi::Boenken::SpriteNonMoving> > ribi::QtBo
       //Right obstacle
       const int x = ( (7 * a.width() ) / 8) - (size / 2);
       const int y = ( (1 * a.height()) / 2) - (size / 2);
-      boost::shared_ptr<Boenken::SpriteNonMoving> s(
-        new Boenken::SpriteNonMoving(x,y,size,r,g,b));
+      boost::shared_ptr<bnkn::SpriteNonMoving> s(
+        new bnkn::SpriteNonMoving(x,y,size,r,g,b));
       assert(s);
       v.push_back(s);
     }
@@ -260,29 +259,29 @@ const std::vector<boost::shared_ptr<ribi::Boenken::SpriteNonMoving> > ribi::QtBo
   return v;
 }
 
-void ribi::QtBoenkenMenuDialog::onControlsClick()
+void ribi::bnkn::QtBoenkenMenuDialog::onControlsClick()
 {
   this->ShowChild(m_controls.get());
 }
 
-void ribi::QtBoenkenMenuDialog::onPlayersClick()
+void ribi::bnkn::QtBoenkenMenuDialog::onPlayersClick()
 {
   this->ShowChild(m_players.get());
 }
 
-void ribi::QtBoenkenMenuDialog::onArenaClick()
+void ribi::bnkn::QtBoenkenMenuDialog::onArenaClick()
 {
   this->ShowChild(m_arena.get());
 }
 
-void ribi::QtBoenkenMenuDialog::onStartClick()
+void ribi::bnkn::QtBoenkenMenuDialog::onStartClick()
 {
-  const Boenken::ArenaSettings a = this->m_arena->GetSettings();
-  const Boenken::Controls c = this->m_controls->GetControls();
-  const std::vector<boost::shared_ptr<Boenken::SpritePlayer   > > players   = CreatePlayers(a);
-  const std::vector<boost::shared_ptr<Boenken::SpriteBall     > > balls     = CreateBalls(a);
-  const std::vector<boost::shared_ptr<Boenken::SpriteNonMoving> > obstacles = CreateObstacles(a);
-  boost::shared_ptr<Boenken::Game> b(new Boenken::Game(a,c,players,balls,obstacles));
+  const bnkn::ArenaSettings a = this->m_arena->GetSettings();
+  const bnkn::Controls c = this->m_controls->GetControls();
+  const std::vector<boost::shared_ptr<bnkn::SpritePlayer   > > players   = CreatePlayers(a);
+  const std::vector<boost::shared_ptr<bnkn::SpriteBall     > > balls     = CreateBalls(a);
+  const std::vector<boost::shared_ptr<bnkn::SpriteNonMoving> > obstacles = CreateObstacles(a);
+  boost::shared_ptr<bnkn::Game> b(new bnkn::Game(a,c,players,balls,obstacles));
   assert(b);
   QtBoenkenMainDialog d(0,b);
 
@@ -291,15 +290,15 @@ void ribi::QtBoenkenMenuDialog::onStartClick()
   this->show();
 }
 
-void ribi::QtBoenkenMenuDialog::onTrainClick()
+void ribi::bnkn::QtBoenkenMenuDialog::onTrainClick()
 {
-  const Boenken::ArenaSettings a = this->m_arena->GetSettings();
-  const Boenken::Controls c = this->m_controls->GetControls();
-  const std::vector<boost::shared_ptr<Boenken::SpritePlayer   > > players   = CreatePlayers(a);
-  const std::vector<boost::shared_ptr<Boenken::SpriteBall     > > balls     = CreateBalls(a);
-  const std::vector<boost::shared_ptr<Boenken::SpriteNonMoving> > obstacles = CreateObstacles(a);
+  const bnkn::ArenaSettings a = this->m_arena->GetSettings();
+  const bnkn::Controls c = this->m_controls->GetControls();
+  const std::vector<boost::shared_ptr<bnkn::SpritePlayer   > > players   = CreatePlayers(a);
+  const std::vector<boost::shared_ptr<bnkn::SpriteBall     > > balls     = CreateBalls(a);
+  const std::vector<boost::shared_ptr<bnkn::SpriteNonMoving> > obstacles = CreateObstacles(a);
 
-  boost::shared_ptr<Boenken::Game> b(new Boenken::Game(a,c,players,balls,obstacles));
+  boost::shared_ptr<bnkn::Game> b(new bnkn::Game(a,c,players,balls,obstacles));
   assert(b);
   this->hide();
   QtBoenkenMainDialog d(0,b);
@@ -307,7 +306,7 @@ void ribi::QtBoenkenMenuDialog::onTrainClick()
   for (int i=0; i!=1000; ++i)
   {
     d.show();
-    for(const boost::shared_ptr<Boenken::SpritePlayer>& p: players)
+    for(const boost::shared_ptr<bnkn::SpritePlayer>& p: players)
     {
       p->Accelerate();
       p->TurnRight();
@@ -318,9 +317,9 @@ void ribi::QtBoenkenMenuDialog::onTrainClick()
   this->show();
 }
 
-void ribi::QtBoenkenMenuDialog::onAboutClick()
+void ribi::bnkn::QtBoenkenMenuDialog::onAboutClick()
 {
-  About a = Boenken::MenuDialog().GetAbout();
+  About a = bnkn::MenuDialog().GetAbout();
   a.AddLibrary("QtHideAndShowDialog version: " + QtHideAndShowDialog::GetVersion());
   QtAboutDialog d(a);
   d.setStyleSheet(this->styleSheet());
@@ -329,27 +328,27 @@ void ribi::QtBoenkenMenuDialog::onAboutClick()
 }
 
 #ifndef NDEBUG
-void ribi::QtBoenkenMenuDialog::Test() noexcept
+void ribi::bnkn::QtBoenkenMenuDialog::Test() noexcept
 {
   {
     static bool is_tested{false};
     if (is_tested) return;
     is_tested = true;
   }
-  Boenken::MenuDialog();
+  bnkn::MenuDialog();
   {
 
-    Boenken::ArenaSettings a;
-    a.formation = Boenken::circle_inward;
+    ArenaSettings a;
+    a.formation = Formation::circle_inward;
     a.friction = 0.999;
     a.n_balls = 1;
     a.n_obstacles = 4;
     a.screen_size = std::make_pair(320,200);
-    Boenken::Controls c;
-    const std::vector<boost::shared_ptr<Boenken::SpritePlayer   > > players   = CreatePlayers(a);
-    const std::vector<boost::shared_ptr<Boenken::SpriteBall     > > balls     = CreateBalls(a);
-    const std::vector<boost::shared_ptr<Boenken::SpriteNonMoving> > obstacles = CreateObstacles(a);
-    boost::shared_ptr<Boenken::Game> b(new Boenken::Game(a,c,players,balls,obstacles));
+    bnkn::Controls c;
+    const std::vector<boost::shared_ptr<bnkn::SpritePlayer   > > players   = CreatePlayers(a);
+    const std::vector<boost::shared_ptr<bnkn::SpriteBall     > > balls     = CreateBalls(a);
+    const std::vector<boost::shared_ptr<bnkn::SpriteNonMoving> > obstacles = CreateObstacles(a);
+    boost::shared_ptr<bnkn::Game> b(new bnkn::Game(a,c,players,balls,obstacles));
     assert(b);
     QtBoenkenMainDialog d(0,b);
   }

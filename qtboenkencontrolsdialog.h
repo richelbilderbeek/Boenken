@@ -37,6 +37,7 @@ namespace Ui {
 }
 
 namespace ribi {
+namespace bnkn {
 
 ///QtBoenkenControlsDialog
 ///
@@ -53,7 +54,7 @@ public:
   QtBoenkenControlsDialog& operator=(const QtBoenkenControlsDialog&) = delete;
   ~QtBoenkenControlsDialog() noexcept;
 
-  Boenken::Controls GetControls() const noexcept;
+  bnkn::Controls GetControls() const noexcept;
 
 private:
   Ui::QtBoenkenControlsDialog *ui;
@@ -72,6 +73,7 @@ private slots:
   std::vector<std::string> getNames() const noexcept;
 };
 
+} //~namespace bnkn
 } //~namespace ribi
 
 #endif // QTBOENKENCONTROLSDIALOG_H

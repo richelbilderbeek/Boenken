@@ -37,7 +37,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma GCC diagnostic pop
 
-ribi::Boenken::Game::Game(
+ribi::bnkn::Game::Game(
   const ArenaSettings& arena_settings,
   const Controls& controls,
   std::vector<boost::shared_ptr<SpritePlayer   > > players,
@@ -79,7 +79,7 @@ ribi::Boenken::Game::Game(
   SpriteBall::SetGoalPoles(goal_y_top,goal_y_bottom);
 }
 
-const std::vector<ribi::Boenken::SpriteMoving*> ribi::Boenken::Game::CollectMovingSprites(
+const std::vector<ribi::bnkn::SpriteMoving*> ribi::bnkn::Game::CollectMovingSprites(
   std::vector<boost::shared_ptr<SpritePlayer> > players,
   std::vector<boost::shared_ptr<SpriteBall  > > balls)
 {
@@ -101,7 +101,7 @@ const std::vector<ribi::Boenken::SpriteMoving*> ribi::Boenken::Game::CollectMovi
   return v;
 }
 
-const std::vector<ribi::Boenken::Sprite*> ribi::Boenken::Game::CollectSprites(
+const std::vector<ribi::bnkn::Sprite*> ribi::bnkn::Game::CollectSprites(
   std::vector<boost::shared_ptr<SpritePlayer   > > players,
   std::vector<boost::shared_ptr<SpriteBall     > > balls,
   std::vector<boost::shared_ptr<SpriteNonMoving> > obstacles)
@@ -131,7 +131,7 @@ const std::vector<ribi::Boenken::Sprite*> ribi::Boenken::Game::CollectSprites(
   return v;
 }
 
-void ribi::Boenken::Game::drawPlayers(QPainter& painter) const
+void ribi::bnkn::Game::drawPlayers(QPainter& painter) const
 {
   for(const Sprite * const s: m_sprites)
   {
@@ -139,23 +139,23 @@ void ribi::Boenken::Game::drawPlayers(QPainter& painter) const
   }
 }
 
-int ribi::Boenken::Game::getHeight() const
+int ribi::bnkn::Game::getHeight() const
 {
   return m_arena_settings.height();
 }
 
-const std::pair<int,int> ribi::Boenken::Game::GetScore() const
+std::pair<int,int> ribi::bnkn::Game::GetScore() const
 {
   return SpriteBall::GetScore();
 }
 
-int ribi::Boenken::Game::getWidth() const
+int ribi::bnkn::Game::getWidth() const
 {
   return m_arena_settings.width();
 }
 
 
-void ribi::Boenken::Game::pressKey(const int key)
+void ribi::bnkn::Game::pressKey(const int key)
 {
   const std::size_t n_players = m_controls.m_names.size();
   for (std::size_t i=0; i!=n_players; ++i)
@@ -190,7 +190,7 @@ void ribi::Boenken::Game::pressKey(const int key)
   if (key == Qt::Key_F2) std::exit(1);
 }
 
-void ribi::Boenken::Game::Test() noexcept
+void ribi::bnkn::Game::Test() noexcept
 {
   {
     static bool is_tested{false};
@@ -218,7 +218,7 @@ void ribi::Boenken::Game::Test() noexcept
 }
 
 ///Moves all sprites
-void ribi::Boenken::Game::tick()
+void ribi::bnkn::Game::tick()
 {
   ///Move all moving sprites
   for(SpriteMoving* const s: m_moving_sprites)

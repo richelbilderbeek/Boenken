@@ -32,8 +32,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 namespace ribi {
-
-namespace Boenken {
+namespace bnkn {
 
 ///Sprite is the ABC of anything that must be drawn on screen
 struct Sprite
@@ -130,8 +129,7 @@ struct Sprite
 
 };
 
-} //~namespace Boenken
-
+} //~namespace bnkn
 } //~namespace ribi
 
 #endif // SPRITE_H

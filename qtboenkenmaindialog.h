@@ -38,9 +38,10 @@ namespace Ui {
 }
 
 namespace ribi {
+namespace bnkn {
 
-namespace Boenken { struct Game; }
-boost::shared_ptr<Boenken::Game> CreateNoBoenken();
+struct Game;
+boost::shared_ptr<bnkn::Game> CreateNoBoenken();
 
 ///QtBoenkenMainDialog displays Boenken and handles user events
 class QtBoenkenMainDialog : public QtHideAndShowDialog
@@ -50,7 +51,7 @@ class QtBoenkenMainDialog : public QtHideAndShowDialog
 public:
   explicit QtBoenkenMainDialog(
     QWidget *parent = 0,
-    boost::shared_ptr<Boenken::Game> boenken = CreateNoBoenken(),
+    boost::shared_ptr<bnkn::Game> boenken = CreateNoBoenken(),
     const bool is_training = false
   );
   QtBoenkenMainDialog(const QtBoenkenMainDialog&) = delete;
@@ -72,7 +73,7 @@ private:
   ///The timer that does the countdown
   boost::shared_ptr<QTimer> m_timer_countdown;
   //Other member variables
-  boost::shared_ptr<Boenken::Game> m_boenken;
+  boost::shared_ptr<bnkn::Game> m_boenken;
   const bool m_is_training;
 
   ///Paint paints a Pixmap to a single color fast,
@@ -94,6 +95,7 @@ private slots:
 
 };
 
+} //~namespace bnkn
 } //~namespace ribi
 
 #endif // QTBOENKENMAINDIALOG_H

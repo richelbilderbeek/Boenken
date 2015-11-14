@@ -29,7 +29,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 namespace ribi {
-namespace Boenken {
+namespace bnkn {
 
 ///SpriteBall is green per default
 ///and keeps track of the score
@@ -42,7 +42,8 @@ struct SpriteBall final : public SpriteMoving
     const int size = 32,
     const unsigned char r =   0,
     const unsigned char g = 255,
-    const unsigned char b =   0);
+    const unsigned char b =   0
+  );
   void Move() noexcept;
   static void SetGoalPoles(const double goal_y_top,const double goal_y_bottom);
   static std::pair<int,int> GetScore() noexcept;
@@ -65,8 +66,7 @@ struct SpriteBall final : public SpriteMoving
 
 };
 
-} //~namespace Boenken {
-
+} //~namespace bnkn {
 } //~namespace ribi
 
 #endif // BOENKENSPRITEBALL_H

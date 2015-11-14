@@ -29,7 +29,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 namespace ribi {
-namespace Boenken {
+namespace bnkn {
 
 ///SpritePlayer is a MovingSprite that can respond to input
 ///and can only be deleted by boost::checked_delete
@@ -67,8 +67,7 @@ struct SpritePlayer final : public SpriteMoving
   static int ms_n_players;
 };
 
-} //~namespace Boenken
-
+} //~namespace bnkn
 } //~namespace ribi
 
 #endif // BOENKENSPRITEPLAYER_H

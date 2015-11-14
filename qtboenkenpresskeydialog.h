@@ -32,6 +32,7 @@ namespace Ui {
 }
 
 namespace ribi {
+namespace bnkn {
 
 ///QtBoenkenPressKeyDialog asks the user to press
 ///any key. The key pressed can be requested
@@ -45,7 +46,7 @@ public:
   QtBoenkenPressKeyDialog(const QtBoenkenPressKeyDialog&) = delete;
   QtBoenkenPressKeyDialog& operator=(const QtBoenkenPressKeyDialog&) = delete;
   ~QtBoenkenPressKeyDialog() noexcept;
-  int GetKey() const { return m_key; }
+  int GetKey() const noexcept { return m_key; }
 
 protected:
   void keyPressEvent(QKeyEvent * e);
@@ -55,6 +56,7 @@ private:
   int m_key;
 };
 
+} //~namespace bnkn
 } //~namespace ribi
 
 #endif // QTBOENKENPRESSKEYDIALOG_H

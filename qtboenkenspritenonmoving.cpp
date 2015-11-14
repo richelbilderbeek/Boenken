@@ -36,7 +36,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma GCC diagnostic pop
 
-ribi::Boenken::SpriteNonMoving::SpriteNonMoving(
+ribi::bnkn::SpriteNonMoving::SpriteNonMoving(
   const double x,
   const double y,
   const int size,
@@ -50,7 +50,7 @@ ribi::Boenken::SpriteNonMoving::SpriteNonMoving(
   #endif
 }
 
-void ribi::Boenken::SpriteNonMoving::Collision(
+void ribi::bnkn::SpriteNonMoving::Collision(
   const SpriteNonMoving &obstacle, SpriteMoving &moving
 )
 {
@@ -127,7 +127,7 @@ void ribi::Boenken::SpriteNonMoving::Collision(
 }
 
 #ifndef NDEBUG
-void ribi::Boenken::SpriteNonMoving::Test() noexcept
+void ribi::bnkn::SpriteNonMoving::Test() noexcept
 {
   {
     static bool is_tested{false};

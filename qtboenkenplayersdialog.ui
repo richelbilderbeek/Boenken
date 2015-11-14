@@ -20,7 +20,7 @@
    <string>Set up players</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="GameBoenken.qrc">
+   <iconset resource="Boenken.qrc">
     <normaloff>:/images/R.png</normaloff>:/images/R.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -105,7 +105,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="GameBoenken.qrc">:/images/PlayerRed.png</pixmap>
+         <pixmap resource="Boenken.qrc">:/images/PlayerRed.png</pixmap>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -118,7 +118,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="GameBoenken.qrc">:/images/Human.png</pixmap>
+         <pixmap resource="Boenken.qrc">:/images/Human.png</pixmap>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -162,7 +162,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="GameBoenken.qrc">:/images/PlayerBlue.png</pixmap>
+         <pixmap resource="Boenken.qrc">:/images/PlayerBlue.png</pixmap>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -175,7 +175,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="GameBoenken.qrc">:/images/Computer.png</pixmap>
+         <pixmap resource="Boenken.qrc">:/images/Computer.png</pixmap>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -227,7 +227,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="GameBoenken.qrc"/>
+  <include location="Boenken.qrc"/>
  </resources>
  <connections/>
 </ui>

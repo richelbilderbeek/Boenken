@@ -33,15 +33,15 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "testtimer.h"
 #pragma GCC diagnostic pop
 
-int ribi::Boenken::SpriteMoving::sm_n_moving_sprites = 0;
+int ribi::bnkn::SpriteMoving::sm_n_moving_sprites = 0;
 
 ///The fraction of impulse that is conserved \n
 ///1.0: no friction
 ///0.9: some friction
 ///0.1: much friction
-double ribi::Boenken::SpriteMoving::m_friction = 0.995;
+double ribi::bnkn::SpriteMoving::m_friction = 0.995;
 
-ribi::Boenken::SpriteMoving::SpriteMoving(
+ribi::bnkn::SpriteMoving::SpriteMoving(
   const double x,
   const double y,
   const int size,
@@ -55,30 +55,30 @@ ribi::Boenken::SpriteMoving::SpriteMoving(
   ++sm_n_moving_sprites;
 }
 
-ribi::Boenken::SpriteMoving::~SpriteMoving()
+ribi::bnkn::SpriteMoving::~SpriteMoving()
 {
   --sm_n_moving_sprites;
 }
 
-double ribi::Boenken::SpriteMoving::CalcImpulseAngle() const noexcept
+double ribi::bnkn::SpriteMoving::CalcImpulseAngle() const noexcept
 {
   return Geometry().GetAngleClockScreen(m_dx,m_dy);
 }
 
-double ribi::Boenken::SpriteMoving::CalcImpulseSpeed() const noexcept
+double ribi::bnkn::SpriteMoving::CalcImpulseSpeed() const noexcept
 {
 
   return Geometry().GetDistance(m_dx,m_dy);
 }
 
-void ribi::Boenken::SpriteMoving::SetFriction(const double friction)
+void ribi::bnkn::SpriteMoving::SetFriction(const double friction)
 {
   assert(friction  > 0.0);
   assert(friction <= 1.0);
   m_friction = friction;
 }
 
-void ribi::Boenken::SpriteMoving::Collision(SpriteMoving * const p1, SpriteMoving * const p2)
+void ribi::bnkn::SpriteMoving::Collision(SpriteMoving * const p1, SpriteMoving * const p2)
 {
   assert(p1!=p2);
   assert(p1 > p2);
@@ -138,7 +138,7 @@ void ribi::Boenken::SpriteMoving::Collision(SpriteMoving * const p1, SpriteMovin
   }
 }
 
-void ribi::Boenken::SpriteMoving::Draw(QPainter& painter) const
+void ribi::bnkn::SpriteMoving::Draw(QPainter& painter) const
 {
   //Draw the globe
   Sprite::Draw(painter);

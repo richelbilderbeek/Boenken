@@ -33,6 +33,7 @@ namespace Ui {
 }
 
 namespace ribi {
+namespace bnkn {
 
 ///QtBoenkenArenaDialog
 ///
@@ -47,17 +48,18 @@ public:
   QtBoenkenArenaDialog& operator=(const QtBoenkenArenaDialog&) = delete;
   ~QtBoenkenArenaDialog() noexcept;
 
-  const std::pair<int,int> GetScreenSize() const noexcept;
+  std::pair<int,int> GetScreenSize() const noexcept;
   int GetNballs() const noexcept;
   int GetNobstacles() const noexcept;
-  Boenken::Formation GetFormation() const noexcept;
+  bnkn::Formation GetFormation() const noexcept;
   double GetFriction() const noexcept;
-  const Boenken::ArenaSettings GetSettings() const noexcept;
+  bnkn::ArenaSettings GetSettings() const noexcept;
 
 private:
   Ui::QtBoenkenArenaDialog *ui;
 };
 
+} //~namespace bnkn
 } //~namespace ribi
 
 #endif // QTBOENKENARENADIALOG_H

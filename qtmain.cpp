@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     "}"
   );
 
-  ribi::QtBoenkenMenuDialog w;
+  ribi::bnkn::QtBoenkenMenuDialog w;
   w.show();
   return a.exec();
 }

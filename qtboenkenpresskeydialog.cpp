@@ -30,7 +30,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtboenkenpresskeydialog.h"
 #pragma GCC diagnostic pop
 
-ribi::QtBoenkenPressKeyDialog::QtBoenkenPressKeyDialog(QWidget *parent) :
+ribi::bnkn::QtBoenkenPressKeyDialog::QtBoenkenPressKeyDialog(QWidget *parent) :
   QtHideAndShowDialog(parent),
   ui(new Ui::QtBoenkenPressKeyDialog),
   m_key(0)
@@ -38,12 +38,12 @@ ribi::QtBoenkenPressKeyDialog::QtBoenkenPressKeyDialog(QWidget *parent) :
   ui->setupUi(this);
 }
 
-ribi::QtBoenkenPressKeyDialog::~QtBoenkenPressKeyDialog() noexcept
+ribi::bnkn::QtBoenkenPressKeyDialog::~QtBoenkenPressKeyDialog() noexcept
 {
   delete ui;
 }
 
-void ribi::QtBoenkenPressKeyDialog::keyPressEvent(QKeyEvent * e)
+void ribi::bnkn::QtBoenkenPressKeyDialog::keyPressEvent(QKeyEvent * e)
 {
   //According to the Qt doc, the assert below is always true
   assert(e->type() == QEvent::KeyPress);

@@ -36,7 +36,7 @@ struct QPainter;
 
 namespace ribi {
 
-namespace Boenken {
+namespace bnkn {
 
 struct Sprite;
 struct SpriteBall;
@@ -58,9 +58,8 @@ struct Game
   void drawPlayers(QPainter& painter) const;
   int getWidth()  const;
   int getHeight() const;
-  const std::pair<int,int> GetScore() const;
+  std::pair<int,int> GetScore() const;
   void pressKey(const int key);
-  //void resize(const int width, const int height);
   void tick();
 
   private:
@@ -90,8 +89,7 @@ struct Game
 
 };
 
-} //~namespace Boenken
-
+} //~namespace bnkn
 } //~namespace ribi
 
 #endif // BOENKENGAME_H

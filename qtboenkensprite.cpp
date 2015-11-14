@@ -39,12 +39,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 ///The maximum x coordinat a Sprite can have
-int ribi::Boenken::Sprite::m_maxx = 320;
+int ribi::bnkn::Sprite::m_maxx = 320;
 
 ///The maximum y coordinat a Sprite can have
-int ribi::Boenken::Sprite::m_maxy = 200;
+int ribi::bnkn::Sprite::m_maxy = 200;
 
-ribi::Boenken::Sprite::Sprite(
+ribi::bnkn::Sprite::Sprite(
   const double x,
   const double y,
   const int size,
@@ -61,27 +61,27 @@ ribi::Boenken::Sprite::Sprite(
   #endif
 }
 
-QRect ribi::Boenken::Sprite::rect() const
+QRect ribi::bnkn::Sprite::rect() const
 {
   return QRect(m_x,m_y,m_size,m_size);
 }
 
-const QPixmap& ribi::Boenken::Sprite::pixmap() const noexcept
+const QPixmap& ribi::bnkn::Sprite::pixmap() const noexcept
 {
   return m_pixmap;
 }
 
-void ribi::Boenken::Sprite::Draw(QPainter& painter) const
+void ribi::bnkn::Sprite::Draw(QPainter& painter) const
 {
   painter.drawPixmap(this->rect(),this->pixmap());
 }
 
-std::string ribi::Boenken::Sprite::GetVersion() noexcept
+std::string ribi::bnkn::Sprite::GetVersion() noexcept
 {
   return "1.1";
 }
 
-std::vector<std::string> ribi::Boenken::Sprite::GetVersionHistory() noexcept
+std::vector<std::string> ribi::bnkn::Sprite::GetVersionHistory() noexcept
 {
   return
   {
@@ -90,7 +90,7 @@ std::vector<std::string> ribi::Boenken::Sprite::GetVersionHistory() noexcept
   };
 }
 
-bool ribi::Boenken::Sprite::IsCollision(const Sprite& p1, const Sprite& p2) noexcept
+bool ribi::bnkn::Sprite::IsCollision(const Sprite& p1, const Sprite& p2) noexcept
 {
   const double dx = p2.getX() - p1.getX();
   const double dy = p2.getY() - p1.getY();
@@ -100,14 +100,14 @@ bool ribi::Boenken::Sprite::IsCollision(const Sprite& p1, const Sprite& p2) noex
   return distance < collision_distance;
 }
 
-void ribi::Boenken::Sprite::setArenaSize(const int width, const int height)
+void ribi::bnkn::Sprite::setArenaSize(const int width, const int height)
 {
   m_maxx = width;
   m_maxy = height;
 }
 
 #ifndef NDEBUG
-void ribi::Boenken::Sprite::Test() noexcept
+void ribi::bnkn::Sprite::Test() noexcept
 {
   {
     static bool is_tested{false};
@@ -165,7 +165,7 @@ void ribi::Boenken::Sprite::Test() noexcept
 #endif
 
 //From http://www.richelbilderbeek.nl/CppDrawGlobe.htm
-QPixmap ribi::Boenken::Sprite::DrawGlobe(
+QPixmap ribi::bnkn::Sprite::DrawGlobe(
   const int width,
   const int height,
   const unsigned char r,
@@ -233,13 +233,13 @@ QPixmap ribi::Boenken::Sprite::DrawGlobe(
   return pixmap;
 }
 
-double ribi::Boenken::Sprite::GetAngle(const double dx, const double dy) noexcept
+double ribi::bnkn::Sprite::GetAngle(const double dx, const double dy) noexcept
 {
   return Geometry().GetAngleClockScreen(dx,dy);
 }
 
 //From http://www.richelbilderbeek.nl/CppDoPerfectElasticCollision.htm
-void ribi::Boenken::Sprite::DoPerfectElasticCollision(
+void ribi::bnkn::Sprite::DoPerfectElasticCollision(
   const double angleCollision,
   double& angle1,
   double& speed1,

@@ -32,14 +32,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "testtimer.h"
 #include "trace.h"
 
-ribi::Boenken::MenuDialog::MenuDialog()
+ribi::bnkn::MenuDialog::MenuDialog()
 {
   #ifndef NDEBUG
   Test();
   #endif
 }
 
-int ribi::Boenken::MenuDialog::ExecuteSpecific(const std::vector<std::string>& argv) noexcept
+int ribi::bnkn::MenuDialog::ExecuteSpecific(const std::vector<std::string>& argv) noexcept
 {
   const int argc = static_cast<int>(argv.size());
   if (argc == 1)
@@ -53,13 +53,13 @@ int ribi::Boenken::MenuDialog::ExecuteSpecific(const std::vector<std::string>& a
   return 0;
 }
 
-ribi::About ribi::Boenken::MenuDialog::GetAbout() const noexcept
+ribi::About ribi::bnkn::MenuDialog::GetAbout() const noexcept
 {
   About a(
     "Richel Bilderbeek",
     "Boenken",
     "a multiplayer soccer/billiards game",
-    "the 2nd of January 2015",
+    "the 14th of November 2015",
     "2007-2015",
     "http://www.richelbilderbeek.nl/GameBoenken.htm",
     GetVersion(),
@@ -74,7 +74,7 @@ ribi::About ribi::Boenken::MenuDialog::GetAbout() const noexcept
   return a;
 }
 
-ribi::Help ribi::Boenken::MenuDialog::GetHelp() const noexcept
+ribi::Help ribi::bnkn::MenuDialog::GetHelp() const noexcept
 {
   return Help(
     this->GetAbout().GetFileTitle(),
@@ -88,21 +88,12 @@ ribi::Help ribi::Boenken::MenuDialog::GetHelp() const noexcept
   );
 }
 
-boost::shared_ptr<const ribi::Program> ribi::Boenken::MenuDialog::GetProgram() const noexcept
+std::string ribi::bnkn::MenuDialog::GetVersion() const noexcept
 {
-  const boost::shared_ptr<const ribi::Program> p {
-    new ProgramBoenken
-  };
-  assert(p);
-  return p;
+  return "5.0";
 }
 
-std::string ribi::Boenken::MenuDialog::GetVersion() const noexcept
-{
-  return "4.2";
-}
-
-std::vector<std::string> ribi::Boenken::MenuDialog::GetVersionHistory() const noexcept
+std::vector<std::string> ribi::bnkn::MenuDialog::GetVersionHistory() const noexcept
 {
   return {
     "2000-xx-xx: version 0.0: wrote QBASIC version of Boenken",
@@ -112,12 +103,13 @@ std::vector<std::string> ribi::Boenken::MenuDialog::GetVersionHistory() const no
     "2010-08-15: version 3.1: created basic menu functionality, improved doxygen documentation,  improved code (seperated GUI from game rules, all sprites can be deleted by boost::checked_delete only)",
     "2012-03-07: version 4.0: conformized naming and architecture for ProjectRichelBilderbeek"
     "2012-11-17: version 4.1: added a fancy color gradient to the main menu",
-    "2015-01-02: version 4.2: fixed bug in collision between player and object"
+    "2015-01-02: version 4.2: fixed bug in collision between player and object",
+    "2015-11-15: version 5.0: moved to own GitHub"
   };
 }
 
 #ifndef NDEBUG
-void ribi::Boenken::MenuDialog::Test() noexcept
+void ribi::bnkn::MenuDialog::Test() noexcept
 {
   {
     static bool is_tested{false};

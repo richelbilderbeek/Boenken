@@ -37,19 +37,19 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 ///The acceleration (i.e. change of impulse)
 ///if a player presses accelerate
-const double ribi::Boenken::SpritePlayer::m_acceleration = 1.0;
+const double ribi::bnkn::SpritePlayer::m_acceleration = 1.0;
 
 ///The speed of turning around
 ///if a player presses turn
-const double ribi::Boenken::SpritePlayer::m_turnspeed
+const double ribi::bnkn::SpritePlayer::m_turnspeed
   = boost::math::constants::pi<double>() / 10.0;
 
 
 ///The number of SpritePlayers.
 ///for debugging purposes
-int ribi::Boenken::SpritePlayer::ms_n_players = 0;
+int ribi::bnkn::SpritePlayer::ms_n_players = 0;
 
-ribi::Boenken::SpritePlayer::SpritePlayer(
+ribi::bnkn::SpritePlayer::SpritePlayer(
   const double x,
   const double y,
   const double angle,
@@ -69,7 +69,7 @@ ribi::Boenken::SpritePlayer::SpritePlayer(
   //  << this->getY() << ")\n";
 }
 
-ribi::Boenken::SpritePlayer::~SpritePlayer() noexcept
+ribi::bnkn::SpritePlayer::~SpritePlayer() noexcept
 {
   //std::clog << "The " << ms_n_players
   //  << "th player is destroyed\n";
@@ -77,7 +77,7 @@ ribi::Boenken::SpritePlayer::~SpritePlayer() noexcept
   assert(ms_n_players >= 0);
 }
 
-void ribi::Boenken::SpritePlayer::Move() noexcept
+void ribi::bnkn::SpritePlayer::Move() noexcept
 {
   ///Move the sprite
   m_x += m_dx;
@@ -121,13 +121,13 @@ void ribi::Boenken::SpritePlayer::Move() noexcept
 }
 
 
-void ribi::Boenken::SpritePlayer::Accelerate() noexcept
+void ribi::bnkn::SpritePlayer::Accelerate() noexcept
 {
   m_dx += (std::sin(m_angle) * m_acceleration);
   m_dy -= (std::cos(m_angle) * m_acceleration);
 }
 
-void ribi::Boenken::SpritePlayer::SetSpeed(const double dx, const double dy) noexcept
+void ribi::bnkn::SpritePlayer::SetSpeed(const double dx, const double dy) noexcept
 {
   SpriteMoving::SetSpeed(dx,dy);
 
@@ -136,12 +136,12 @@ void ribi::Boenken::SpritePlayer::SetSpeed(const double dx, const double dy) noe
   //this->m_angle = Geometry().GetAngleClockScreen(dx,dy);
 }
 
-void ribi::Boenken::SpritePlayer::TurnRight() noexcept
+void ribi::bnkn::SpritePlayer::TurnRight() noexcept
 {
   m_angle+=m_turnspeed;
 }
 
-void ribi::Boenken::SpritePlayer::Draw(QPainter& painter) const
+void ribi::bnkn::SpritePlayer::Draw(QPainter& painter) const
 {
   //Draw the globe and possibly impulse
   SpriteMoving::Draw(painter);

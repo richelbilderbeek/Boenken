@@ -35,18 +35,16 @@ namespace Ui {
 }
 
 namespace ribi {
+namespace bnkn {
 
+
+struct ArenaSettings;
+struct SpriteBall;
+struct SpriteNonMoving;
+struct SpritePlayer;
 struct QtBoenkenPlayersDialog;
 struct QtBoenkenArenaDialog;
 struct QtBoenkenControlsDialog;
-
-namespace Boenken
-{
-  struct ArenaSettings;
-  struct SpriteBall;
-  struct SpriteNonMoving;
-  struct SpritePlayer;
-}
 
 ///QtBoenkenMenuDialog
 ///
@@ -67,14 +65,14 @@ private:
   boost::shared_ptr<QtBoenkenPlayersDialog> m_players;
   boost::shared_ptr<QtBoenkenArenaDialog> m_arena;
 
-  static const std::vector<boost::shared_ptr<Boenken::SpritePlayer> > CreatePlayers(
-    const Boenken::ArenaSettings& a);
+  static std::vector<boost::shared_ptr<bnkn::SpritePlayer>> CreatePlayers(
+    const bnkn::ArenaSettings& a);
 
-  static const std::vector<boost::shared_ptr<Boenken::SpriteBall> > CreateBalls(
-    const Boenken::ArenaSettings& a);
+  static std::vector<boost::shared_ptr<bnkn::SpriteBall>> CreateBalls(
+    const bnkn::ArenaSettings& a);
 
-  static const std::vector<boost::shared_ptr<Boenken::SpriteNonMoving> > CreateObstacles(
-    const Boenken::ArenaSettings& a);
+  static std::vector<boost::shared_ptr<bnkn::SpriteNonMoving>> CreateObstacles(
+    const bnkn::ArenaSettings& a);
 
   #ifndef NDEBUG
   static void Test() noexcept;
@@ -89,6 +87,7 @@ private slots:
   void onAboutClick();
 };
 
+} //~namespace bnkn
 } //~namespace ribi
 
 #endif // QTBOENKENMENUDIALOG_H

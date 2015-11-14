@@ -26,14 +26,14 @@
    <string>Boenken</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="GameBoenken.qrc">
+   <iconset resource="Boenken.qrc">
     <normaloff>:/images/R.png</normaloff>:/images/R.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="GameBoenken.qrc"/>
+  <include location="Boenken.qrc"/>
  </resources>
  <connections/>
 </ui>

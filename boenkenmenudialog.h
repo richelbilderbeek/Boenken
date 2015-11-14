@@ -26,14 +26,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 namespace ribi {
 
-namespace Boenken {
+namespace bnkn {
 
 struct MenuDialog final : public ::ribi::MenuDialog
 {
   MenuDialog();
   About GetAbout() const noexcept override;
   Help GetHelp() const noexcept override;
-  boost::shared_ptr<const Program> GetProgram() const noexcept override;
   std::string GetVersion() const noexcept override;
   std::vector<std::string> GetVersionHistory() const noexcept override;
 
@@ -45,7 +44,7 @@ struct MenuDialog final : public ::ribi::MenuDialog
   #endif
 };
 
-} //~namespace Boenken
+} //~namespace bnkn
 
 } //~namespace ribi
 

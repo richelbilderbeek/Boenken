@@ -20,7 +20,7 @@
    <string>Set up controls</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="GameBoenken.qrc">
+   <iconset resource="Boenken.qrc">
     <normaloff>:/images/R.png</normaloff>:/images/R.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -215,7 +215,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="GameBoenken.qrc"/>
+  <include location="Boenken.qrc"/>
  </resources>
  <connections/>
 </ui>

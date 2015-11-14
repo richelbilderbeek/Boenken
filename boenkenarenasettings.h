@@ -26,9 +26,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 namespace ribi {
 
-namespace Boenken {
+namespace bnkn {
 
-enum Formation
+enum class Formation
 {
   straight_line,
   circle_inward,
@@ -39,8 +39,8 @@ enum Formation
 struct ArenaSettings
 {
   std::pair<int,int> screen_size;
-  int width() const { return screen_size.first; }
-  int height() const { return screen_size.second; }
+  int width() const noexcept { return screen_size.first; }
+  int height() const noexcept { return screen_size.second; }
   int n_balls;
   int n_obstacles;
   Formation formation;

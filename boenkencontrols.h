@@ -26,8 +26,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <vector>
 
 namespace ribi {
-
-namespace Boenken {
+namespace bnkn {
 
 ///Controls contains the control keys
 ///and the players' names
@@ -39,8 +38,7 @@ struct Controls
   std::vector<std::string> m_names;
 };
 
-} //~namespace Boenken
-
+} //~namespace bnkn
 } //~namespace ribi
 
 #endif // BOENKENCONTROLS_H

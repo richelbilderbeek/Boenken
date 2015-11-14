@@ -20,7 +20,7 @@
    <string>Set up arena</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="GameBoenken.qrc">
+   <iconset resource="Boenken.qrc">
     <normaloff>:/images/R.png</normaloff>:/images/R.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -212,7 +212,7 @@
   <tabstop>button_done</tabstop>
  </tabstops>
  <resources>
-  <include location="GameBoenken.qrc"/>
+  <include location="Boenken.qrc"/>
  </resources>
  <connections/>
 </ui>
