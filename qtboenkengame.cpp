@@ -40,20 +40,23 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 ribi::bnkn::Game::Game(
   const ArenaSettings& arena_settings,
   const Controls& controls,
-  std::vector<boost::shared_ptr<SpritePlayer   > > players,
+  const std::vector<SpritePlayer>& players,
   std::vector<boost::shared_ptr<SpriteBall     > > balls,
   std::vector<boost::shared_ptr<SpriteNonMoving> > obstacles)
   : m_players(players),
     m_balls(balls),
     m_obstacles(obstacles),
-    m_moving_sprites(CollectMovingSprites(players,balls)),
-    m_sprites(CollectSprites(players,balls,obstacles)),
+    m_moving_sprites{},
+    m_sprites{},
     m_arena_settings(arena_settings),
     m_controls(controls)
 {
   #ifndef NDEBUG
   Test();
   #endif
+  m_moving_sprites = CollectMovingSprites(m_players,m_balls);
+  m_sprites = CollectSprites(m_players,m_balls,m_obstacles);
+
   ///Reset the score to 0-0
   SpriteBall::ResetScore();
 
@@ -79,15 +82,15 @@ ribi::bnkn::Game::Game(
   SpriteBall::SetGoalPoles(goal_y_top,goal_y_bottom);
 }
 
-const std::vector<ribi::bnkn::SpriteMoving*> ribi::bnkn::Game::CollectMovingSprites(
-  std::vector<boost::shared_ptr<SpritePlayer> > players,
-  std::vector<boost::shared_ptr<SpriteBall  > > balls)
+std::vector<ribi::bnkn::SpriteMoving*> ribi::bnkn::Game::CollectMovingSprites(
+  std::vector<SpritePlayer>& players,
+  std::vector<boost::shared_ptr<SpriteBall>> balls
+)
 {
   std::vector<SpriteMoving*> v;
-  for(boost::shared_ptr<SpritePlayer> i: players)
+  for(auto& i: players)
   {
-    assert(i);
-    SpriteMoving * const s = i.get();
+    SpriteMoving * const s = &i;
     assert(s);
     v.push_back(s);
   }
@@ -101,16 +104,15 @@ const std::vector<ribi::bnkn::SpriteMoving*> ribi::bnkn::Game::CollectMovingSpri
   return v;
 }
 
-const std::vector<ribi::bnkn::Sprite*> ribi::bnkn::Game::CollectSprites(
-  std::vector<boost::shared_ptr<SpritePlayer   > > players,
+std::vector<ribi::bnkn::Sprite*> ribi::bnkn::Game::CollectSprites(
+  std::vector<SpritePlayer>& players,
   std::vector<boost::shared_ptr<SpriteBall     > > balls,
   std::vector<boost::shared_ptr<SpriteNonMoving> > obstacles)
 {
   std::vector<Sprite*> v;
-  for(boost::shared_ptr<SpritePlayer> i: players)
+  for(auto& i: players)
   {
-    assert(i);
-    Sprite * const s = i.get();
+    Sprite * const s = &i;
     assert(s);
     v.push_back(s);
   }
@@ -160,32 +162,8 @@ void ribi::bnkn::Game::pressKey(const int key)
   const std::size_t n_players = m_controls.m_names.size();
   for (std::size_t i=0; i!=n_players; ++i)
   {
-    if (key == m_controls.m_keys_accel[i]) m_players[i]->Accelerate();
-    if (key == m_controls.m_keys_turn[i] ) m_players[i]->TurnRight();
-  }
-  switch (key)
-  {
-    ///F1 is the debugging key
-    ///F2 is the debugging key, after which there is a quit
-    case Qt::Key_F1:
-    case Qt::Key_F2:
-    {
-      //std::clog << "Player coordinats:\n";
-      //BOOST_FOREACH(boost::shared_ptr<SpritePlayer>& s,m_players)
-      {
-        //std::clog << s.get() << ": (" << s->getX() << "," << s->getY() << ")\n";
-      }
-      //std::clog << "Ball coordinats:\n";
-      //BOOST_FOREACH(boost::shared_ptr<SpriteBall>& s,m_balls)
-      {
-        //std::clog << s.get() << ": (" << s->getX() << "," << s->getY() << ")\n";
-      }
-      //std::clog << "Moving sprite coordinats (must match above):\n";
-      //BOOST_FOREACH(SpriteMoving * s,m_moving_sprites)
-      {
-        //std::clog << s << ": (" << s->getX() << "," << s->getY() << ")\n";
-      }
-    }
+    if (key == m_controls.m_keys_accel[i]) m_players[i].Accelerate();
+    if (key == m_controls.m_keys_turn[i] ) m_players[i].TurnRight();
   }
   if (key == Qt::Key_F2) std::exit(1);
 }

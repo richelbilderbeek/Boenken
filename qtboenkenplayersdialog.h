@@ -38,15 +38,15 @@ namespace bnkn {
 ///A controller can be\n
 ///- a human\n
 ///- a computer\n
-class QtBoenkenPlayersDialog : public QtHideAndShowDialog
+class QtPlayersDialog : public QtHideAndShowDialog
 {
   Q_OBJECT
 
 public:
-  explicit QtBoenkenPlayersDialog(QWidget *parent = 0);
-  QtBoenkenPlayersDialog(const QtBoenkenPlayersDialog&) = delete;
-  QtBoenkenPlayersDialog& operator=(const QtBoenkenPlayersDialog&) = delete;
-  ~QtBoenkenPlayersDialog() noexcept;
+  explicit QtPlayersDialog(QWidget *parent = 0);
+  QtPlayersDialog(const QtPlayersDialog&) = delete;
+  QtPlayersDialog& operator=(const QtPlayersDialog&) = delete;
+  ~QtPlayersDialog() noexcept;
 
 private:
   Ui::QtBoenkenPlayersDialog *ui;

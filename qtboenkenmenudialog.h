@@ -42,37 +42,37 @@ struct ArenaSettings;
 struct SpriteBall;
 struct SpriteNonMoving;
 struct SpritePlayer;
-struct QtBoenkenPlayersDialog;
-struct QtBoenkenArenaDialog;
-struct QtBoenkenControlsDialog;
+struct QtPlayersDialog;
+struct QtArenaDialog;
+struct QtControlsDialog;
 
 ///QtBoenkenMenuDialog
 ///
 ///Gathers all options to start a game
-class QtBoenkenMenuDialog : public QtHideAndShowDialog
+class QtMenuDialog : public QtHideAndShowDialog
 {
   Q_OBJECT
 
 public:
-  explicit QtBoenkenMenuDialog(QWidget *parent = 0);
-  QtBoenkenMenuDialog(const QtBoenkenMenuDialog&) = delete;
-  QtBoenkenMenuDialog& operator=(const QtBoenkenMenuDialog&) = delete;
-  ~QtBoenkenMenuDialog() noexcept;
+  explicit QtMenuDialog(QWidget *parent = 0);
+  QtMenuDialog(const QtMenuDialog&) = delete;
+  QtMenuDialog& operator=(const QtMenuDialog&) = delete;
+  ~QtMenuDialog() noexcept;
 
 private:
   Ui::QtBoenkenMenuDialog *ui;
-  boost::shared_ptr<QtBoenkenControlsDialog> m_controls;
-  boost::shared_ptr<QtBoenkenPlayersDialog> m_players;
-  boost::shared_ptr<QtBoenkenArenaDialog> m_arena;
+  boost::shared_ptr<QtControlsDialog> m_controls;
+  boost::shared_ptr<QtPlayersDialog> m_players;
+  boost::shared_ptr<QtArenaDialog> m_arena;
 
-  static std::vector<boost::shared_ptr<bnkn::SpritePlayer>> CreatePlayers(
-    const bnkn::ArenaSettings& a);
+  static std::vector<SpritePlayer> CreatePlayers(
+    const ArenaSettings& a);
 
   static std::vector<boost::shared_ptr<bnkn::SpriteBall>> CreateBalls(
-    const bnkn::ArenaSettings& a);
+    const ArenaSettings& a);
 
   static std::vector<boost::shared_ptr<bnkn::SpriteNonMoving>> CreateObstacles(
-    const bnkn::ArenaSettings& a);
+    const ArenaSettings& a);
 
   #ifndef NDEBUG
   static void Test() noexcept;
@@ -83,7 +83,6 @@ private slots:
   void onPlayersClick();
   void onArenaClick();
   void onStartClick();
-  void onTrainClick();
   void onAboutClick();
 };
 

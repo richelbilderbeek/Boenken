@@ -47,7 +47,7 @@ const double ribi::bnkn::SpritePlayer::m_turnspeed
 
 ///The number of SpritePlayers.
 ///for debugging purposes
-int ribi::bnkn::SpritePlayer::ms_n_players = 0;
+//int ribi::bnkn::SpritePlayer::ms_n_players = 0;
 
 ribi::bnkn::SpritePlayer::SpritePlayer(
   const double x,
@@ -56,13 +56,13 @@ ribi::bnkn::SpritePlayer::SpritePlayer(
   const int size,
   const unsigned char r,
   const unsigned char g,
-  const unsigned char b)
-  : SpriteMoving(x,y,size,r,g,b),
-    m_id(ms_n_players),
+  const unsigned char b
+) : SpriteMoving(x,y,size,r,g,b),
     m_angle(angle)
+    //m_id(ms_n_players)
 
 {
-  ++ms_n_players;
+  //++ms_n_players;
   //std::clog << "The " << ms_n_players
   //  << "th player is created at ("
   //  << this->getX() << ","
@@ -73,8 +73,8 @@ ribi::bnkn::SpritePlayer::~SpritePlayer() noexcept
 {
   //std::clog << "The " << ms_n_players
   //  << "th player is destroyed\n";
-  --ms_n_players;
-  assert(ms_n_players >= 0);
+  //--ms_n_players;
+  //assert(ms_n_players >= 0);
 }
 
 void ribi::bnkn::SpritePlayer::Move() noexcept
@@ -84,8 +84,8 @@ void ribi::bnkn::SpritePlayer::Move() noexcept
   m_y += m_dy;
 
   ///Calculate the sprites maximal coordinats
-  const double maxx = this->m_maxx - this->m_size;
-  const double maxy = this->m_maxy - this->m_size;
+  const double maxx = this->m_maxx - this->GetSize();
+  const double maxy = this->m_maxy - this->GetSize();
   assert(maxx > 0);
   assert(maxy > 0);
 
@@ -146,7 +146,7 @@ void ribi::bnkn::SpritePlayer::Draw(QPainter& painter) const
   //Draw the globe and possibly impulse
   SpriteMoving::Draw(painter);
   //Determine the player center
-  const double half_size = boost::numeric_cast<double>(m_size) / 2.0;
+  const double half_size = boost::numeric_cast<double>(GetSize()) / 2.0;
   const double x_mid = m_x + half_size;
   const double y_mid = m_y + half_size;
   //Draw the line the player looks at

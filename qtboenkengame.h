@@ -28,6 +28,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
 #include "boenkenarenasettings.h"
+#include "qtboenkenspriteplayer.h"
 #include "boenkencontrols.h"
 #include "qtboenkensprite.h"
 #pragma GCC diagnostic pop
@@ -51,7 +52,7 @@ struct Game
   Game(
     const ArenaSettings& arena_settings,
     const Controls& controls,
-    std::vector<boost::shared_ptr<SpritePlayer   > > players,
+    const std::vector<SpritePlayer>& players,
     std::vector<boost::shared_ptr<SpriteBall     > > balls,
     std::vector<boost::shared_ptr<SpriteNonMoving> > obstacles);
 
@@ -64,25 +65,27 @@ struct Game
 
   private:
   ///'Real' sprites
-  std::vector<boost::shared_ptr<SpritePlayer   > > m_players;
+  std::vector<SpritePlayer> m_players;
   std::vector<boost::shared_ptr<SpriteBall     > > m_balls;
   std::vector<boost::shared_ptr<SpriteNonMoving> > m_obstacles;
   ///Sprite copies for group-specific routines
-  const std::vector<SpriteMoving*> m_moving_sprites;
-  const std::vector<Sprite      *> m_sprites;
+  std::vector<SpriteMoving*> m_moving_sprites;
+  std::vector<Sprite*> m_sprites;
   ///
   const ArenaSettings m_arena_settings;
   const Controls m_controls;
 
   ///Collect all moving sprites
-  static const std::vector<SpriteMoving*> CollectMovingSprites(
-    std::vector<boost::shared_ptr<SpritePlayer> > players,
-    std::vector<boost::shared_ptr<SpriteBall  > > balls);
+  static std::vector<SpriteMoving*> CollectMovingSprites(
+    std::vector<SpritePlayer>& players,
+    std::vector<boost::shared_ptr<SpriteBall>> balls
+  );
 
-  static const std::vector<Sprite*> CollectSprites(
-    std::vector<boost::shared_ptr<SpritePlayer   > > players,
-    std::vector<boost::shared_ptr<SpriteBall     > > balls,
-    std::vector<boost::shared_ptr<SpriteNonMoving> > obstacles);
+  static std::vector<Sprite*> CollectSprites(
+    std::vector<SpritePlayer>& players,
+    std::vector<boost::shared_ptr<SpriteBall>> balls,
+    std::vector<boost::shared_ptr<SpriteNonMoving>> obstacles
+  );
 
   ///Test this class
   static void Test() noexcept;

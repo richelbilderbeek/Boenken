@@ -37,15 +37,15 @@ namespace bnkn {
 ///QtBoenkenPressKeyDialog asks the user to press
 ///any key. The key pressed can be requested
 ///later, by DialogControls.
-class QtBoenkenPressKeyDialog : public QtHideAndShowDialog
+class QtPressKeyDialog : public QtHideAndShowDialog
 {
   Q_OBJECT
 
 public:
-  explicit QtBoenkenPressKeyDialog(QWidget *parent = 0);
-  QtBoenkenPressKeyDialog(const QtBoenkenPressKeyDialog&) = delete;
-  QtBoenkenPressKeyDialog& operator=(const QtBoenkenPressKeyDialog&) = delete;
-  ~QtBoenkenPressKeyDialog() noexcept;
+  explicit QtPressKeyDialog(QWidget *parent = 0);
+  QtPressKeyDialog(const QtPressKeyDialog&) = delete;
+  QtPressKeyDialog& operator=(const QtPressKeyDialog&) = delete;
+  ~QtPressKeyDialog() noexcept;
   int GetKey() const noexcept { return m_key; }
 
 protected:

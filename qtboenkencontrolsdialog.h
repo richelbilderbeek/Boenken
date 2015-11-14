@@ -44,15 +44,15 @@ namespace bnkn {
 ///This dialog connects player names to their controls
 ///(but it does not connect sprites to their controllers,
 ///this is what DialogPlayers is for)
-class QtBoenkenControlsDialog : public QtHideAndShowDialog
+class QtControlsDialog : public QtHideAndShowDialog
 {
   Q_OBJECT
 
 public:
-  explicit QtBoenkenControlsDialog(QWidget *parent = 0);
-  QtBoenkenControlsDialog(const QtBoenkenControlsDialog&) = delete;
-  QtBoenkenControlsDialog& operator=(const QtBoenkenControlsDialog&) = delete;
-  ~QtBoenkenControlsDialog() noexcept;
+  explicit QtControlsDialog(QWidget *parent = 0);
+  QtControlsDialog(const QtControlsDialog&) = delete;
+  QtControlsDialog& operator=(const QtControlsDialog&) = delete;
+  ~QtControlsDialog() noexcept;
 
   bnkn::Controls GetControls() const noexcept;
 

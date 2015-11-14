@@ -51,10 +51,10 @@ ribi::bnkn::Sprite::Sprite(
   const unsigned char r,
   const unsigned char g,
   const unsigned char b)
-  : m_size(size),
+  : m_x(x),
+    m_y(y),
     m_pixmap(DrawGlobe(size,size,r,g,b)),
-    m_x(x),
-    m_y(y)
+    m_size(size)
 {
   #ifndef NDEBUG
   Test();

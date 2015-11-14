@@ -30,7 +30,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtboenkencontrolsdialog.h"
 #pragma GCC diagnostic pop
 
-ribi::bnkn::QtBoenkenControlsDialog::QtBoenkenControlsDialog(QWidget *parent)
+ribi::bnkn::QtControlsDialog::QtControlsDialog(QWidget *parent)
   : QtHideAndShowDialog(parent),
     ui(new Ui::QtBoenkenControlsDialog),
     m_keys_accel{},
@@ -42,7 +42,7 @@ ribi::bnkn::QtBoenkenControlsDialog::QtBoenkenControlsDialog(QWidget *parent)
     ui->button_done,
     &QPushButton::clicked,
     this,
-    &ribi::bnkn::QtBoenkenControlsDialog::close
+    &ribi::bnkn::QtControlsDialog::close
   );
   m_keys_accel.push_back(Qt::Key_W);
   m_keys_accel.push_back(Qt::Key_Up);
@@ -53,35 +53,35 @@ ribi::bnkn::QtBoenkenControlsDialog::QtBoenkenControlsDialog(QWidget *parent)
     ui->button_accelerate_1,
     &QPushButton::clicked,
     this,
-    &ribi::bnkn::QtBoenkenControlsDialog::onAccelerate1
+    &ribi::bnkn::QtControlsDialog::onAccelerate1
   );
   QObject::connect(
     ui->button_accelerate_2,
     &QPushButton::clicked,
     this,
-    &ribi::bnkn::QtBoenkenControlsDialog::onAccelerate2
+    &ribi::bnkn::QtControlsDialog::onAccelerate2
   );
   QObject::connect(
     ui->button_turn_1,
     &QPushButton::clicked,
     this,
-    &ribi::bnkn::QtBoenkenControlsDialog::onTurn1
+    &ribi::bnkn::QtControlsDialog::onTurn1
   );
   QObject::connect(ui->button_turn_2,
     &QPushButton::clicked,
     this,
-    &ribi::bnkn::QtBoenkenControlsDialog::onTurn2
+    &ribi::bnkn::QtControlsDialog::onTurn2
   );
 
   showKeys();
 }
 
-ribi::bnkn::QtBoenkenControlsDialog::~QtBoenkenControlsDialog() noexcept
+ribi::bnkn::QtControlsDialog::~QtControlsDialog() noexcept
 {
   delete ui;
 }
 
-void ribi::bnkn::QtBoenkenControlsDialog::showKeys() noexcept
+void ribi::bnkn::QtControlsDialog::showKeys() noexcept
 {
   ui->button_accelerate_1->setText(
     boost::lexical_cast<std::string>(m_keys_accel[0]).c_str() );
@@ -94,53 +94,53 @@ void ribi::bnkn::QtBoenkenControlsDialog::showKeys() noexcept
 
 }
 
-void ribi::bnkn::QtBoenkenControlsDialog::onAccelerate1() noexcept
+void ribi::bnkn::QtControlsDialog::onAccelerate1() noexcept
 {
-  QtBoenkenPressKeyDialog d;
+  QtPressKeyDialog d;
   d.exec();
   const int key = d.GetKey();
   m_keys_accel[0] = key;
   showKeys();
 }
 
-void ribi::bnkn::QtBoenkenControlsDialog::onAccelerate2() noexcept
+void ribi::bnkn::QtControlsDialog::onAccelerate2() noexcept
 {
-  QtBoenkenPressKeyDialog d;
+  QtPressKeyDialog d;
   d.exec();
   const int key = d.GetKey();
   m_keys_accel[1] = key;
   showKeys();
 }
 
-void ribi::bnkn::QtBoenkenControlsDialog::onTurn1() noexcept
+void ribi::bnkn::QtControlsDialog::onTurn1() noexcept
 {
-  QtBoenkenPressKeyDialog d;
+  QtPressKeyDialog d;
   d.exec();
   const int key = d.GetKey();
   m_keys_turn[0] = key;
   showKeys();
 }
 
-void ribi::bnkn::QtBoenkenControlsDialog::onTurn2() noexcept
+void ribi::bnkn::QtControlsDialog::onTurn2() noexcept
 {
-  QtBoenkenPressKeyDialog d;
+  QtPressKeyDialog d;
   d.exec();
   const int key = d.GetKey();
   m_keys_turn[1] = key;
   showKeys();
 }
 
-std::vector<int> ribi::bnkn::QtBoenkenControlsDialog::getKeysAccel() const noexcept
+std::vector<int> ribi::bnkn::QtControlsDialog::getKeysAccel() const noexcept
 {
   return m_keys_accel;
 }
 
-std::vector<int> ribi::bnkn::QtBoenkenControlsDialog::getKeysTurn() const noexcept
+std::vector<int> ribi::bnkn::QtControlsDialog::getKeysTurn() const noexcept
 {
   return m_keys_turn;
 }
 
-std::vector<std::string> ribi::bnkn::QtBoenkenControlsDialog::getNames() const noexcept
+std::vector<std::string> ribi::bnkn::QtControlsDialog::getNames() const noexcept
 {
   std::vector<std::string> v;
   v.push_back(ui->edit_name1->text().toStdString());
@@ -148,7 +148,7 @@ std::vector<std::string> ribi::bnkn::QtBoenkenControlsDialog::getNames() const n
   return v;
 }
 
-ribi::bnkn::Controls ribi::bnkn::QtBoenkenControlsDialog::GetControls() const noexcept
+ribi::bnkn::Controls ribi::bnkn::QtControlsDialog::GetControls() const noexcept
 {
   bnkn::Controls c;
   c.m_keys_accel = this->getKeysAccel();

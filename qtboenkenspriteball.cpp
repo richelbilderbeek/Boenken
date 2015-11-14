@@ -72,8 +72,8 @@ void ribi::bnkn::SpriteBall::SetGoalPoles(
 
 void ribi::bnkn::SpriteBall::Move() noexcept
 {
-  const double maxx = this->m_maxx - this->m_size;
-  const double maxy = this->m_maxy - this->m_size;
+  const double maxx = this->m_maxx - this->GetSize();
+  const double maxy = this->m_maxy - this->GetSize();
   m_x += m_dx;
   m_y += m_dy;
 

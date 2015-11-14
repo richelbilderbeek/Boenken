@@ -31,23 +31,23 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "ui_qtboenkenarenadialog.h"
 #pragma GCC diagnostic pop
 
-ribi::bnkn::QtBoenkenArenaDialog::QtBoenkenArenaDialog(QWidget *parent) noexcept :
+ribi::bnkn::QtArenaDialog::QtArenaDialog(QWidget *parent) noexcept :
     QtHideAndShowDialog(parent),
     ui(new Ui::QtBoenkenArenaDialog)
 {
   ui->setupUi(this);
   QObject::connect(
-    ui->button_done,&QPushButton::clicked,this,&QtBoenkenArenaDialog::close);
+    ui->button_done,&QPushButton::clicked,this,&QtArenaDialog::close);
 }
 
-ribi::bnkn::QtBoenkenArenaDialog::~QtBoenkenArenaDialog() noexcept
+ribi::bnkn::QtArenaDialog::~QtArenaDialog() noexcept
 {
   delete ui;
 }
 
 ///The purpose of QtBoenkenArenaDialog is to create
 ///an ArenaSettings
-ribi::bnkn::ArenaSettings ribi::bnkn::QtBoenkenArenaDialog::GetSettings() const noexcept
+ribi::bnkn::ArenaSettings ribi::bnkn::QtArenaDialog::GetSettings() const noexcept
 {
   ArenaSettings s;
   s.formation = this->GetFormation();
@@ -58,7 +58,7 @@ ribi::bnkn::ArenaSettings ribi::bnkn::QtBoenkenArenaDialog::GetSettings() const 
   return s;
 }
 
-std::pair<int,int> ribi::bnkn::QtBoenkenArenaDialog::GetScreenSize() const noexcept
+std::pair<int,int> ribi::bnkn::QtArenaDialog::GetScreenSize() const noexcept
 {
   //Makes the code shorter and copy-pastable
   const QComboBox * const b = ui->box_screen_size;
@@ -86,7 +86,7 @@ std::pair<int,int> ribi::bnkn::QtBoenkenArenaDialog::GetScreenSize() const noexc
   }
 }
 
-int ribi::bnkn::QtBoenkenArenaDialog::GetNballs() const noexcept
+int ribi::bnkn::QtArenaDialog::GetNballs() const noexcept
 {
   //Makes the code shorter and copy-pastable
   const QComboBox * const b = ui->box_nballs;
@@ -105,7 +105,7 @@ int ribi::bnkn::QtBoenkenArenaDialog::GetNballs() const noexcept
   }
 }
 
-int ribi::bnkn::QtBoenkenArenaDialog::GetNobstacles() const noexcept
+int ribi::bnkn::QtArenaDialog::GetNobstacles() const noexcept
 {
   //Makes the code shorter and copy-pastable
   const QComboBox * const b = ui->box_obstacles;
@@ -123,7 +123,7 @@ int ribi::bnkn::QtBoenkenArenaDialog::GetNobstacles() const noexcept
   throw std::logic_error("ribi::bnkn::QtBoenkenArenaDialog::GetNobstacles");
 }
 
-ribi::bnkn::Formation ribi::bnkn::QtBoenkenArenaDialog::GetFormation() const noexcept
+ribi::bnkn::Formation ribi::bnkn::QtArenaDialog::GetFormation() const noexcept
 {
   //Makes the code shorter and copy-pastable
   const QComboBox * const b = ui->box_formation;
@@ -144,7 +144,7 @@ ribi::bnkn::Formation ribi::bnkn::QtBoenkenArenaDialog::GetFormation() const noe
   throw std::logic_error("ribi::bnkn::QtBoenkenArenaDialog::GetFormation");
 }
 
-double ribi::bnkn::QtBoenkenArenaDialog::GetFriction() const noexcept
+double ribi::bnkn::QtArenaDialog::GetFriction() const noexcept
 {
   const QComboBox * const b = ui->box_friction;
   assert(b->count()==3);

@@ -86,7 +86,7 @@ void ribi::bnkn::SpriteMoving::Collision(SpriteMoving * const p1, SpriteMoving *
   const double dy = p2->getY() - p1->getY();
   const double distance = std::sqrt((dy * dy) + (dx * dx));
   const double collision_distance
-    = boost::numeric_cast<double>(p1->m_size + p2->m_size) / 2.0;
+    = boost::numeric_cast<double>(p1->GetSize() + p2->GetSize()) / 2.0;
   if (distance < collision_distance)
   {
     //A collision!

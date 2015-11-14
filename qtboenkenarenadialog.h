@@ -38,22 +38,22 @@ namespace bnkn {
 ///QtBoenkenArenaDialog
 ///
 ///Dialog to setup up the arena
-class QtBoenkenArenaDialog : public QtHideAndShowDialog
+class QtArenaDialog : public QtHideAndShowDialog
 {
   Q_OBJECT
 
 public:
-  explicit QtBoenkenArenaDialog(QWidget *parent = 0) noexcept;
-  QtBoenkenArenaDialog(const QtBoenkenArenaDialog&) = delete;
-  QtBoenkenArenaDialog& operator=(const QtBoenkenArenaDialog&) = delete;
-  ~QtBoenkenArenaDialog() noexcept;
+  explicit QtArenaDialog(QWidget *parent = 0) noexcept;
+  QtArenaDialog(const QtArenaDialog&) = delete;
+  QtArenaDialog& operator=(const QtArenaDialog&) = delete;
+  ~QtArenaDialog() noexcept;
 
   std::pair<int,int> GetScreenSize() const noexcept;
   int GetNballs() const noexcept;
   int GetNobstacles() const noexcept;
-  bnkn::Formation GetFormation() const noexcept;
+  Formation GetFormation() const noexcept;
   double GetFriction() const noexcept;
-  bnkn::ArenaSettings GetSettings() const noexcept;
+  ArenaSettings GetSettings() const noexcept;
 
 private:
   Ui::QtBoenkenArenaDialog *ui;

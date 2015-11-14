@@ -49,12 +49,14 @@ struct SpritePlayer final : public SpriteMoving
   void Accelerate() noexcept;
   void Draw(QPainter& painter) const override;
   double GetAngle() const noexcept { return m_angle; }
+
+  ///The SpritePlayer's ID
+  //int GetId() const noexcept { return m_id; }
+
   void Move() noexcept override;
   void SetSpeed(const double dx, const double dy) noexcept override;
   void TurnRight() noexcept;
 
-  ///The SpritePlayer's ID
-  const int m_id;
 
   private:
   ///Direction the player looks to
@@ -62,9 +64,12 @@ struct SpritePlayer final : public SpriteMoving
   ///Note: the actual moving is done by m_dx and m_dy
   double m_angle;
 
+  ///The SpritePlayer's ID
+  //const int m_id;
+
   static const double m_acceleration;
   static const double m_turnspeed;
-  static int ms_n_players;
+  //static int ms_n_players;
 };
 
 } //~namespace bnkn

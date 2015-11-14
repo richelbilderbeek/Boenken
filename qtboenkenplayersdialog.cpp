@@ -27,7 +27,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma GCC diagnostic pop
 
-ribi::bnkn::QtBoenkenPlayersDialog::QtBoenkenPlayersDialog(QWidget *parent) :
+ribi::bnkn::QtPlayersDialog::QtPlayersDialog(QWidget *parent) :
     QtHideAndShowDialog(parent),
     ui(new Ui::QtBoenkenPlayersDialog)
 {
@@ -36,11 +36,11 @@ ribi::bnkn::QtBoenkenPlayersDialog::QtBoenkenPlayersDialog(QWidget *parent) :
     ui->button_done,
     &QPushButton::clicked,
     this,
-    &ribi::bnkn::QtBoenkenPlayersDialog::close
+    &ribi::bnkn::QtPlayersDialog::close
   );
 }
 
-ribi::bnkn::QtBoenkenPlayersDialog::~QtBoenkenPlayersDialog() noexcept
+ribi::bnkn::QtPlayersDialog::~QtPlayersDialog() noexcept
 {
   delete ui;
 }

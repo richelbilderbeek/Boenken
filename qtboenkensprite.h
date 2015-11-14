@@ -43,16 +43,15 @@ struct Sprite
     const int size,
     const unsigned char r,
     const unsigned char g,
-    const unsigned char b);
-  Sprite(const Sprite&) = delete;
-  Sprite& operator=(const Sprite&) = delete;
+    const unsigned char b
+  );
   virtual ~Sprite() = default;
 
   ///The size (width==height) in pixels
-  const int m_size;
+  int GetSize() const noexcept { return m_size; }
 
   ///The globe part of the Sprite
-  const QPixmap m_pixmap;
+  const QPixmap& GetPixmap() const noexcept { return m_pixmap; }
 
   double getX() const noexcept { return GetX(); }
   double getY() const noexcept { return GetY(); }
@@ -122,6 +121,13 @@ struct Sprite
     double& speed2) noexcept;
 
   private:
+
+  ///The globe part of the Sprite
+  QPixmap m_pixmap;
+
+  ///The size (width==height) in pixels
+  int m_size;
+
   #ifndef NDEBUG
   ///Test this class
   static void Test() noexcept;

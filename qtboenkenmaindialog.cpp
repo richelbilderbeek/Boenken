@@ -42,7 +42,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic pop
 
 ///All parameters are fed into the contructor
-ribi::bnkn::QtBoenkenMainDialog::QtBoenkenMainDialog(
+ribi::bnkn::QtMainDialog::QtMainDialog(
   QWidget *parent,
   boost::shared_ptr<bnkn::Game> boenken,
   bool is_training)
@@ -72,11 +72,11 @@ ribi::bnkn::QtBoenkenMainDialog::QtBoenkenMainDialog(
   ///Start the timer
   QObject::connect(
     m_timer.get(),&QTimer::timeout,
-    this,&ribi::bnkn::QtBoenkenMainDialog::onTimer
+    this,&ribi::bnkn::QtMainDialog::onTimer
   );
   QObject::connect(
     m_timer_countdown.get(),&QTimer::timeout,
-    this,&ribi::bnkn::QtBoenkenMainDialog::onCountdownTimer
+    this,&ribi::bnkn::QtMainDialog::onCountdownTimer
   );
   if (!m_is_training)
   {
@@ -84,14 +84,14 @@ ribi::bnkn::QtBoenkenMainDialog::QtBoenkenMainDialog(
   }
 }
 
-ribi::bnkn::QtBoenkenMainDialog::~QtBoenkenMainDialog() noexcept
+ribi::bnkn::QtMainDialog::~QtMainDialog() noexcept
 {
   m_timer->stop();
   m_timer_countdown->stop();
   delete ui;
 }
 
-void ribi::bnkn::QtBoenkenMainDialog::paintEvent(QPaintEvent*)
+void ribi::bnkn::QtMainDialog::paintEvent(QPaintEvent*)
 {
   QPainter painter(this);
 
@@ -125,7 +125,7 @@ void ribi::bnkn::QtBoenkenMainDialog::paintEvent(QPaintEvent*)
 
 ///Handles key presses.
 ///These are ignored when the computer is training
-void ribi::bnkn::QtBoenkenMainDialog::keyPressEvent(QKeyEvent * e)
+void ribi::bnkn::QtMainDialog::keyPressEvent(QKeyEvent * e)
 {
   if (m_is_training) return;
   //Assume that a key is pressed
@@ -136,7 +136,7 @@ void ribi::bnkn::QtBoenkenMainDialog::keyPressEvent(QKeyEvent * e)
 
 ///This method gives the game 1000 msecs time
 ///to do those magical start-up things...
-void ribi::bnkn::QtBoenkenMainDialog::onCountdownTimer()
+void ribi::bnkn::QtMainDialog::onCountdownTimer()
 {
   assert(!m_is_training);
   m_timer_countdown->stop();
@@ -146,7 +146,7 @@ void ribi::bnkn::QtBoenkenMainDialog::onCountdownTimer()
 ///The main method when not training:
 ///every 50msec the Sprites
 ///move and are drawn to the screen
-void ribi::bnkn::QtBoenkenMainDialog::onTimer()
+void ribi::bnkn::QtMainDialog::onTimer()
 {
   assert(!m_is_training);
   ///Boenken moves all sprites
@@ -155,7 +155,7 @@ void ribi::bnkn::QtBoenkenMainDialog::onTimer()
   this->repaint();
 }
 
-void ribi::bnkn::QtBoenkenMainDialog::Paint(
+void ribi::bnkn::QtMainDialog::Paint(
   QPixmap& pixmap,
   const unsigned char r,
   const unsigned char g,
@@ -186,7 +186,7 @@ void ribi::bnkn::QtBoenkenMainDialog::Paint(
 }
 
 #ifndef NDEBUG
-void ribi::bnkn::QtBoenkenMainDialog::Test() noexcept
+void ribi::bnkn::QtMainDialog::Test() noexcept
 {
   {
     static bool is_tested{false};
