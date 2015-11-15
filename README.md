@@ -1,8 +1,27 @@
 # Boenken
 
-C++ 20-player game that is a mix between soccer and billiards using Qt.
+Boenken is a 20-player game that is a mix between soccer and billiards, programmed in C++ using Qt (see 'About the program' for more details).
 
-## Screenshots
+# Downloads
+
+ * [Download the Windows executable](http://richelbilderbeek.nl/GameBoenken.zip)
+
+# About the program
+
+Boenken is programmed in C++14 using the STL, [Boost](http://www.boost.org), [Qt](http://www.qt.io) (for the desktop version) and [Wt](http://www.webtoolkit.eu/wt) (for the website version) libraries.
+
+Boenken is cross-compiled using [MXE](http://mxe.cc) in the bash shell scripts.
+
+# I want to contribute!
+
+Awesome!
+
+You can collaborate by
+ * email richelbilderbeek (at [Richel Bilderbeek's webpage its 'Contact Me' section](http://www.richelbilderbeek.nl/Contact.htm))
+ * add a GitHub issue: this can be a question, suggestion, or whatever
+ * fork this repository, make the changes, and submit a pull request. 
+
+# Screenshot archive
 
 Most recent at the top.
 
