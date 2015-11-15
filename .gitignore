@@ -27,3 +27,10 @@
 *.out
 *.app
 *.pro.user
+Makefile
+Makefile*
+object_script*
+*_plugin_import.cpp
+debug/
+release/
+ui_*
