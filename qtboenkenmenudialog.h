@@ -26,7 +26,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
-#include <boost/shared_ptr.hpp>
 #include "qthideandshowdialog.h"
 #pragma GCC diagnostic pop
 
@@ -61,14 +60,12 @@ public:
 
 private:
   Ui::QtBoenkenMenuDialog *ui;
-  boost::shared_ptr<QtControlsDialog> m_controls;
-  boost::shared_ptr<QtPlayersDialog> m_players;
-  boost::shared_ptr<QtArenaDialog> m_arena;
+  QtControlsDialog * const m_controls;
+  QtPlayersDialog * const m_players;
+  QtArenaDialog * const m_arena;
 
   static std::vector<SpritePlayer> CreatePlayers(const ArenaSettings& a);
-
   static std::vector<SpriteBall> CreateBalls(const ArenaSettings& a);
-
   static std::vector<SpriteNonMoving> CreateObstacles(const ArenaSettings& a);
 
   #ifndef NDEBUG

@@ -97,7 +97,7 @@ void ribi::bnkn::QtControlsDialog::showKeys() noexcept
 void ribi::bnkn::QtControlsDialog::onAccelerate1() noexcept
 {
   QtPressKeyDialog d;
-  d.exec();
+  this->ShowChild(&d);
   const int key = d.GetKey();
   m_keys_accel[0] = key;
   showKeys();
@@ -106,7 +106,7 @@ void ribi::bnkn::QtControlsDialog::onAccelerate1() noexcept
 void ribi::bnkn::QtControlsDialog::onAccelerate2() noexcept
 {
   QtPressKeyDialog d;
-  d.exec();
+  this->ShowChild(&d);
   const int key = d.GetKey();
   m_keys_accel[1] = key;
   showKeys();
@@ -115,7 +115,7 @@ void ribi::bnkn::QtControlsDialog::onAccelerate2() noexcept
 void ribi::bnkn::QtControlsDialog::onTurn1() noexcept
 {
   QtPressKeyDialog d;
-  d.exec();
+  this->ShowChild(&d);
   const int key = d.GetKey();
   m_keys_turn[0] = key;
   showKeys();
@@ -124,7 +124,7 @@ void ribi::bnkn::QtControlsDialog::onTurn1() noexcept
 void ribi::bnkn::QtControlsDialog::onTurn2() noexcept
 {
   QtPressKeyDialog d;
-  d.exec();
+  this->ShowChild(&d);
   const int key = d.GetKey();
   m_keys_turn[1] = key;
   showKeys();

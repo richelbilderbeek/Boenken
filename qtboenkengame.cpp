@@ -172,9 +172,7 @@ void ribi::bnkn::Game::Test() noexcept
     is_tested = true;
   }
   {
-    const boost::shared_ptr<SpritePlayer> p(new SpritePlayer(
-      0.0,0.0,0.0,8,0,0,0));
-    assert(p);
+    SpritePlayer p{0.0,0.0,0.0,8,0,0,0};
   }
   {
     const SpriteBall b{0.0,0.0};

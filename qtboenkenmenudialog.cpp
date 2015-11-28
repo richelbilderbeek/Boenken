@@ -52,9 +52,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 ribi::bnkn::QtMenuDialog::QtMenuDialog(QWidget *parent)
   : QtHideAndShowDialog(parent),
     ui(new Ui::QtBoenkenMenuDialog),
-    m_controls(new QtControlsDialog),
-    m_players( new QtPlayersDialog),
-    m_arena(new QtArenaDialog)
+    m_controls{new QtControlsDialog(this)},
+    m_players{new QtPlayersDialog(this)},
+    m_arena{new QtArenaDialog(this)}
 {
   ui->setupUi(this);
   #ifndef NDEBUG
@@ -235,17 +235,17 @@ std::vector<ribi::bnkn::SpriteNonMoving> ribi::bnkn::QtMenuDialog::CreateObstacl
 
 void ribi::bnkn::QtMenuDialog::onControlsClick()
 {
-  this->ShowChild(m_controls.get());
+  this->ShowChild(m_controls);
 }
 
 void ribi::bnkn::QtMenuDialog::onPlayersClick()
 {
-  this->ShowChild(m_players.get());
+  this->ShowChild(m_players);
 }
 
 void ribi::bnkn::QtMenuDialog::onArenaClick()
 {
-  this->ShowChild(m_arena.get());
+  this->ShowChild(m_arena);
 }
 
 void ribi::bnkn::QtMenuDialog::onStartClick()
