@@ -2,7 +2,8 @@ INCLUDEPATH += \
     ../Boenken
 
 SOURCES += \
-    ../Boenken/boenkenmenudialog.cpp
+    ../Boenken/boenkenmenudialog.cpp \
+    $$PWD/boenkencontrols.cpp
 
 HEADERS  += \
     ../Boenken/boenkenarenasettings.h \

@@ -28,7 +28,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "fileio.h"
 #include "geometry.h"
 #include "plane.h"
-#include "richelbilderbeekprogram.h"
 #include "testtimer.h"
 #include "trace.h"
 
@@ -59,7 +58,7 @@ ribi::About ribi::bnkn::MenuDialog::GetAbout() const noexcept
     "Richel Bilderbeek",
     "Boenken",
     "a multiplayer soccer/billiards game",
-    "the 14th of November 2015",
+    "the 28th of November 2015",
     "2007-2015",
     "http://www.richelbilderbeek.nl/GameBoenken.htm",
     GetVersion(),
@@ -90,7 +89,7 @@ ribi::Help ribi::bnkn::MenuDialog::GetHelp() const noexcept
 
 std::string ribi::bnkn::MenuDialog::GetVersion() const noexcept
 {
-  return "5.0";
+  return "5.1";
 }
 
 std::vector<std::string> ribi::bnkn::MenuDialog::GetVersionHistory() const noexcept
@@ -104,7 +103,8 @@ std::vector<std::string> ribi::bnkn::MenuDialog::GetVersionHistory() const noexc
     "2012-03-07: version 4.0: conformized naming and architecture for ProjectRichelBilderbeek"
     "2012-11-17: version 4.1: added a fancy color gradient to the main menu",
     "2015-01-02: version 4.2: fixed bug in collision between player and object",
-    "2015-11-15: version 5.0: moved to own GitHub"
+    "2015-11-15: version 5.0: moved to own GitHub",
+    "2015-11-28: version 5.1: made many types regular",
   };
 }
 

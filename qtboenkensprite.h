@@ -100,7 +100,8 @@ struct Sprite
     const int height,
     const unsigned char r,
     const unsigned char g,
-    const unsigned char b);
+    const unsigned char b
+  );
 
   ///Obtain the angle in radians between two deltas
   ///12 o'clock is 0.0 * pi
@@ -118,7 +119,8 @@ struct Sprite
     double& angle1,
     double& speed1,
     double& angle2,
-    double& speed2) noexcept;
+    double& speed2
+  ) noexcept;
 
   private:
 

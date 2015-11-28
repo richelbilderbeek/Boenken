@@ -35,7 +35,6 @@ struct SpriteMoving;
 
 ///SpriteNonMoving are obstacles.
 ///Obstacles are grey per default
-///and can only be deleted by boost::checked_delete
 struct SpriteNonMoving final : public Sprite
 {
   explicit SpriteNonMoving(

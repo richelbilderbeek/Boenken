@@ -36,7 +36,8 @@ struct SpriteMoving: public Sprite
     const int size,
     const unsigned char r,
     const unsigned char g,
-    const unsigned char b);
+    const unsigned char b
+  );
   virtual ~SpriteMoving();
 
   double CalcImpulseAngle() const noexcept;

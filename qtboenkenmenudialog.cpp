@@ -136,44 +136,32 @@ std::vector<ribi::bnkn::SpritePlayer> ribi::bnkn::QtMenuDialog::CreatePlayers(
   return v;
 }
 
-std::vector<boost::shared_ptr<ribi::bnkn::SpriteBall> > ribi::bnkn::QtMenuDialog::CreateBalls(
-  const bnkn::ArenaSettings& a)
+std::vector<ribi::bnkn::SpriteBall> ribi::bnkn::QtMenuDialog::CreateBalls(
+  const ArenaSettings& a)
 {
   const int size = 32;
   //A ball is always green
   const unsigned char r =   0;
   const unsigned char g = 255;
   const unsigned char b =   0;
-  std::vector<boost::shared_ptr<bnkn::SpriteBall> > v;
+  std::vector<SpriteBall> v;
   switch (a.n_balls)
   {
     case 1:
     {
-      const int x
-        = a.screen_size.first / 2 - (size / 2);
-      const int y
-        = a.screen_size.second / 2 - (size / 2);
-      boost::shared_ptr<bnkn::SpriteBall> s(
-        new bnkn::SpriteBall(x,y,size,r,g,b));
-      assert(s);
+      const double x{static_cast<double>((a.screen_size.first ) / 2 - (size / 2))};
+      const double y{static_cast<double>((a.screen_size.second) / 2 - (size / 2))};
+      SpriteBall s{x,y,size,r,g,b};
       v.push_back(s);
     }
     break;
     case 2:
     {
-      const int x1
-        = (a.screen_size.first / 2)
-        - size;
-      const int x2 = x1 + size + 1;
-      const int y
-        = (a.screen_size.second / 2)
-        - (size / 2);
-      boost::shared_ptr<bnkn::SpriteBall> s1(
-        new bnkn::SpriteBall(x1,y,size,r,g,b));
-      boost::shared_ptr<bnkn::SpriteBall> s2(
-        new bnkn::SpriteBall(x2,y,size,r,g,b));
-      assert(s1);
-      assert(s2);
+      const double x1{static_cast<double>(a.screen_size.first / 2) - size};
+      const double x2{x1 + size + 1.0};
+      const double y{static_cast<double>((a.screen_size.second / 2)- (size / 2))};
+      SpriteBall s1{x1,y,size,r,g,b};
+      SpriteBall s2{x2,y,size,r,g,b};
       v.push_back(s1);
       v.push_back(s2);
     }
@@ -185,69 +173,59 @@ std::vector<boost::shared_ptr<ribi::bnkn::SpriteBall> > ribi::bnkn::QtMenuDialog
 }
 
 ///Always creates the four goalposts
-std::vector<boost::shared_ptr<ribi::bnkn::SpriteNonMoving> > ribi::bnkn::QtMenuDialog::CreateObstacles(
-  const bnkn::ArenaSettings& a)
+std::vector<ribi::bnkn::SpriteNonMoving> ribi::bnkn::QtMenuDialog::CreateObstacles(
+  const ArenaSettings& a
+)
 {
-  const int size = 32;
+  const int size{32};
   //A obstacle is always grey
-  const unsigned char r = 255;
-  const unsigned char g = 255;
-  const unsigned char b = 255;
+  const unsigned char r{255};
+  const unsigned char g{255};
+  const unsigned char b{255};
 
-  std::vector<boost::shared_ptr<bnkn::SpriteNonMoving> > v;
+  std::vector<SpriteNonMoving> v;
   {
     //Top-left goalpost
-    const int x = 0;
-    const int y = a.screen_size.second / 4;
-    boost::shared_ptr<bnkn::SpriteNonMoving> s(
-      new bnkn::SpriteNonMoving(x,y,size,r,g,b));
+    const double x{static_cast<double>(0)};
+    const double y{static_cast<double>(a.screen_size.second / 4)};
+    SpriteNonMoving s{x,y,size,r,g,b};
     v.push_back(s);
   }
   {
     //Bottom-left goalpost
-    const int x = 0;
-    const int y = 3 * a.screen_size.second / 4;
-    boost::shared_ptr<bnkn::SpriteNonMoving> s(
-      new bnkn::SpriteNonMoving(x,y,size,r,g,b));
-    assert(s);
+    const double x{static_cast<double>(0)};
+    const double y{static_cast<double>(3 * a.screen_size.second / 4)};
+    SpriteNonMoving s{x,y,size,r,g,b};
     v.push_back(s);
   }
   {
     //Top-left goalpost
-    const int x = a.screen_size.first - size;
-    const int y = a.screen_size.second / 4;
-    boost::shared_ptr<bnkn::SpriteNonMoving> s(
-      new bnkn::SpriteNonMoving(x,y,size,r,g,b));
-    assert(s);
+    const double x{static_cast<double>(a.screen_size.first - size)};
+    const double y{static_cast<double>(a.screen_size.second / 4)};
+    SpriteNonMoving s{x,y,size,r,g,b};
     v.push_back(s);
   }
   {
     //Bottom-left goalpost
-    const int x = a.screen_size.first - size;
-    const int y = 3 * a.screen_size.second / 4;
-    boost::shared_ptr<bnkn::SpriteNonMoving> s(
-      new bnkn::SpriteNonMoving(x,y,size,r,g,b));
-    assert(s);
+    const double x{static_cast<double>(a.screen_size.first - size)};
+    const double y{static_cast<double>(3 * a.screen_size.second / 4)};
+    SpriteNonMoving s{x,y,size,r,g,b};
     v.push_back(s);
   }
   if (a.n_obstacles == 2)
   {
     {
       //Left obstacle
-      const int x = ( (1 * a.width() ) / 8) - (size / 2);
-      const int y = ( (1 * a.height()) / 2) - (size / 2);
-      boost::shared_ptr<bnkn::SpriteNonMoving> s(
-        new bnkn::SpriteNonMoving(x,y,size,r,g,b));
-      assert(s);
+      const double x{static_cast<double>(( (1 * a.width() ) / 8) - (size / 2))};
+      const double y{static_cast<double>(( (1 * a.height()) / 2) - (size / 2))};
+      SpriteNonMoving s{x,y,size,r,g,b};
       v.push_back(s);
     }
     {
       //Right obstacle
-      const int x = ( (7 * a.width() ) / 8) - (size / 2);
-      const int y = ( (1 * a.height()) / 2) - (size / 2);
-      boost::shared_ptr<bnkn::SpriteNonMoving> s(
-        new bnkn::SpriteNonMoving(x,y,size,r,g,b));
-      assert(s);
+      const double x{static_cast<double>(( (7 * a.width() ) / 8) - (size / 2))};
+      const double y{static_cast<double>(( (1 * a.height()) / 2) - (size / 2))};
+      SpriteNonMoving s{x,y,size,r,g,b};
       v.push_back(s);
     }
 
@@ -272,14 +250,13 @@ void ribi::bnkn::QtMenuDialog::onArenaClick()
 
 void ribi::bnkn::QtMenuDialog::onStartClick()
 {
-  const bnkn::ArenaSettings a = this->m_arena->GetSettings();
-  const bnkn::Controls c = this->m_controls->GetControls();
-  const std::vector<SpritePlayer> players = CreatePlayers(a);
-  const std::vector<boost::shared_ptr<bnkn::SpriteBall     > > balls     = CreateBalls(a);
-  const std::vector<boost::shared_ptr<bnkn::SpriteNonMoving> > obstacles = CreateObstacles(a);
-  boost::shared_ptr<Game> b(new Game(a,c,players,balls,obstacles));
-  assert(b);
-  QtMainDialog d(0,b);
+  const ArenaSettings a{this->m_arena->GetSettings()};
+  const Controls c{this->m_controls->GetControls()};
+  const std::vector<SpritePlayer> players{CreatePlayers(a)};
+  const std::vector<SpriteBall> balls{CreateBalls(a)};
+  const std::vector<SpriteNonMoving> obstacles{CreateObstacles(a)};
+  const Game b{a,c,players,balls,obstacles};
+  QtMainDialog d{b};
 
   this->hide();
   d.exec();
@@ -306,7 +283,6 @@ void ribi::bnkn::QtMenuDialog::Test() noexcept
   }
   bnkn::MenuDialog();
   {
-
     ArenaSettings a;
     a.formation = Formation::circle_inward;
     a.friction = 0.999;
@@ -315,11 +291,10 @@ void ribi::bnkn::QtMenuDialog::Test() noexcept
     a.screen_size = std::make_pair(320,200);
     Controls c;
     const std::vector<SpritePlayer> players{CreatePlayers(a)};
-    const std::vector<boost::shared_ptr<bnkn::SpriteBall     > > balls     = CreateBalls(a);
-    const std::vector<boost::shared_ptr<bnkn::SpriteNonMoving> > obstacles = CreateObstacles(a);
-    boost::shared_ptr<Game> b(new Game(a,c,players,balls,obstacles));
-    assert(b);
-    QtMainDialog d(0,b);
+    const std::vector<SpriteBall> balls = CreateBalls(a);
+    const std::vector<SpriteNonMoving> obstacles = CreateObstacles(a);
+    const Game b{a,c,players,balls,obstacles};
+    QtMainDialog d{b};
   }
   const TestTimer test_timer(__func__,__FILE__,1.0);
 }

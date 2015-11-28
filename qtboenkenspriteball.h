@@ -36,7 +36,7 @@ namespace bnkn {
 ///and can only be deleted by boost::checked_delete
 struct SpriteBall final : public SpriteMoving
 {
-  SpriteBall(
+  explicit SpriteBall(
     const double x,
     const double y,
     const int size = 32,
@@ -44,26 +44,19 @@ struct SpriteBall final : public SpriteMoving
     const unsigned char g = 255,
     const unsigned char b =   0
   );
+  ~SpriteBall() noexcept;
+
   void Move() noexcept;
   static void SetGoalPoles(const double goal_y_top,const double goal_y_bottom);
   static std::pair<int,int> GetScore() noexcept;
   static void ResetScore() noexcept { m_score_left = 0; m_score_right = 0; }
-  static int CountBalls() noexcept { return sm_n_balls; }
 
   private:
-  ///Ensure SpriteBall can only be deleted by boost::checked_delete
-  ~SpriteBall() noexcept;
-  friend void boost::checked_delete<>(SpriteBall* x);
 
   static double m_goal_y_top;
   static double m_goal_y_bottom;
   static int m_score_left;
   static int m_score_right;
-
-  //The number of balls, for debugging purposes
-  static int sm_n_balls;
-
-
 };
 
 } //~namespace bnkn {

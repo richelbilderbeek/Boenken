@@ -51,7 +51,7 @@ ribi::bnkn::SpriteNonMoving::SpriteNonMoving(
 }
 
 void ribi::bnkn::SpriteNonMoving::Collision(
-  const SpriteNonMoving &obstacle, SpriteMoving &moving
+  const SpriteNonMoving& obstacle, SpriteMoving& moving
 )
 {
   if (!Sprite::IsCollision(obstacle,moving)) return;

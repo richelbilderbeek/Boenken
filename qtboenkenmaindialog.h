@@ -26,8 +26,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
-#include <boost/shared_ptr.hpp>
-
+#include "qtboenkengame.h"
 #include "qthideandshowdialog.h"
 #include <QPixmap>
 #include <QTimer>
@@ -40,9 +39,6 @@ namespace Ui {
 namespace ribi {
 namespace bnkn {
 
-struct Game;
-boost::shared_ptr<bnkn::Game> CreateNoBoenken();
-
 ///QtBoenkenMainDialog displays Boenken and handles user events
 class QtMainDialog : public QtHideAndShowDialog
 {
@@ -50,9 +46,8 @@ class QtMainDialog : public QtHideAndShowDialog
 
 public:
   explicit QtMainDialog(
-    QWidget *parent = 0,
-    boost::shared_ptr<Game> boenken = CreateNoBoenken(),
-    const bool is_training = false
+    const Game& game,
+    QWidget *parent = 0
   );
   QtMainDialog(const QtMainDialog&) = delete;
   QtMainDialog& operator=(const QtMainDialog&) = delete;
@@ -66,15 +61,15 @@ private:
   //UI
   Ui::QtBoenkenMainDialog *ui;
   //Graphics
-  boost::shared_ptr<QPixmap> m_background;
+  QPixmap m_background;
   //Other Qthings
   ///The main game timer
-  boost::shared_ptr<QTimer> m_timer;
+  QTimer * const m_timer;
   ///The timer that does the countdown
-  boost::shared_ptr<QTimer> m_timer_countdown;
+  QTimer * const m_timer_countdown;
   //Other member variables
-  boost::shared_ptr<Game> m_boenken;
-  const bool m_is_training;
+  Game m_game;
+  bool m_verbose;
 
   ///Paint paints a Pixmap to a single color fast,
   ///from http://www.richelbilderbeek.nl/CppPaint.htm
@@ -83,7 +78,8 @@ private:
     const unsigned char r,
     const unsigned char g,
     const unsigned char b,
-    const unsigned char a = 255);
+    const unsigned char a = 255
+  );
 
   #ifndef NDEBUG
   static void Test() noexcept;

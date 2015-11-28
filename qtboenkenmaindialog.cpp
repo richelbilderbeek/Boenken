@@ -43,45 +43,43 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 ///All parameters are fed into the contructor
 ribi::bnkn::QtMainDialog::QtMainDialog(
-  QWidget *parent,
-  boost::shared_ptr<bnkn::Game> boenken,
-  bool is_training)
+  const bnkn::Game& game,
+  QWidget *parent
+)
   : QtHideAndShowDialog(parent),
     ui(new Ui::QtBoenkenMainDialog),
-    m_background(new QPixmap),
-    m_timer(new QTimer),
-    m_timer_countdown(new QTimer),
-    m_boenken(boenken),
-    m_is_training(is_training)
+    m_background{game.getWidth(),game.getHeight()},
+    m_timer{new QTimer(this)},
+    m_timer_countdown{new QTimer(this)},
+    m_game{game},
+    m_verbose{false}
 {
   ui->setupUi(this);
 
 
   ///Set GUI size to Boenken size
-  this->setGeometry(0,0,m_boenken->getWidth(),m_boenken->getHeight());
+  this->setGeometry(0,0,m_game.getWidth(),m_game.getHeight());
   ///Size the black background
-  m_background.reset(new QPixmap(m_boenken->getWidth(),m_boenken->getHeight()));
-  Paint(*m_background,1,1,1); //Black
+
+  Paint(m_background,1,1,1); //Black
   ///Put the dialog in the screen center
   const QRect screen = QApplication::desktop()->screenGeometry();
   this->move( screen.center() - this->rect().center() );
+
   ///Disallow resize from now on
-  this->setFixedWidth(m_boenken->getWidth());
-  this->setFixedHeight(m_boenken->getHeight());
+  this->setFixedWidth(m_game.getWidth());
+  this->setFixedHeight(m_game.getHeight());
 
   ///Start the timer
   QObject::connect(
-    m_timer.get(),&QTimer::timeout,
+    m_timer,&QTimer::timeout,
     this,&ribi::bnkn::QtMainDialog::onTimer
   );
   QObject::connect(
-    m_timer_countdown.get(),&QTimer::timeout,
+    m_timer_countdown,&QTimer::timeout,
     this,&ribi::bnkn::QtMainDialog::onCountdownTimer
   );
-  if (!m_is_training)
-  {
-    m_timer_countdown->start(1000);
-  }
+  m_timer_countdown->start(1000);
 }
 
 ribi::bnkn::QtMainDialog::~QtMainDialog() noexcept
@@ -93,10 +91,11 @@ ribi::bnkn::QtMainDialog::~QtMainDialog() noexcept
 
 void ribi::bnkn::QtMainDialog::paintEvent(QPaintEvent*)
 {
+  //if (m_verbose) { TRACE(__func__); }
   QPainter painter(this);
 
   ///Draw background on painter
-  painter.drawPixmap(rect(),*m_background);
+  painter.drawPixmap(rect(),m_background);
 
   ///Draw all sprites on painter
   {
@@ -107,13 +106,13 @@ void ribi::bnkn::QtMainDialog::paintEvent(QPaintEvent*)
     painter.setPen(pen);
   }
   ///Call Boenken to draw the sprites
-  m_boenken->drawPlayers(painter);
+  m_game.drawPlayers(painter);
   ///Draw score on painter
   {
     QFont font = painter.font();
     font.setFamily("Courier");
     painter.setFont(font);
-    const std::pair<int,int> scores = m_boenken->GetScore();
+    const std::pair<int,int> scores = m_game.GetScore();
     const QString score_left
       = QString(boost::lexical_cast<std::string>(scores.first).c_str());
     const QString score_right
@@ -123,22 +122,17 @@ void ribi::bnkn::QtMainDialog::paintEvent(QPaintEvent*)
   }
 }
 
-///Handles key presses.
-///These are ignored when the computer is training
 void ribi::bnkn::QtMainDialog::keyPressEvent(QKeyEvent * e)
 {
-  if (m_is_training) return;
-  //Assume that a key is pressed
-  //(which according to the Qt doc is always true)
   assert(e->type() == QEvent::KeyPress);
-  m_boenken->pressKey(e->key());
+  m_game.pressKey(e->key());
 }
 
 ///This method gives the game 1000 msecs time
 ///to do those magical start-up things...
 void ribi::bnkn::QtMainDialog::onCountdownTimer()
 {
-  assert(!m_is_training);
+  //if (m_verbose) { TRACE(__func__); }
   m_timer_countdown->stop();
   m_timer->start(20);
 }
@@ -148,9 +142,9 @@ void ribi::bnkn::QtMainDialog::onCountdownTimer()
 ///move and are drawn to the screen
 void ribi::bnkn::QtMainDialog::onTimer()
 {
-  assert(!m_is_training);
+  //if (m_verbose) { TRACE(__func__); }
   ///Boenken moves all sprites
-  m_boenken->tick();
+  m_game.tick();
   ///Repaint the screen
   this->repaint();
 }
@@ -160,7 +154,8 @@ void ribi::bnkn::QtMainDialog::Paint(
   const unsigned char r,
   const unsigned char g,
   const unsigned char b,
-  const unsigned char a)
+  const unsigned char a
+)
 {
   const int width = pixmap.width();
   const int height = pixmap.height();

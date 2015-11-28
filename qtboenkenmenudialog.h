@@ -65,14 +65,11 @@ private:
   boost::shared_ptr<QtPlayersDialog> m_players;
   boost::shared_ptr<QtArenaDialog> m_arena;
 
-  static std::vector<SpritePlayer> CreatePlayers(
-    const ArenaSettings& a);
+  static std::vector<SpritePlayer> CreatePlayers(const ArenaSettings& a);
 
-  static std::vector<boost::shared_ptr<bnkn::SpriteBall>> CreateBalls(
-    const ArenaSettings& a);
+  static std::vector<SpriteBall> CreateBalls(const ArenaSettings& a);
 
-  static std::vector<boost::shared_ptr<bnkn::SpriteNonMoving>> CreateObstacles(
-    const ArenaSettings& a);
+  static std::vector<SpriteNonMoving> CreateObstacles(const ArenaSettings& a);
 
   #ifndef NDEBUG
   static void Test() noexcept;

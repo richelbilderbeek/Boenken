@@ -31,6 +31,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "qtboenkenspriteplayer.h"
 #include "boenkencontrols.h"
 #include "qtboenkensprite.h"
+#include "qtboenkenspriteball.h"
+#include "qtboenkenspritenonmoving.h"
+
 #pragma GCC diagnostic pop
 
 struct QPainter;
@@ -38,12 +41,6 @@ struct QPainter;
 namespace ribi {
 
 namespace bnkn {
-
-struct Sprite;
-struct SpriteBall;
-struct SpriteMoving;
-struct SpriteNonMoving;
-struct SpritePlayer;
 
 ///Boenken contains the game.
 ///Boenken can be displayed by DialogMain
@@ -53,42 +50,42 @@ struct Game
     const ArenaSettings& arena_settings,
     const Controls& controls,
     const std::vector<SpritePlayer>& players,
-    std::vector<boost::shared_ptr<SpriteBall     > > balls,
-    std::vector<boost::shared_ptr<SpriteNonMoving> > obstacles);
+    const std::vector<SpriteBall>& balls,
+    const std::vector<SpriteNonMoving>& obstacles
+  );
 
   void drawPlayers(QPainter& painter) const;
-  int getWidth()  const;
-  int getHeight() const;
-  std::pair<int,int> GetScore() const;
+  int getWidth() const noexcept;
+  int getHeight() const noexcept;
+  std::pair<int,int> GetScore() const noexcept;
   void pressKey(const int key);
   void tick();
 
   private:
-  ///'Real' sprites
   std::vector<SpritePlayer> m_players;
-  std::vector<boost::shared_ptr<SpriteBall     > > m_balls;
-  std::vector<boost::shared_ptr<SpriteNonMoving> > m_obstacles;
-  ///Sprite copies for group-specific routines
-  std::vector<SpriteMoving*> m_moving_sprites;
-  std::vector<Sprite*> m_sprites;
-  ///
+  std::vector<SpriteBall> m_balls;
+  std::vector<SpriteNonMoving> m_obstacles;
   const ArenaSettings m_arena_settings;
   const Controls m_controls;
+  bool m_verbose;
 
   ///Collect all moving sprites
+  ///'players' and 'balls' cannot be const: these will become (con-const) SpriteMoving*
   static std::vector<SpriteMoving*> CollectMovingSprites(
     std::vector<SpritePlayer>& players,
-    std::vector<boost::shared_ptr<SpriteBall>> balls
-  );
+    std::vector<SpriteBall>& balls
+  ) noexcept;
 
-  static std::vector<Sprite*> CollectSprites(
-    std::vector<SpritePlayer>& players,
-    std::vector<boost::shared_ptr<SpriteBall>> balls,
-    std::vector<boost::shared_ptr<SpriteNonMoving>> obstacles
-  );
+  static std::vector<const Sprite*> CollectSprites(
+    const std::vector<SpritePlayer>& players,
+    const std::vector<SpriteBall>& balls,
+    const std::vector<SpriteNonMoving>& obstacles
+  ) noexcept;
 
+  #ifndef NDEBUG
   ///Test this class
   static void Test() noexcept;
+  #endif
 
 };
 

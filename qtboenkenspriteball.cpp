@@ -35,9 +35,6 @@ int ribi::bnkn::SpriteBall::m_score_left = 0;
 ///The current score for the right team
 int ribi::bnkn::SpriteBall::m_score_right = 0;
 
-//The number of balls, for debugging purposes
-int ribi::bnkn::SpriteBall::sm_n_balls = 0;
-
 ribi::bnkn::SpriteBall::SpriteBall(
   const double x,
   const double y,
@@ -47,16 +44,12 @@ ribi::bnkn::SpriteBall::SpriteBall(
   const unsigned char b)
 : SpriteMoving(x,y,size,r,g,b)
 {
-  ++sm_n_balls;
-  //std::clog << "A ball is created at ("
-  //  << this->getX() << ","
-  //  << this->getY() << ")\n";
+
 }
 
 ribi::bnkn::SpriteBall::~SpriteBall() noexcept
 {
-  --sm_n_balls;
-  assert(sm_n_balls >= 0);
+
 }
 
 

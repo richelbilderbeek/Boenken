@@ -19,28 +19,19 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 //---------------------------------------------------------------------------
 //From http://www.richelbilderbeek.nl/GameBoenken.htm
 //---------------------------------------------------------------------------
-#ifndef BOENKENCONTROLS_H
-#define BOENKENCONTROLS_H
+#include "boenkencontrols.h"
 
-#include <string>
-#include <vector>
+#include <cassert>
+#include <iostream>
 
-namespace ribi {
-namespace bnkn {
-
-///Controls contains the control keys
-///and the players' names
-///Controls is created by DialogControls
-struct Controls
+std::ostream& ribi::bnkn::operator<<(std::ostream& os, const Controls& c) noexcept
 {
-  std::vector<int> m_keys_accel;
-  std::vector<int> m_keys_turn;
-  std::vector<std::string> m_names;
-};
+  assert(c.m_keys_accel.size() == c.m_keys_turn.size());
+  assert(c.m_keys_accel.size() == c.m_names.size());
+  const int sz{static_cast<int>(c.m_names.size())};
+  for (int i=0; i!=sz; ++i) {
+    os << c.m_names[i] << ", " << c.m_keys_accel[i] << ", " << c.m_keys_turn[i] << '\n';
+  }
+  return os;
+}
 
-std::ostream& operator<<(std::ostream& os, const Controls& c) noexcept;
-
-} //~namespace bnkn
-} //~namespace ribi
-
-#endif // BOENKENCONTROLS_H
