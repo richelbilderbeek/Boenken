@@ -32,12 +32,21 @@ ribi::bnkn::QtPlayersDialog::QtPlayersDialog(QWidget *parent) :
     ui(new Ui::QtBoenkenPlayersDialog)
 {
   ui->setupUi(this);
+  #ifdef QT5_TODO_FIND_THE_RIGHT_DEFINE
   QObject::connect(
     ui->button_done,
     &QPushButton::clicked,
     this,
     &ribi::bnkn::QtPlayersDialog::close
   );
+  #else
+  QObject::connect(
+    ui->button_done,
+    SIGNAL(clicked(bool)),
+    this,
+    SLOT(close())
+  );
+  #endif
 }
 
 ribi::bnkn::QtPlayersDialog::~QtPlayersDialog() noexcept

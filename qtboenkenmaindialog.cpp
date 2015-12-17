@@ -71,6 +71,7 @@ ribi::bnkn::QtMainDialog::QtMainDialog(
   this->setFixedHeight(m_game.getHeight());
 
   ///Start the timer
+  #ifdef QT5_TODO_FIND_THE_RIGHT_DEFINE
   QObject::connect(
     m_timer,&QTimer::timeout,
     this,&ribi::bnkn::QtMainDialog::onTimer
@@ -79,6 +80,16 @@ ribi::bnkn::QtMainDialog::QtMainDialog(
     m_timer_countdown,&QTimer::timeout,
     this,&ribi::bnkn::QtMainDialog::onCountdownTimer
   );
+  #else
+  QObject::connect(
+    m_timer,SIGNAL(timeout()),
+    this,SLOT(onTimer())
+  );
+  QObject::connect(
+    m_timer_countdown,SIGNAL(timeout()),
+    this,SLOT(onCountdownTimer())
+  );
+  #endif
   m_timer_countdown->start(1000);
 }
 

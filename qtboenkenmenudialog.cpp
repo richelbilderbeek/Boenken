@@ -60,12 +60,21 @@ ribi::bnkn::QtMenuDialog::QtMenuDialog(QWidget *parent)
   #ifndef NDEBUG
   Test();
   #endif
+  #ifdef QT5_TODO_FIND_THE_RIGHT_DEFINE
   QObject::connect(ui->button_set_controls,&QAbstractButton::clicked,this,&ribi::bnkn::QtMenuDialog::onControlsClick);
   QObject::connect(ui->button_set_players ,&QAbstractButton::clicked,this,&ribi::bnkn::QtMenuDialog::onPlayersClick );
   QObject::connect(ui->button_set_arena   ,&QAbstractButton::clicked,this,&ribi::bnkn::QtMenuDialog::onArenaClick   );
   QObject::connect(ui->button_start       ,&QAbstractButton::clicked,this,&ribi::bnkn::QtMenuDialog::onStartClick   );
   QObject::connect(ui->button_about       ,&QAbstractButton::clicked,this,&ribi::bnkn::QtMenuDialog::onAboutClick   );
   QObject::connect(ui->button_quit        ,&QAbstractButton::clicked,this,&ribi::bnkn::QtMenuDialog::close          );
+  #else
+  QObject::connect(ui->button_set_controls,SIGNAL(clicked(bool)),this,SLOT(onControlsClick()));
+  QObject::connect(ui->button_set_players ,SIGNAL(clicked(bool)),this,SLOT(onPlayersClick()) );
+  QObject::connect(ui->button_set_arena   ,SIGNAL(clicked(bool)),this,SLOT(onArenaClick())   );
+  QObject::connect(ui->button_start       ,SIGNAL(clicked(bool)),this,SLOT(onStartClick())   );
+  QObject::connect(ui->button_about       ,SIGNAL(clicked(bool)),this,SLOT(onAboutClick())   );
+  QObject::connect(ui->button_quit        ,SIGNAL(clicked(bool)),this,SLOT(close())          );
+  #endif
 }
 
 ribi::bnkn::QtMenuDialog::~QtMenuDialog() noexcept

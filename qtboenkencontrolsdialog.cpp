@@ -38,17 +38,22 @@ ribi::bnkn::QtControlsDialog::QtControlsDialog(QWidget *parent)
 {
   ui->setupUi(this);
 
+  #ifdef QT5_TODO_FIND_THE_RIGHT_DEFINE
   QObject::connect(
     ui->button_done,
     &QPushButton::clicked,
     this,
     &ribi::bnkn::QtControlsDialog::close
   );
+  #else
+  QObject::connect(ui->button_done,SIGNAL(clicked(bool)),this,SLOT(close()));
+  #endif
   m_keys_accel.push_back(Qt::Key_W);
   m_keys_accel.push_back(Qt::Key_Up);
   m_keys_turn.push_back(Qt::Key_D);
   m_keys_turn.push_back(Qt::Key_Right);
 
+  #ifdef QT5_TODO_FIND_THE_RIGHT_DEFINE
   QObject::connect(
     ui->button_accelerate_1,
     &QPushButton::clicked,
@@ -72,7 +77,31 @@ ribi::bnkn::QtControlsDialog::QtControlsDialog(QWidget *parent)
     this,
     &ribi::bnkn::QtControlsDialog::onTurn2
   );
-
+  #else
+  QObject::connect(
+    ui->button_accelerate_1,
+    SIGNAL(clicked(bool)),
+    this,
+    SLOT(onAccelerate1())
+  );
+  QObject::connect(
+    ui->button_accelerate_2,
+    SIGNAL(clicked(bool)),
+    this,
+    SLOT(onAccelerate2())
+  );
+  QObject::connect(
+    ui->button_turn_1,
+    SIGNAL(clicked(bool)),
+    this,
+    SLOT(onTurn1())
+  );
+  QObject::connect(ui->button_turn_2,
+    SIGNAL(clicked(bool)),
+    this,
+    SLOT(onTurn2())
+  );
+  #endif
   showKeys();
 }
 

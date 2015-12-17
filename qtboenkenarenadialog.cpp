@@ -36,8 +36,12 @@ ribi::bnkn::QtArenaDialog::QtArenaDialog(QWidget *parent) noexcept :
     ui(new Ui::QtBoenkenArenaDialog)
 {
   ui->setupUi(this);
+  #ifdef QT5_TODO_FIND_THE_RIGHT_DEFINE
   QObject::connect(
     ui->button_done,&QPushButton::clicked,this,&QtArenaDialog::close);
+  #else
+  QObject::connect(ui->button_done,SIGNAL(clicked(bool)),this,SLOT(close()));
+  #endif
 }
 
 ribi::bnkn::QtArenaDialog::~QtArenaDialog() noexcept
