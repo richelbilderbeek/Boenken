@@ -4,7 +4,7 @@ Boenken is a 20-player game that is a mix between soccer and billiards, programm
 
 # Downloads
 
- * [Download the Windows executable](http://richelbilderbeek.nl/GameBoenken.zip)
+ * [Download the Windows executable](http://richelbilderbeek.nl/GameBoenkenExe.zip)
 
 # About the program
 
