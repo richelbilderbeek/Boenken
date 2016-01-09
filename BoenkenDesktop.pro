@@ -1,4 +1,4 @@
-include(../RibiLibraries/DesktopApplication.pri)
+include(../RibiLibraries/DesktopApplicationNoWeffcpp.pri)
 
 include(../RibiLibraries/Apfloat.pri)
 include(../RibiLibraries/Boost.pri)

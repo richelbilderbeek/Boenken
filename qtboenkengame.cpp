@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Boenken. A multiplayer soccer/billiards game.
-Copyright (C) 2007-2015 Richel Bilderbeek
+Copyright (C) 2007-2016 Richel Bilderbeek
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -44,11 +44,10 @@ ribi::bnkn::Game::Game(
   const std::vector<SpriteBall>& balls,
   const std::vector<SpriteNonMoving>& obstacles
 )
-  : m_players{players},
+  :
+    m_players{players},
     m_balls{balls},
     m_obstacles{obstacles},
-    //m_moving_sprites{},
-    //m_sprites{},
     m_arena_settings{arena_settings},
     m_controls{controls},
     m_verbose{false}

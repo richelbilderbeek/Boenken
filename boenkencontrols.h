@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Boenken. A multiplayer soccer/billiards game.
-Copyright (C) 2007-2015 Richel Bilderbeek
+Copyright (C) 2007-2016 Richel Bilderbeek
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -33,6 +33,7 @@ namespace bnkn {
 ///Controls is created by DialogControls
 struct Controls
 {
+  Controls() : m_keys_accel{}, m_keys_turn{}, m_names{} {}
   std::vector<int> m_keys_accel;
   std::vector<int> m_keys_turn;
   std::vector<std::string> m_names;

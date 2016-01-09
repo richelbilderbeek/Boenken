@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 /*
 Boenken. A multiplayer soccer/billiards game.
-Copyright (C) 2007-2015 Richel Bilderbeek
+Copyright (C) 2007-2016 Richel Bilderbeek
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -38,6 +38,15 @@ enum class Formation
 ///ArenaSettings holds the parameters set in DialogArena
 struct ArenaSettings
 {
+  ArenaSettings()
+    : screen_size{0,0},
+      n_balls{0},
+      n_obstacles{0},
+      formation{Formation::circle_inward},
+      friction{1.0}
+  {
+
+  }
   std::pair<int,int> screen_size;
   int width() const noexcept { return screen_size.first; }
   int height() const noexcept { return screen_size.second; }
