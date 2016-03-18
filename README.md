@@ -1,5 +1,7 @@
 # Boenken
 
+[![Build Status](https://travis-ci.org/richelbilderbeek/Boenken.svg?branch=master)](https://travis-ci.org/richelbilderbeek/Boenken)
+
 Boenken is a 20-player game that is a mix between soccer and billiards, programmed in C++ using Qt (see 'About the program' for more details).
 
 # Downloads
