@@ -16,3 +16,4 @@ SOURCES += main.cpp
 
 # Qt resourse files generate an unused variable warning
 QMAKE_CXXFLAGS_WARN_OFF += unused-variable
+QMAKE_CXXFLAGS_ERROR_OFF += unused-variable
