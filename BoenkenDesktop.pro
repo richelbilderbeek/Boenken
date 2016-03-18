@@ -14,3 +14,6 @@ include(../RibiClasses/CppRibiRegex/CppRibiRegex.pri)
 include(BoenkenDesktop.pri)
 
 SOURCES += qtmain.cpp
+
+# Qt resourse files generate an unused variable warning
+QMAKE_CXXFLAGS_WARN_OFF += unused-variable
