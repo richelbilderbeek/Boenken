@@ -7,7 +7,9 @@ before_install:
   - sudo pip install codecov # From https://github.com/travis-ci/travis-ci/issues/1705
   - sudo apt-get update -qq
 
-install: sudo apt-get install -qq g++-5
+install: 
+  - sudo apt-get install -qq g++-5
+  - ./install_oclint.sh
 
 addons:
   apt:
@@ -20,8 +22,11 @@ addons:
     - libboost1.55-all-dev
 
 script: 
- - ./build.sh
-
-after_success:
+  - ./build.sh
+  - ./get_code_cov.sh
   - codecov
+  - ./do_oclint.sh
+
+after_success: 
+  - bash <(curl -s https://codecov.io/bash)
 
