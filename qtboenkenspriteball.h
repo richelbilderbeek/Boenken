@@ -51,7 +51,7 @@ struct SpriteBall final : public SpriteMoving
   static std::pair<int,int> GetScore() noexcept;
   static void ResetScore() noexcept { m_score_left = 0; m_score_right = 0; }
 
-  private:
+  //private:
 
   static double m_goal_y_top;
   static double m_goal_y_bottom;

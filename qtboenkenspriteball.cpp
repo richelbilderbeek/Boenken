@@ -22,6 +22,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "qtboenkenspriteball.h"
 
 #include <cassert>
+#include <cmath>
 
 ///The y-coordinat of the top goal post
 double ribi::bnkn::SpriteBall::m_goal_y_top = 100.0;
