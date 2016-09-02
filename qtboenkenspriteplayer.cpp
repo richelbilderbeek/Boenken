@@ -35,15 +35,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "testtimer.h"
 #pragma GCC diagnostic pop
 
-///The acceleration (i.e. change of impulse)
-///if a player presses accelerate
-const double ribi::bnkn::SpritePlayer::m_acceleration = 1.0;
-
-///The speed of turning around
-///if a player presses turn
-const double ribi::bnkn::SpritePlayer::m_turnspeed
-  = boost::math::constants::pi<double>() / 10.0;
-
+constexpr double ribi::bnkn::GetAcceleration()
+{
+  return 1.0;
+}
+constexpr double ribi::bnkn::GetTurnSpeed()
+{
+  return boost::math::constants::pi<double>() / 10.0;
+}
 
 ///The number of SpritePlayers.
 ///for debugging purposes
@@ -123,8 +122,8 @@ void ribi::bnkn::SpritePlayer::Move() noexcept
 
 void ribi::bnkn::SpritePlayer::Accelerate() noexcept
 {
-  m_dx += (std::sin(m_angle) * m_acceleration);
-  m_dy -= (std::cos(m_angle) * m_acceleration);
+  m_dx += (std::sin(m_angle) * GetAcceleration());
+  m_dy -= (std::cos(m_angle) * GetAcceleration());
 }
 
 void ribi::bnkn::SpritePlayer::SetSpeed(const double dx, const double dy) noexcept
@@ -138,7 +137,7 @@ void ribi::bnkn::SpritePlayer::SetSpeed(const double dx, const double dy) noexce
 
 void ribi::bnkn::SpritePlayer::TurnRight() noexcept
 {
-  m_angle+=m_turnspeed;
+  m_angle+=GetTurnSpeed();
 }
 
 void ribi::bnkn::SpritePlayer::Draw(QPainter& painter) const
