@@ -46,7 +46,7 @@ namespace bnkn {
 ///this is what DialogPlayers is for)
 class QtControlsDialog : public QtHideAndShowDialog
 {
-  Q_OBJECT
+  Q_OBJECT //!OCLINT
 
 public:
   explicit QtControlsDialog(QWidget *parent = 0);

@@ -40,7 +40,7 @@ namespace bnkn {
 ///Dialog to setup up the arena
 class QtArenaDialog : public QtHideAndShowDialog
 {
-  Q_OBJECT
+  Q_OBJECT //!OCLINT
 
 public:
   explicit QtArenaDialog(QWidget *parent = 0) noexcept;

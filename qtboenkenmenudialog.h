@@ -50,7 +50,7 @@ struct QtControlsDialog;
 ///Gathers all options to start a game
 class QtMenuDialog : public QtHideAndShowDialog
 {
-  Q_OBJECT
+  Q_OBJECT //!OCLINT
 
 public:
   explicit QtMenuDialog(QWidget *parent = 0);

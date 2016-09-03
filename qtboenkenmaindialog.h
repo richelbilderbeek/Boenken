@@ -42,7 +42,7 @@ namespace bnkn {
 ///QtBoenkenMainDialog displays Boenken and handles user events
 class QtMainDialog : public QtHideAndShowDialog
 {
-  Q_OBJECT
+  Q_OBJECT //!OCLINT
 
 public:
   explicit QtMainDialog(

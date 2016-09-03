@@ -40,7 +40,7 @@ namespace bnkn {
 ///- a computer\n
 class QtPlayersDialog : public QtHideAndShowDialog
 {
-  Q_OBJECT
+  Q_OBJECT //!OCLINT
 
 public:
   explicit QtPlayersDialog(QWidget *parent = 0);
