@@ -52,9 +52,6 @@ ribi::bnkn::Game::Game(
     m_controls{controls},
     m_verbose{false}
 {
-  #ifndef NDEBUG
-  Test();
-  #endif
   //m_moving_sprites = CollectMovingSprites(m_players,m_balls);
   //m_sprites = CollectSprites(m_players,m_balls,m_obstacles);
 
@@ -162,32 +159,7 @@ void ribi::bnkn::Game::pressKey(const int key)
   if (key == Qt::Key_F2) std::exit(1);
 }
 
-#ifndef NDEBUG
-void ribi::bnkn::Game::Test() noexcept
-{
-  {
-    static bool is_tested{false};
-    if (is_tested) return;
-    is_tested = true;
-  }
-  {
-    SpritePlayer p{0.0,0.0,0.0,8,0,0,0};
-  }
-  {
-    const SpriteBall b{0.0,0.0};
-  }
-  {
-    const SpriteNonMoving p{0.0,0.0};
-  }
-  {
-    ArenaSettings arena_settings;
-    const Controls controls;
-  }
-  const TestTimer test_timer(__func__,__FILE__,1.0);
-}
-#endif // NDEBUG
 
-///Moves all sprites
 void ribi::bnkn::Game::tick()
 {
   std::vector<SpriteMoving*> moving_sprites{CollectMovingSprites(m_players,m_balls)};

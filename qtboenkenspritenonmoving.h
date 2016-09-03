@@ -52,11 +52,6 @@ struct SpriteNonMoving final : public Sprite
 
   ///A non-moving sprite, like an object, will not change
   static void Collision(const SpriteNonMoving& p1, SpriteMoving& p2);
-
-  private:
-  #ifndef NDEBUG
-  static void Test() noexcept;
-  #endif
 };
 
 } //~namespace bnkn

@@ -64,14 +64,6 @@ private:
   QtPlayersDialog * const m_players;
   QtArenaDialog * const m_arena;
 
-  static std::vector<SpritePlayer> CreatePlayers(const ArenaSettings& a);
-  static std::vector<SpriteBall> CreateBalls(const ArenaSettings& a);
-  static std::vector<SpriteNonMoving> CreateObstacles(const ArenaSettings& a);
-
-  #ifndef NDEBUG
-  static void Test() noexcept;
-  #endif
-
 private slots:
   void onControlsClick();
   void onPlayersClick();
@@ -79,6 +71,10 @@ private slots:
   void onStartClick();
   void onAboutClick();
 };
+
+std::vector<SpritePlayer> CreatePlayers(const ArenaSettings& a);
+std::vector<SpriteBall> CreateBalls(const ArenaSettings& a);
+std::vector<SpriteNonMoving> CreateObstacles(const ArenaSettings& a);
 
 } //~namespace bnkn
 } //~namespace ribi

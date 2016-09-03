@@ -33,9 +33,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 ribi::bnkn::MenuDialog::MenuDialog()
 {
-  #ifndef NDEBUG
-  Test();
-  #endif
 }
 
 int ribi::bnkn::MenuDialog::ExecuteSpecific(const std::vector<std::string>& argv) noexcept
@@ -108,21 +105,3 @@ std::vector<std::string> ribi::bnkn::MenuDialog::GetVersionHistory() const noexc
     "2016-01-09: version 5.2: crosscompiles again",
   };
 }
-
-#ifndef NDEBUG
-void ribi::bnkn::MenuDialog::Test() noexcept
-{
-  {
-    static bool is_tested{false};
-    if (is_tested) return;
-    is_tested = true;
-  }
-  {
-    Container();
-    fileio::FileIo();
-    Geometry();
-  }
-
-  const TestTimer test_timer(__func__,__FILE__,1.0);
-}
-#endif

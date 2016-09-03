@@ -59,6 +59,8 @@ struct Game
   int getHeight() const noexcept;
   std::pair<int,int> GetScore() const noexcept;
   void pressKey(const int key);
+
+  ///Moves all sprites
   void tick();
 
   private:
@@ -81,12 +83,6 @@ struct Game
     const std::vector<SpriteBall>& balls,
     const std::vector<SpriteNonMoving>& obstacles
   ) noexcept;
-
-  #ifndef NDEBUG
-  ///Test this class
-  static void Test() noexcept;
-  #endif
-
 };
 
 } //~namespace bnkn

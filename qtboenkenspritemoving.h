@@ -63,11 +63,6 @@ struct SpriteMoving: public Sprite
   double m_dy;
   static double m_friction;
   static int sm_n_moving_sprites;
-
-
-  #ifndef NDEBUG
-  static void Test() noexcept;
-  #endif
 };
 
 } //~namespace bnkn

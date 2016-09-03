@@ -91,7 +91,7 @@ void ribi::bnkn::SpriteMoving::Collision(SpriteMoving * const p1, SpriteMoving *
   {
     //A collision!
     //Obtain the relative angle between the players
-    const double a = GetAngle(dx,dy);
+    const double a = Geometry().GetAngleClockScreen(dx,dy);
     //Obtain the players' current impulses
     double p1_a = p1->CalcImpulseAngle();
     double p1_s = p1->CalcImpulseSpeed();

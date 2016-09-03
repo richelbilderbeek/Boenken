@@ -1,18 +1,13 @@
-INCLUDEPATH += \
-    ../Boenken
+INCLUDEPATH += $$PWD
 
 SOURCES += \
-    ../Boenken/boenkenmenudialog.cpp \
+    $$PWD/boenkenmenudialog.cpp \
     $$PWD/boenkencontrols.cpp
 
 HEADERS  += \
-    ../Boenken/boenkenarenasettings.h \
-    ../Boenken/boenkencontrols.h \
-    ../Boenken/boenkenmenudialog.h
+    $$PWD/boenkenarenasettings.h \
+    $$PWD/boenkencontrols.h \
+    $$PWD/boenkenmenudialog.h
 
 RESOURCES += \
-    ../Boenken/Boenken.qrc
-
-OTHER_FILES += \
-    ../Boenken/Licence.txt
-
+    $$PWD/Boenken.qrc

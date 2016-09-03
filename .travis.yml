@@ -22,13 +22,15 @@ addons:
     - libboost1.55-all-dev
 
 script: 
-  - ./build.sh
+  - ./build_console_test.sh
+  - ./BoenkenConsoleTest
+  - ./build_desktop_test.sh
+  - ./BoenkenDesktopTest
   - ./get_code_cov.sh
   - codecov
+  - ./build_console.sh
+  - ./build_desktop.sh
   - ./do_oclint.sh
 
 after_success: 
-  - bash <(curl -s https://codecov.io/bash)
-
-after_failure: 
   - bash <(curl -s https://codecov.io/bash)

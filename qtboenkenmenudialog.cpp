@@ -57,9 +57,6 @@ ribi::bnkn::QtMenuDialog::QtMenuDialog(QWidget *parent)
     m_arena{new QtArenaDialog(this)}
 {
   ui->setupUi(this);
-  #ifndef NDEBUG
-  Test();
-  #endif
   #ifdef QT5_TODO_FIND_THE_RIGHT_DEFINE
   QObject::connect(ui->button_set_controls,&QAbstractButton::clicked,this,&ribi::bnkn::QtMenuDialog::onControlsClick);
   QObject::connect(ui->button_set_players ,&QAbstractButton::clicked,this,&ribi::bnkn::QtMenuDialog::onPlayersClick );
@@ -82,7 +79,7 @@ ribi::bnkn::QtMenuDialog::~QtMenuDialog() noexcept
   delete ui;
 }
 
-std::vector<ribi::bnkn::SpritePlayer> ribi::bnkn::QtMenuDialog::CreatePlayers(
+std::vector<ribi::bnkn::SpritePlayer> ribi::bnkn::CreatePlayers(
   const ArenaSettings& a)
 {
   //Create two
@@ -145,7 +142,7 @@ std::vector<ribi::bnkn::SpritePlayer> ribi::bnkn::QtMenuDialog::CreatePlayers(
   return v;
 }
 
-std::vector<ribi::bnkn::SpriteBall> ribi::bnkn::QtMenuDialog::CreateBalls(
+std::vector<ribi::bnkn::SpriteBall> ribi::bnkn::CreateBalls(
   const ArenaSettings& a)
 {
   const int size = 32;
@@ -182,7 +179,7 @@ std::vector<ribi::bnkn::SpriteBall> ribi::bnkn::QtMenuDialog::CreateBalls(
 }
 
 ///Always creates the four goalposts
-std::vector<ribi::bnkn::SpriteNonMoving> ribi::bnkn::QtMenuDialog::CreateObstacles(
+std::vector<ribi::bnkn::SpriteNonMoving> ribi::bnkn::CreateObstacles(
   const ArenaSettings& a
 )
 {
@@ -281,30 +278,3 @@ void ribi::bnkn::QtMenuDialog::onAboutClick()
   d.setWindowIcon(this->windowIcon());
   this->ShowChild(&d);
 }
-
-#ifndef NDEBUG
-void ribi::bnkn::QtMenuDialog::Test() noexcept
-{
-  {
-    static bool is_tested{false};
-    if (is_tested) return;
-    is_tested = true;
-  }
-  bnkn::MenuDialog();
-  {
-    ArenaSettings a;
-    a.formation = Formation::circle_inward;
-    a.friction = 0.999;
-    a.n_balls = 1;
-    a.n_obstacles = 4;
-    a.screen_size = std::make_pair(320,200);
-    Controls c;
-    const std::vector<SpritePlayer> players{CreatePlayers(a)};
-    const std::vector<SpriteBall> balls = CreateBalls(a);
-    const std::vector<SpriteNonMoving> obstacles = CreateObstacles(a);
-    const Game b{a,c,players,balls,obstacles};
-    QtMainDialog d{b};
-  }
-  const TestTimer test_timer(__func__,__FILE__,1.0);
-}
-#endif

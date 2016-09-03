@@ -56,9 +56,6 @@ ribi::bnkn::Sprite::Sprite(
     m_pixmap(DrawGlobe(size,size,r,g,b)),
     m_size(size)
 {
-  #ifndef NDEBUG
-  Test();
-  #endif
 }
 
 QRect ribi::bnkn::Sprite::rect() const
@@ -90,13 +87,13 @@ std::vector<std::string> ribi::bnkn::Sprite::GetVersionHistory() noexcept
   };
 }
 
-bool ribi::bnkn::Sprite::IsCollision(const Sprite& p1, const Sprite& p2) noexcept
+bool ribi::bnkn::IsCollision(const Sprite& p1, const Sprite& p2) noexcept
 {
   const double dx = p2.getX() - p1.getX();
   const double dy = p2.getY() - p1.getY();
   const double distance = std::sqrt((dy * dy) + (dx * dx));
   const double collision_distance
-    = boost::numeric_cast<double>(p1.m_size + p2.m_size) / 2.0;
+    = boost::numeric_cast<double>(p1.GetSize() + p2.GetSize()) / 2.0;
   return distance < collision_distance;
 }
 
@@ -105,64 +102,6 @@ void ribi::bnkn::Sprite::setArenaSize(const int width, const int height)
   m_maxx = width;
   m_maxy = height;
 }
-
-#ifndef NDEBUG
-void ribi::bnkn::Sprite::Test() noexcept
-{
-  {
-    static bool is_tested{false};
-    if (is_tested) return;
-    is_tested = true;
-  }
-  const TestTimer test_timer(__func__,__FILE__,1.0);
-  //Test GetAngle
-  const double pi = boost::math::constants::pi<double>();
-  {
-    const double angle =  GetAngle(0.0,-1.0); //North
-    const double expected = 0.0 * pi;
-    assert(std::abs(angle-expected) < 0.01);
-  }
-  {
-    const double angle =  GetAngle(1.0,-1.0); //North-East
-    const double expected = 0.25 * pi;
-    assert(std::abs(angle-expected) < 0.01);
-  }
-  {
-    const double angle =  GetAngle(1.0,0.0); //East
-    const double expected = 0.5 * pi;
-    assert(std::abs(angle-expected) < 0.01);
-  }
-  {
-    const double angle =  GetAngle(1.0,1.0); //South-East
-    const double expected = 0.75 * pi;
-    assert(std::abs(angle-expected) < 0.01);
-  }
-  {
-    const double angle =  GetAngle(0.0,1.0); //South
-    const double expected = 1.0 * pi;
-    assert(std::abs(angle-expected) < 0.01);
-  }
-  {
-    const double angle =  GetAngle(-1.0,1.0); //South-West
-    const double expected = 1.25 * pi;
-    assert(std::abs(angle-expected) < 0.01);
-  }
-  {
-    const double angle =  GetAngle(-1.0,0.0); //West
-    const double expected = 1.5 * pi;
-    assert(std::abs(angle-expected) < 0.01);
-  }
-  {
-    const double angle =  GetAngle(-1.0,-1.0); //North-West
-    const double expected = 1.75 * pi;
-    assert(std::abs(angle-expected) < 0.01);
-  }
-  //IsCollision
-  {
-
-  }
-}
-#endif
 
 //From http://www.richelbilderbeek.nl/CppDrawGlobe.htm
 QPixmap ribi::bnkn::Sprite::DrawGlobe(
@@ -204,12 +143,12 @@ QPixmap ribi::bnkn::Sprite::DrawGlobe(
         const int r_here = rel_dist * r_max;
         const int g_here = rel_dist * g_max;
         const int b_here = rel_dist * b_max;
-        assert( r_here >= 0);
-        assert( r_here < 256);
-        assert( g_here >= 0);
-        assert( g_here < 256);
-        assert( b_here >= 0);
-        assert( b_here < 256);
+        assert(r_here >= 0);
+        assert(r_here < 256);
+        assert(g_here >= 0);
+        assert(g_here < 256);
+        assert(b_here >= 0);
+        assert(b_here < 256);
         line[x*4+3] = 255; //Alpha value
         line[x*4+2] = r_here; //Red
         line[x*4+1] = g_here; //Green
@@ -233,13 +172,13 @@ QPixmap ribi::bnkn::Sprite::DrawGlobe(
   return pixmap;
 }
 
-double ribi::bnkn::Sprite::GetAngle(const double dx, const double dy) noexcept
-{
-  return Geometry().GetAngleClockScreen(dx,dy);
-}
+//double ribi::bnkn::Sprite::GetAngle(const double dx, const double dy) noexcept
+//{
+//  return Geometry().GetAngleClockScreen(dx,dy);
+//}
 
 //From http://www.richelbilderbeek.nl/CppDoPerfectElasticCollision.htm
-void ribi::bnkn::Sprite::DoPerfectElasticCollision(
+void ribi::bnkn::DoPerfectElasticCollision(
   const double angleCollision,
   double& angle1,
   double& speed1,
@@ -289,8 +228,8 @@ void ribi::bnkn::Sprite::DoPerfectElasticCollision(
   const double HdY{BdY + GdY};
 
   //Write the final results
-  angle1 = GetAngle(DdX, DdY);
-  angle2 = GetAngle(HdX, HdY);
+  angle1 = Geometry().GetAngleClockScreen(DdX, DdY);
+  angle2 = Geometry().GetAngleClockScreen(HdX, HdY);
   speed1 = std::sqrt( (DdX * DdX) + (DdY * DdY) ); //Pythagoras
   speed2 = std::sqrt( (HdX * HdX) + (HdY * HdY) ); //Pythagoras
 }

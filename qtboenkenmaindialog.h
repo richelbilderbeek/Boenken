@@ -81,10 +81,6 @@ private:
     const unsigned char a = 255
   );
 
-  #ifndef NDEBUG
-  static void Test() noexcept;
-  #endif
-
 private slots:
   void onTimer();
   void onCountdownTimer();

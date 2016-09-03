@@ -268,15 +268,3 @@ void ribi::bnkn::QtMainDialog::Paint(
   }
   pixmap = pixmap.fromImage(image);
 }
-
-#ifndef NDEBUG
-void ribi::bnkn::QtMainDialog::Test() noexcept
-{
-  {
-    static bool is_tested{false};
-    if (is_tested) return;
-    is_tested = true;
-  }
-  const TestTimer test_timer(__func__,__FILE__,1.0);
-}
-#endif

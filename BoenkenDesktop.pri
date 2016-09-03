@@ -1,38 +1,38 @@
-include(../Boenken/BoenkenConsole.pri)
+include($$PWD/BoenkenConsole.pri)
 
 SOURCES += \
-    ../Boenken/qtboenkenarenadialog.cpp \
-    ../Boenken/qtboenkencontrolsdialog.cpp \
-    ../Boenken/qtboenkengame.cpp \
-    ../Boenken/qtboenkenmaindialog.cpp \
-    ../Boenken/qtboenkenmenudialog.cpp \
-    ../Boenken/qtboenkenplayersdialog.cpp \
-    ../Boenken/qtboenkenpresskeydialog.cpp \
-    ../Boenken/qtboenkensprite.cpp \
-    ../Boenken/qtboenkenspriteball.cpp \
-    ../Boenken/qtboenkenspritemoving.cpp \
-    ../Boenken/qtboenkenspritenonmoving.cpp \
-    ../Boenken/qtboenkenspriteplayer.cpp
+    $$PWD/qtboenkenarenadialog.cpp \
+    $$PWD/qtboenkencontrolsdialog.cpp \
+    $$PWD/qtboenkengame.cpp \
+    $$PWD/qtboenkenmaindialog.cpp \
+    $$PWD/qtboenkenmenudialog.cpp \
+    $$PWD/qtboenkenplayersdialog.cpp \
+    $$PWD/qtboenkenpresskeydialog.cpp \
+    $$PWD/qtboenkensprite.cpp \
+    $$PWD/qtboenkenspriteball.cpp \
+    $$PWD/qtboenkenspritemoving.cpp \
+    $$PWD/qtboenkenspritenonmoving.cpp \
+    $$PWD/qtboenkenspriteplayer.cpp
 
 HEADERS  += \
-    ../Boenken/qtboenkenarenadialog.h \
-    ../Boenken/qtboenkencontrolsdialog.h \
-    ../Boenken/qtboenkengame.h \
-    ../Boenken/qtboenkenmaindialog.h \
-    ../Boenken/qtboenkenmenudialog.h \
-    ../Boenken/qtboenkenplayersdialog.h \
-    ../Boenken/qtboenkenpresskeydialog.h \
-    ../Boenken/qtboenkensprite.h \
-    ../Boenken/qtboenkenspriteball.h \
-    ../Boenken/qtboenkenspritemoving.h \
-    ../Boenken/qtboenkenspritenonmoving.h \
-    ../Boenken/qtboenkenspriteplayer.h
+    $$PWD/qtboenkenarenadialog.h \
+    $$PWD/qtboenkencontrolsdialog.h \
+    $$PWD/qtboenkengame.h \
+    $$PWD/qtboenkenmaindialog.h \
+    $$PWD/qtboenkenmenudialog.h \
+    $$PWD/qtboenkenplayersdialog.h \
+    $$PWD/qtboenkenpresskeydialog.h \
+    $$PWD/qtboenkensprite.h \
+    $$PWD/qtboenkenspriteball.h \
+    $$PWD/qtboenkenspritemoving.h \
+    $$PWD/qtboenkenspritenonmoving.h \
+    $$PWD/qtboenkenspriteplayer.h
 
 FORMS += \
-    ../Boenken/qtboenkenarenadialog.ui \
-    ../Boenken/qtboenkencontrolsdialog.ui \
-    ../Boenken/qtboenkenmaindialog.ui \
-    ../Boenken/qtboenkenmenudialog.ui \
-    ../Boenken/qtboenkenplayersdialog.ui \
-    ../Boenken/qtboenkenpresskeydialog.ui
+    $$PWD/qtboenkenarenadialog.ui \
+    $$PWD/qtboenkencontrolsdialog.ui \
+    $$PWD/qtboenkenmaindialog.ui \
+    $$PWD/qtboenkenmenudialog.ui \
+    $$PWD/qtboenkenplayersdialog.ui \
+    $$PWD/qtboenkenpresskeydialog.ui
 

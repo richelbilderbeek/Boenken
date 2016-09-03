@@ -72,8 +72,6 @@ struct Sprite
   ///Obtain the version history of this class
   static std::vector<std::string> GetVersionHistory() noexcept;
 
-  static bool IsCollision(const Sprite& p1, const Sprite& p2) noexcept;
-
   ///Sets the arena size,
   ///that is Sprite::m_maxx and Sprite::m_maxy.
   ///SpriteBall::SetGoalPoles defines the vertical
@@ -109,18 +107,7 @@ struct Sprite
   /// 6 o'clock is 1.0 * pi
   /// 9 o'clock is 1.5 * pi
   //From www.richelbilderbeek.nl/CppGetAngle.htm
-  static double GetAngle(const double dx, const double dy) noexcept;
-
-  ///DoPerfectElasticCollision calculates the impulses after a
-  ///collision.
-  ///From http://www.richelbilderbeek.nl/CppDoPerfectElasticCollision.htm
-  static void DoPerfectElasticCollision(
-    const double angleCollision,
-    double& angle1,
-    double& speed1,
-    double& angle2,
-    double& speed2
-  ) noexcept;
+  //static double GetAngle(const double dx, const double dy) noexcept;
 
   private:
 
@@ -129,13 +116,20 @@ struct Sprite
 
   ///The size (width==height) in pixels
   int m_size;
-
-  #ifndef NDEBUG
-  ///Test this class
-  static void Test() noexcept;
-  #endif
-
 };
+
+///DoPerfectElasticCollision calculates the impulses after a
+///collision.
+///From http://www.richelbilderbeek.nl/CppDoPerfectElasticCollision.htm
+void DoPerfectElasticCollision(
+  const double angleCollision,
+  double& angle1,
+  double& speed1,
+  double& angle2,
+  double& speed2
+) noexcept;
+
+bool IsCollision(const Sprite& p1, const Sprite& p2) noexcept;
 
 } //~namespace bnkn
 } //~namespace ribi
