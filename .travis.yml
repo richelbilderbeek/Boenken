@@ -22,6 +22,7 @@ addons:
     - libboost1.55-all-dev
 
 script: 
+  - ./download_other_githubs.sh
   - ./build_console_test.sh
   - ./BoenkenConsoleTest
   - ./build_desktop_test.sh
