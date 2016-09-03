@@ -19,5 +19,8 @@ SOURCES += qtmain_test.cpp
 # Qt resourse files generate an unused variable warning
 QMAKE_CXXFLAGS += -Wno-unused-variable
 
+# QtTest generates this
+QMAKE_CXXFLAGS += -Wno-unused-local-typedefs
+
 # QTest
 QT += testlib
