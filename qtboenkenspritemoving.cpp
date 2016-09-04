@@ -123,18 +123,6 @@ void ribi::bnkn::SpriteMoving::Collision(SpriteMoving * const p1, SpriteMoving *
     //Let the players move again
     p1->Move();
     p2->Move();
-    #ifndef NDEBUG
-    {
-      const double new_dx = p2->getX() - p1->getX();
-      const double new_dy = p2->getY() - p1->getY();
-      const double new_distance = std::sqrt((new_dy * new_dy) + (new_dx * new_dx));
-      if (new_distance < distance)
-      {
-        //std::clog << "Players should in general move away after a collision\n";
-      }
-      //assert(new_distance > distance && "Players should move away after a collision");
-    }
-    #endif
   }
 }
 

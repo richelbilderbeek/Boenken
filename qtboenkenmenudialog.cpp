@@ -57,21 +57,12 @@ ribi::bnkn::QtMenuDialog::QtMenuDialog(QWidget *parent)
     m_arena{new QtArenaDialog(this)}
 {
   ui->setupUi(this);
-  #ifdef QT5_TODO_FIND_THE_RIGHT_DEFINE
-  QObject::connect(ui->button_set_controls,&QAbstractButton::clicked,this,&ribi::bnkn::QtMenuDialog::onControlsClick);
-  QObject::connect(ui->button_set_players ,&QAbstractButton::clicked,this,&ribi::bnkn::QtMenuDialog::onPlayersClick );
-  QObject::connect(ui->button_set_arena   ,&QAbstractButton::clicked,this,&ribi::bnkn::QtMenuDialog::onArenaClick   );
-  QObject::connect(ui->button_start       ,&QAbstractButton::clicked,this,&ribi::bnkn::QtMenuDialog::onStartClick   );
-  QObject::connect(ui->button_about       ,&QAbstractButton::clicked,this,&ribi::bnkn::QtMenuDialog::onAboutClick   );
-  QObject::connect(ui->button_quit        ,&QAbstractButton::clicked,this,&ribi::bnkn::QtMenuDialog::close          );
-  #else
   QObject::connect(ui->button_set_controls,SIGNAL(clicked(bool)),this,SLOT(onControlsClick()));
   QObject::connect(ui->button_set_players ,SIGNAL(clicked(bool)),this,SLOT(onPlayersClick()) );
   QObject::connect(ui->button_set_arena   ,SIGNAL(clicked(bool)),this,SLOT(onArenaClick())   );
   QObject::connect(ui->button_start       ,SIGNAL(clicked(bool)),this,SLOT(onStartClick())   );
   QObject::connect(ui->button_about       ,SIGNAL(clicked(bool)),this,SLOT(onAboutClick())   );
   QObject::connect(ui->button_quit        ,SIGNAL(clicked(bool)),this,SLOT(close())          );
-  #endif
 }
 
 ribi::bnkn::QtMenuDialog::~QtMenuDialog() noexcept
@@ -102,9 +93,9 @@ std::vector<ribi::bnkn::SpritePlayer> ribi::bnkn::CreatePlayers(
     {
       const int x = (i % 2 ? x_right : x_left);
       const double pi = boost::math::constants::pi<double>();
-      const double face_angle = (i % 2 ? 1.5 * pi : 0.5 * pi);
+      const double face_angle = i % 2 ? 1.5 * pi : 0.5 * pi;
       const unsigned char r = (i % 2 ?   0 : 255);
-      const unsigned char g = (i % 2 ?   0 :   0);
+      const unsigned char g = 0;
       const unsigned char b = (i % 2 ? 255 :   0);
       SpritePlayer p(x,y,face_angle,size,r,g,b);
       v.push_back(p);
@@ -129,7 +120,7 @@ std::vector<ribi::bnkn::SpritePlayer> ribi::bnkn::CreatePlayers(
         = mid_y - (std::cos(angle) * ray_y)
         - (boost::numeric_cast<double>(size) / 2.0);
       const unsigned char r = (i % 2 ?   0 : 255);
-      const unsigned char g = (i % 2 ?   0 :   0);
+      const unsigned char g = 0;
       const unsigned char b = (i % 2 ? 255 :   0);
       const double face_angle = angle
         + (a.formation == Formation::circle_inward ? pi : 0.0);
@@ -143,7 +134,7 @@ std::vector<ribi::bnkn::SpritePlayer> ribi::bnkn::CreatePlayers(
 }
 
 std::vector<ribi::bnkn::SpriteBall> ribi::bnkn::CreateBalls(
-  const ArenaSettings& a)
+  const ArenaSettings& a) noexcept
 {
   const int size = 32;
   //A ball is always green
@@ -173,7 +164,7 @@ std::vector<ribi::bnkn::SpriteBall> ribi::bnkn::CreateBalls(
     }
     break;
     default:
-      assert(!"Should not get here");
+      throw std::logic_error("ribi::bnkn::CreateBalls: should not get here");
   }
   return v;
 }

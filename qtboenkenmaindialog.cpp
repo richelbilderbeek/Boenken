@@ -238,7 +238,7 @@ void ribi::bnkn::QtMainDialog::onTimer()
   this->repaint();
 }
 
-void ribi::bnkn::QtMainDialog::Paint(
+void ribi::bnkn::Paint(
   QPixmap& pixmap,
   const unsigned char r,
   const unsigned char g,

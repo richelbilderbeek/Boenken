@@ -94,10 +94,16 @@ std::vector<std::string> ribi::bnkn::MenuDialog::GetVersionHistory() const noexc
   return {
     "2000-xx-xx: version 0.0: wrote QBASIC version of Boenken",
     "2007-10-18: version 1.0: port from QBASIC to C++ Builder",
-    "2007-12-30: version 2.0: added old-school-graphics mode, two-button control and option to set the friction of the players",
-    "2010-08-14: version 3.0: initial port to cross-platform, using Qt Creator. Added doxygen support",
-    "2010-08-15: version 3.1: created basic menu functionality, improved doxygen documentation,  improved code (seperated GUI from game rules, all sprites can be deleted by boost::checked_delete only)",
-    "2012-03-07: version 4.0: conformized naming and architecture for ProjectRichelBilderbeek"
+    "2007-12-30: version 2.0: added old-school-graphics mode, "
+      "two-button control and option to set the friction of the players",
+    "2010-08-14: version 3.0: initial port to cross-platform, "
+      "using Qt Creator. Added doxygen support",
+    "2010-08-15: version 3.1: created basic menu functionality, "
+      "improved doxygen documentation, "
+      "improved code (seperated GUI from game rules, "
+      "all sprites can be deleted by boost::checked_delete only)",
+    "2012-03-07: version 4.0: conformized naming and architecture "
+      "for ProjectRichelBilderbeek"
     "2012-11-17: version 4.1: added a fancy color gradient to the main menu",
     "2015-01-02: version 4.2: fixed bug in collision between player and object",
     "2015-11-15: version 5.0: moved to own GitHub",

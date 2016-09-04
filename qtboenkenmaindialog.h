@@ -71,21 +71,20 @@ private:
   Game m_game;
   bool m_verbose;
 
-  ///Paint paints a Pixmap to a single color fast,
-  ///from http://www.richelbilderbeek.nl/CppPaint.htm
-  static void Paint(
-    QPixmap& pixmap,
-    const unsigned char r,
-    const unsigned char g,
-    const unsigned char b,
-    const unsigned char a = 255
-  );
-
 private slots:
   void onTimer();
   void onCountdownTimer();
-
 };
+
+///Paint paints a Pixmap to a single color fast,
+///from http://www.richelbilderbeek.nl/CppPaint.htm
+void Paint(
+  QPixmap& pixmap,
+  const unsigned char r,
+  const unsigned char g,
+  const unsigned char b,
+  const unsigned char a = 255
+);
 
 } //~namespace bnkn
 } //~namespace ribi

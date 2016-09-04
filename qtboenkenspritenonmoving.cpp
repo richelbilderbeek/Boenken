@@ -65,9 +65,6 @@ void ribi::bnkn::SpriteNonMoving::Collision(
   */
   const double dx = moving.getX() - obstacle.getX();
   const double dy = moving.getY() - obstacle.getY();
-  #ifndef NDEBUG
-  const double distance = Geometry().GetDistance(dx,dy);
-  #endif
   //const double collision_distance
   //  = boost::numeric_cast<double>(obstacle.m_size + moving.m_size) / 2.0;
   //Obtain the relative angle between the players
@@ -93,33 +90,13 @@ void ribi::bnkn::SpriteNonMoving::Collision(
   double obstacle_angle = moving_angle + pi;
   double obstancle_speed = moving_speed;
   //Obtain the new impulses
-  DoPerfectElasticCollision(angle_players, obstacle_angle,obstancle_speed,moving_angle,moving_speed);
+  DoPerfectElasticCollision(
+    angle_players, obstacle_angle,obstancle_speed,moving_angle,moving_speed
+  );
   //Set the player's new impulse
   const double dx2 =  std::sin(moving_angle) * moving_speed;
   const double dy2 = -std::cos(moving_angle) * moving_speed;
   moving.SetSpeed(dx2,dy2);
-    //Let the player move away from each perpendicalar to the collision axis
-  /*
-  {
-    const double go_away_distance = collision_distance - distance;
-    assert(go_away_distance > 0);
-    const double go_away_dx2 =  std::sin(angle_players +  0.0) * (go_away_distance / 2.0);
-    const double go_away_dy2 = -std::cos(angle_players +  0.0) * (go_away_distance / 2.0);
-    moving.Move(go_away_dx2,go_away_dy2);
-  }
-  */
   //Let the player move again
   moving.Move();
-  #ifndef NDEBUG
-  {
-    const double new_dx = moving.getX() - obstacle.getX();
-    const double new_dy = moving.getY() - obstacle.getY();
-    const double new_distance = Geometry().GetDistance(new_dx,new_dy);
-    if (new_distance < distance)
-    {
-      std::clog << "Players should in general move away after a collision\n";
-    }
-    assert(new_distance > distance && "Players should move away after a collision");
-  }
-  #endif
 }

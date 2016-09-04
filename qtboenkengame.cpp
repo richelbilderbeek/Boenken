@@ -74,7 +74,7 @@ ribi::bnkn::Game::Game(
   SpriteBall::SetGoalPoles(goal_y_top,goal_y_bottom);
 }
 
-std::vector<ribi::bnkn::SpriteMoving*> ribi::bnkn::Game::CollectMovingSprites(
+std::vector<ribi::bnkn::SpriteMoving*> ribi::bnkn::CollectMovingSprites(
   std::vector<SpritePlayer>& players,
   std::vector<SpriteBall>& balls
 ) noexcept
@@ -95,7 +95,7 @@ std::vector<ribi::bnkn::SpriteMoving*> ribi::bnkn::Game::CollectMovingSprites(
   return v;
 }
 
-std::vector<const ribi::bnkn::Sprite*> ribi::bnkn::Game::CollectSprites(
+std::vector<const ribi::bnkn::Sprite*> ribi::bnkn::CollectSprites(
   const std::vector<SpritePlayer>& players,
   const std::vector<SpriteBall>& balls,
   const std::vector<SpriteNonMoving>& obstacles
@@ -143,16 +143,13 @@ int ribi::bnkn::Game::getWidth() const noexcept
 
 void ribi::bnkn::Game::pressKey(const int key)
 {
-  if (m_verbose) { std::stringstream msg; msg << __func__ << ": key '" << key << "' pressed"; TRACE(msg.str()); }
   const int n_players{static_cast<int>(m_controls.m_names.size())};
   for (int i=0; i!=n_players; ++i)
   {
     if (key == m_controls.m_keys_accel[i]) {
-      if (m_verbose) { std::stringstream msg; msg << __func__ << ": player[" << i << "] accelerates"; TRACE(msg.str()); }
       m_players[i].Accelerate();
     }
     if (key == m_controls.m_keys_turn[i] ) {
-      if (m_verbose) { std::stringstream msg; msg << __func__ << ": player[" << i << "] turns right"; TRACE(msg.str()); }
       m_players[i].TurnRight();
     }
   }

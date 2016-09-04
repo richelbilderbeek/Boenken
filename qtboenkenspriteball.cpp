@@ -76,15 +76,10 @@ void ribi::bnkn::SpriteBall::Move() noexcept
   {
     if (m_y  > m_goal_y_top && m_y < m_goal_y_bottom)
     {
-      //GOAL!
       ++m_score_right;
-      //std::clog << "Ball at ("<< m_x << "," << m_y << ")"
-      //  << " hit the left goal, defined in height range <"
-      //  << m_goal_y_top << "," << m_goal_y_bottom << ">\n";
     }
     m_x = 0.0;
     m_dx = std::fabs(m_dx);
-    //std::clog << "Ball moved to the right to (" << m_x << "," << m_y << ")\n";
   }
   else
   {
@@ -92,23 +87,16 @@ void ribi::bnkn::SpriteBall::Move() noexcept
     {
       if (m_y  > m_goal_y_top && m_y < m_goal_y_bottom)
       {
-        ///GOAL!
         ++m_score_left;
-        //std::clog << "Ball at ("<< m_x << "," << m_y << ")"
-        //  << " hit the right goal, defined in height range <"
-        //  << m_goal_y_top << "," << m_goal_y_bottom << ">\n";
       }
       m_x = maxx;
       m_dx = -std::fabs(m_dx);
-      //std::clog << "Ball moved to the left to (" << m_x << "," << m_y << ")\n";
     }
   }
   if (m_y <  0.0)
   {
     m_y  =  0.0;
     m_dy = std::fabs(m_dy);
-    //std::clog << "Ball moved downwards to (" << m_x << "," << m_y << ")\n";
-
   }
   else
   {
@@ -116,7 +104,6 @@ void ribi::bnkn::SpriteBall::Move() noexcept
     {
       m_y  = maxy;
       m_dy = -std::fabs(m_dy);
-      //std::clog << "Ball moved upwards to (" << m_x << "," << m_y << ")\n";
     }
   }
   m_dx *= m_friction;

@@ -71,19 +71,20 @@ struct Game
   const Controls m_controls;
   bool m_verbose;
 
-  ///Collect all moving sprites
-  ///'players' and 'balls' cannot be const: these will become (con-const) SpriteMoving*
-  static std::vector<SpriteMoving*> CollectMovingSprites(
-    std::vector<SpritePlayer>& players,
-    std::vector<SpriteBall>& balls
-  ) noexcept;
-
-  static std::vector<const Sprite*> CollectSprites(
-    const std::vector<SpritePlayer>& players,
-    const std::vector<SpriteBall>& balls,
-    const std::vector<SpriteNonMoving>& obstacles
-  ) noexcept;
 };
+
+///Collect all moving sprites
+///'players' and 'balls' cannot be const: these will become (con-const) SpriteMoving*
+std::vector<SpriteMoving*> CollectMovingSprites(
+std::vector<SpritePlayer>& players,
+std::vector<SpriteBall>& balls
+) noexcept;
+
+std::vector<const Sprite*> CollectSprites(
+const std::vector<SpritePlayer>& players,
+const std::vector<SpriteBall>& balls,
+const std::vector<SpriteNonMoving>& obstacles
+) noexcept;
 
 } //~namespace bnkn
 } //~namespace ribi

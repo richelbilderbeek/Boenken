@@ -73,7 +73,7 @@ private slots:
 };
 
 std::vector<SpritePlayer> CreatePlayers(const ArenaSettings& a);
-std::vector<SpriteBall> CreateBalls(const ArenaSettings& a);
+std::vector<SpriteBall> CreateBalls(const ArenaSettings& a) noexcept;
 std::vector<SpriteNonMoving> CreateObstacles(const ArenaSettings& a);
 
 } //~namespace bnkn

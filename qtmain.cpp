@@ -31,7 +31,9 @@ int main(int argc, char *argv[])
 
   a.setStyleSheet(
     "QDialog { "
-    "  background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #FF9090, stop: 1 #9090FF);"
+    "  background-color: qlineargradient("
+    "    x1: 0, y1: 0, x2: 1, y2: 1, stop: 0 #FF9090, stop: 1 #9090FF"
+    "  );"
     "}"
   );
 
