@@ -1,11 +1,8 @@
 # Boenken
 
-[![Travis CI logo](TravisCI.png)](https://travis-ci.org)
-![Whitespace](Whitespace.png)
-[![Codecov logo](Codecov.png)](https://www.codecov.io)
-
-[![Build Status](https://travis-ci.org/richelbilderbeek/Boenken.svg?branch=master)](https://travis-ci.org/richelbilderbeek/Boenken)
-[![codecov.io](https://codecov.io/github/richelbilderbeek/Boenken/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/Boenken?branch=master)
+Branch|[![Travis CI logo](TravisCI.png)](https://travis-ci.org)|[![Codecov logo](Codecov.png)](https://www.codecov.io)
+---|---|---
+master|[![Build Status](https://travis-ci.org/richelbilderbeek/Boenken.svg?branch=master)](https://travis-ci.org/richelbilderbeek/Boenken)|[![codecov.io](https://codecov.io/github/richelbilderbeek/Boenken/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/Boenken/branch/master)
 
 Boenken is a 20-player game that is a mix between soccer and billiards, programmed in C++ using Qt (see 'About the program' for more details).
 
