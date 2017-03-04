@@ -28,15 +28,28 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 script: 
-  - ./download_other_githubs.sh
-  - ./build_console_test.sh
+  # Prerequisites
+  - ./download_other_githubs
+  # Console test
+  - qmake -qt=qt5 BoenkenConsoleTest.pro
+  - make debug
   - ./BoenkenConsoleTest
-  - ./build_desktop_test.sh
+  # Desktop test
+  - qmake -qt=qt5 BoenkenDesktopTest.pro
+  - make debug
   - ./BoenkenDesktopTest
+  # Console
+  - qmake -qt=qt5 BoenkenConsole.pro
+  - make debug
+  - ./BoenkenConsole & 
+  # Desktop test
+  - qmake -qt=qt5 BoenkenDesktop.pro
+  - make debug
+  - ./BoenkenDesktop &
+  # Code coverage
   - ./get_code_cov.sh
   - codecov
-  - ./build_console.sh
-  - ./build_desktop.sh
+  # OCLint
   - ./do_oclint.sh
 
 after_success: 
