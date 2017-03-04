@@ -8,8 +8,9 @@ before_install:
   - sudo apt-get update -qq
 
 install: 
+  # C++14
   - sudo apt-get install -qq g++-5
-  - ./install_oclint.sh
+  - ./install_oclint
 
 addons:
   apt:
@@ -47,10 +48,10 @@ script:
   - make debug
   - ./BoenkenDesktop &
   # Code coverage
-  - ./get_code_cov.sh
+  - ./get_code_cov
   - codecov
   # OCLint
-  - ./do_oclint.sh
+  - ./do_oclint
 
 after_success: 
   - bash <(curl -s https://codecov.io/bash)
