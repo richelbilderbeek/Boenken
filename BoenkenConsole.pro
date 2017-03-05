@@ -12,9 +12,6 @@ include(../Boenken/BoenkenConsole.pri)
 
 SOURCES += main.cpp
 
-# Qt resourse files generate an unused variable warning
-QMAKE_CXXFLAGS += -Wno-unused-variable
-
 # C++14
 CONFIG += c++14
 QMAKE_CXX = g++-5
