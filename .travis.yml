@@ -37,19 +37,19 @@ before_script:
 script: 
   # Console test
   - qmake -qt=qt5 BoenkenConsoleTest.pro
-  - make debug
+  - make --silent debug
   - ./BoenkenConsoleTest
   # Desktop test
   - qmake -qt=qt5 BoenkenDesktopTest.pro
-  - make debug
+  - make --silent debug
   - ./BoenkenDesktopTest
   # Console
   - qmake -qt=qt5 BoenkenConsole.pro
-  - make debug
+  - make --silent debug
   - ./BoenkenConsole & 
   # Desktop test
   - qmake -qt=qt5 BoenkenDesktop.pro
-  - make debug
+  - make --silent debug
   - ./BoenkenDesktop &
   # Code coverage
   - ./get_code_cov
