@@ -1,24 +1,3 @@
-//---------------------------------------------------------------------------
-/*
-Boenken. A multiplayer soccer/billiards game.
-Copyright (C) 2007-2016 Richel Bilderbeek
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
-//---------------------------------------------------------------------------
-//From http://www.richelbilderbeek.nl/GameBoenken.htm
-//---------------------------------------------------------------------------
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Weffc++"
 #include "qtboenkenarenadialog.h"
@@ -67,44 +46,36 @@ std::pair<int,int> ribi::bnkn::QtArenaDialog::GetScreenSize() const noexcept
   //Makes the code shorter and copy-pastable
   const QComboBox * const b = ui->box_screen_size;
   assert(b->count()==2);
-  switch(b->currentIndex())
+  if (b->currentIndex() == 0)
   {
-    case 0:
-      assert(b->currentText() == "Full screen");
-      {
-        // -8, because of the application fame
-        const int width
-          = QApplication::desktop()->width()
-          - 8;
-        // -50, because of the app's title bar and those Ubuntu panels
-        const int height
-          = QApplication::desktop()->height() - 96;
-        return std::make_pair(width,height);
-      }
-    case 1:
-      assert(b->currentText() == "640x400");
-      return std::make_pair(640,400);
-    default:
-      throw std::logic_error("ribi::bnkn::QtBoenkenArenaDialog::GetScreenSize");
+    assert(b->currentText() == "Full screen");
+    // -8, because of the application fame
+    const int width
+      = QApplication::desktop()->width()
+      - 8;
+    // -50, because of the app's title bar and those Ubuntu panels
+    const int height
+      = QApplication::desktop()->height() - 96;
+    return std::make_pair(width,height);
   }
+  assert(b->currentIndex() == 1);
+  assert(b->currentText() == "640x400");
+  return std::make_pair(640,400);
 }
 
 int ribi::bnkn::QtArenaDialog::GetNballs() const noexcept
 {
   //Makes the code shorter and copy-pastable
   const QComboBox * const b = ui->box_nballs;
-  assert(b->count()==2);
-  switch(b->currentIndex())
+  assert(b->count() == 2);
+  if (b->currentIndex() == 0)
   {
-    case 0:
-      assert(b->currentText() == "One");
-      return 1;
-    case 1:
-      assert(b->currentText() == "Two");
-      return 2;
-    default:
-      throw std::logic_error("ribi::bnkn::QtBoenkenArenaDialog::GetNballs");
+    assert(b->currentText() == "One");
+    return 1;
   }
+  assert(b->currentIndex() == 1);
+  assert(b->currentText() == "Two");
+  return 2;
 }
 
 int ribi::bnkn::QtArenaDialog::GetNobstacles() const noexcept
@@ -112,17 +83,14 @@ int ribi::bnkn::QtArenaDialog::GetNobstacles() const noexcept
   //Makes the code shorter and copy-pastable
   const QComboBox * const b = ui->box_obstacles;
   assert(b->count()==2);
-  switch(b->currentIndex())
+  if (b->currentIndex() == 0)
   {
-    case 0:
-      assert(b->currentText() == "None");
-      return 0;
-    case 1:
-      assert(b->currentText() == "Two");
-      return 2;
-    default:
-      throw std::logic_error("ribi::bnkn::QtBoenkenArenaDialog::GetNobstacles");
+    assert(b->currentText() == "None");
+    return 0;
   }
+  assert(b->currentIndex() == 1);
+  assert(b->currentText() == "Two");
+  return 2;
 }
 
 ribi::bnkn::Formation ribi::bnkn::QtArenaDialog::GetFormation() const noexcept
@@ -130,39 +98,37 @@ ribi::bnkn::Formation ribi::bnkn::QtArenaDialog::GetFormation() const noexcept
   //Makes the code shorter and copy-pastable
   const QComboBox * const b = ui->box_formation;
   assert(b->count()==3);
-  switch(b->currentIndex())
+  if (b->currentIndex() == 0)
   {
-    case 0:
-      assert(b->currentText() == "Line");
-      return Formation::straight_line;
-    case 1:
-      assert(b->currentText() == "Circle, inward");
-      return Formation::circle_inward;
-    case 2:
-      assert(b->currentText() == "Circle, outward");
-      return Formation::circle_outward;
-    default:
-      throw std::logic_error("ribi::bnkn::QtBoenkenArenaDialog::GetFormation");
+    assert(b->currentText() == "Line");
+    return Formation::straight_line;
   }
+  else if (b->currentIndex() == 1)
+  {
+    assert(b->currentText() == "Circle, inward");
+    return Formation::circle_inward;
+  }
+  assert(b->currentIndex() == 2);
+  assert(b->currentText() == "Circle, outward");
+  return Formation::circle_outward;
 }
 
 double ribi::bnkn::QtArenaDialog::GetFriction() const noexcept
 {
   const QComboBox * const b = ui->box_friction;
   assert(b->count()==3);
-  switch(b->currentIndex())
+  if (b->currentIndex() == 0)
   {
-    case 0:
       assert(b->currentText() == "None");
       return 1.0;
-    case 1:
-      assert(b->currentText() == "Low");
-      return 0.999;
-    case 2:
-      assert(b->currentText() == "Medium");
-      return 0.99;
-    default:
-      throw std::logic_error("ribi::bnkn::QtBoenkenArenaDialog::GetFriction");
   }
+  else if (b->currentIndex() == 1)
+  {
+    assert(b->currentText() == "Low");
+    return 0.999;
+  }
+  assert(b->currentIndex() == 2);
+  assert(b->currentText() == "Medium");
+  return 0.99;
 }
 
