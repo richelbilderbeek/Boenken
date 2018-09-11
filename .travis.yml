@@ -13,7 +13,7 @@ before_install:
 
 install: 
   # C++14
-  - sudo apt-get install -qq g++-6
+  - sudo apt install -qq g++-6
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
   # Qt5
   - sudo apt-get install -qq libqt5webkit5-dev qtdeclarative5-dev libqt5svg5*
@@ -42,7 +42,7 @@ script:
   - ./BoenkenConsoleTest
   # Desktop test
   - qmake -qt=qt5 BoenkenDesktopTest.pro
-  - make --silent debug
+  - make debug
   - ./BoenkenDesktopTest
   # Console
   - qmake -qt=qt5 BoenkenConsole.pro
