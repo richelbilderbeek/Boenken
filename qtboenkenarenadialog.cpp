@@ -85,7 +85,8 @@ std::pair<int,int> ribi::bnkn::QtArenaDialog::GetScreenSize() const noexcept
       assert(b->currentText() == "640x400");
       return std::make_pair(640,400);
     default:
-      throw std::logic_error("ribi::bnkn::QtBoenkenArenaDialog::GetScreenSize");
+      assert(!"Should not get here"); //!OCLINT accepted idiom
+      return {};
   }
 }
 
@@ -103,7 +104,8 @@ int ribi::bnkn::QtArenaDialog::GetNballs() const noexcept
       assert(b->currentText() == "Two");
       return 2;
     default:
-      throw std::logic_error("ribi::bnkn::QtBoenkenArenaDialog::GetNballs");
+      assert(!"Should not get here"); //!OCLINT accepted idiom
+      return 0;
   }
 }
 
@@ -121,7 +123,8 @@ int ribi::bnkn::QtArenaDialog::GetNobstacles() const noexcept
       assert(b->currentText() == "Two");
       return 2;
     default:
-      throw std::logic_error("ribi::bnkn::QtBoenkenArenaDialog::GetNobstacles");
+      assert(!"Should not get here"); //!OCLINT accepted idiom
+      return 0;
   }
 }
 
@@ -142,7 +145,8 @@ ribi::bnkn::Formation ribi::bnkn::QtArenaDialog::GetFormation() const noexcept
       assert(b->currentText() == "Circle, outward");
       return Formation::circle_outward;
     default:
-      throw std::logic_error("ribi::bnkn::QtBoenkenArenaDialog::GetFormation");
+      assert(!"Should not get here"); //!OCLINT accepted idiom
+      return Formation::straight_line;
   }
 }
 
@@ -162,7 +166,8 @@ double ribi::bnkn::QtArenaDialog::GetFriction() const noexcept
       assert(b->currentText() == "Medium");
       return 0.99;
     default:
-      throw std::logic_error("ribi::bnkn::QtBoenkenArenaDialog::GetFriction");
+      assert(!"Should not get here"); //!OCLINT accepted idiom
+      return 0.0;
   }
 }
 

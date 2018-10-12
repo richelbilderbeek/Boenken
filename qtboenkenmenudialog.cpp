@@ -141,7 +141,8 @@ std::vector<ribi::bnkn::SpriteBall> ribi::bnkn::CreateBalls(
     }
     break;
     default:
-      throw std::logic_error("ribi::bnkn::CreateBalls: should not get here");
+      assert(!"Should not get here"); //!OCLINT accepted idiom
+      return v;
   }
   return v;
 }
