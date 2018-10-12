@@ -37,15 +37,15 @@ before_script:
 
 script: 
   # Console test
-  #- qmake -qt=qt5 BoenkenConsoleTest.pro
-  #- make --silent debug
-  #- make clean
-  #- ./BoenkenConsoleTest
-  # Desktop test
-  - qmake -qt=qt5 BoenkenDesktopTest.pro
+  - qmake -qt=qt5 BoenkenConsoleTest.pro
   - make --silent debug
   - make clean
-  - ./BoenkenDesktopTest
+  - ./BoenkenConsoleTest
+  # Desktop test
+  #- qmake -qt=qt5 BoenkenDesktopTest.pro
+  #- make --silent debug
+  #- make clean
+  #- ./BoenkenDesktopTest
   # Console
   - qmake -qt=qt5 BoenkenConsole.pro
   - make --silent debug
