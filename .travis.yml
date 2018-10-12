@@ -39,18 +39,22 @@ script:
   # Console test
   - qmake -qt=qt5 BoenkenConsoleTest.pro
   - make --silent debug
+  - make clean
   - ./BoenkenConsoleTest
   # Desktop test
   - qmake -qt=qt5 BoenkenDesktopTest.pro
   - make --silent debug
+  - make clean
   - ./BoenkenDesktopTest
   # Console
   - qmake -qt=qt5 BoenkenConsole.pro
   - make --silent debug
+  - make clean
   - ./BoenkenConsole & 
   # Desktop test
   - qmake -qt=qt5 BoenkenDesktop.pro
   - make --silent debug
+  - make clean
   - ./BoenkenDesktop &
   # Code coverage
   - ./get_code_cov
