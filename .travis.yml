@@ -48,7 +48,7 @@ script:
   - ./BoenkenConsoleTest
   # Desktop test
   - qmake -qt=qt5 BoenkenDesktopTest.pro
-  - make debug
+  - make --silent debug
   - ./BoenkenDesktopTest
   # Console
   - qmake -qt=qt5 BoenkenConsole.pro
