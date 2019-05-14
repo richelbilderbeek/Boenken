@@ -119,31 +119,22 @@ std::vector<ribi::bnkn::SpriteBall> ribi::bnkn::CreateBalls(
   const unsigned char g = 255;
   const unsigned char b =   0;
   std::vector<SpriteBall> v;
-  switch (a.n_balls)
+  if (a.n_balls == 1)
   {
-    case 1:
-    {
-      const double x{static_cast<double>((a.screen_size.first ) / 2 - (size / 2))};
-      const double y{static_cast<double>((a.screen_size.second) / 2 - (size / 2))};
-      SpriteBall s{x,y,size,r,g,b};
-      v.push_back(s);
-    }
-    break;
-    case 2:
-    {
-      const double x1{static_cast<double>(a.screen_size.first / 2) - size};
-      const double x2{x1 + size + 1.0};
-      const double y{static_cast<double>((a.screen_size.second / 2)- (size / 2))};
-      SpriteBall s1{x1,y,size,r,g,b};
-      SpriteBall s2{x2,y,size,r,g,b};
-      v.push_back(s1);
-      v.push_back(s2);
-    }
-    break;
-    default:
-      assert(!"Should not get here"); //!OCLINT accepted idiom
-      return v;
+    const double x{static_cast<double>((a.screen_size.first ) / 2 - (size / 2))};
+    const double y{static_cast<double>((a.screen_size.second) / 2 - (size / 2))};
+    SpriteBall s{x,y,size,r,g,b};
+    v.push_back(s);
+    return v;
   }
+  assert(a.n_balls == 2);
+  const double x1{static_cast<double>(a.screen_size.first / 2) - size};
+  const double x2{x1 + size + 1.0};
+  const double y{static_cast<double>((a.screen_size.second / 2)- (size / 2))};
+  SpriteBall s1{x1,y,size,r,g,b};
+  SpriteBall s2{x2,y,size,r,g,b};
+  v.push_back(s1);
+  v.push_back(s2);
   return v;
 }
 
