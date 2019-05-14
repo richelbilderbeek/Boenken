@@ -29,10 +29,10 @@ script:
   - make clean
   - ./BoenkenConsoleTest
   # Desktop test
-  #- qmake -qt=qt5 BoenkenDesktopTest.pro
-  #- make --silent debug
-  #- make clean
-  #- ./BoenkenDesktopTest
+  - qmake -qt=qt5 BoenkenDesktopTest.pro
+  - make --silent debug
+  - make clean
+  - ./BoenkenDesktopTest
   # Console
   - qmake -qt=qt5 BoenkenConsole.pro
   - make --silent debug
