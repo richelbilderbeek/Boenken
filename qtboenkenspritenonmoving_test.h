@@ -3,7 +3,7 @@
 
 #pragma GCC diagnostic push
 
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
+
 #include <QtTest/QtTest>
 #pragma GCC diagnostic pop
 
