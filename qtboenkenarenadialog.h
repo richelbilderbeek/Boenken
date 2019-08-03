@@ -2,7 +2,7 @@
 #define QTBOENKENARENADIALOG_H
 
 #pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
+
 #include "qthideandshowdialog.h"
 #include "boenkenarenasettings.h"
 #pragma GCC diagnostic pop

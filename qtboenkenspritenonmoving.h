@@ -2,7 +2,7 @@
 #define BOENKENSPRITENONMOVING_H
 
 #pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
+
 #include <boost/checked_delete.hpp>
 #include "qtboenkensprite.h"
 #pragma GCC diagnostic pop

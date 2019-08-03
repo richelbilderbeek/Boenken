@@ -5,7 +5,7 @@
 
 
 #pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
+
 #include "boenkenarenasettings.h"
 #include "qtboenkenspriteplayer.h"
 #include "boenkencontrols.h"

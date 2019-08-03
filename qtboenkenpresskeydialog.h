@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #define QTBOENKENPRESSKEYDIALOG_H
 
 #pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
+
 #include "qthideandshowdialog.h"
 #pragma GCC diagnostic pop
 
