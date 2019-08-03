@@ -1,4 +1,4 @@
-#pragma GCC diagnostic push
+
 
 
 #include "qtboenkenspriteplayer.h"
@@ -11,7 +11,7 @@
 #include <QPainter>
 
 #include "geometry.h"
-#pragma GCC diagnostic pop
+
 
 constexpr double ribi::bnkn::GetAcceleration()
 {

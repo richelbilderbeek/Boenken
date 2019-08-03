@@ -1,11 +1,11 @@
 #ifndef BOENKENSPRITENONMOVING_H
 #define BOENKENSPRITENONMOVING_H
 
-#pragma GCC diagnostic push
+
 
 #include <boost/checked_delete.hpp>
 #include "qtboenkensprite.h"
-#pragma GCC diagnostic pop
+
 
 namespace ribi {
 namespace bnkn {

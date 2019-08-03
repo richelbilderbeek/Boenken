@@ -1,4 +1,4 @@
-#pragma GCC diagnostic push
+
 
 
 #include "qtboenkenmaindialog.h"
@@ -16,7 +16,7 @@
 #include "qtboenkengame.h"
 #include "ui_qtboenkenmaindialog.h"
 
-#pragma GCC diagnostic pop
+
 
 ///All parameters are fed into the contructor
 ribi::bnkn::QtMainDialog::QtMainDialog(

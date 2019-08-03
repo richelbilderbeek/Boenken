@@ -1,4 +1,4 @@
-#pragma GCC diagnostic push
+
 
 #include "qtboenkengame.h"
 
@@ -13,7 +13,7 @@
 #include "qtboenkenspritenonmoving.h"
 #include "qtboenkenspriteplayer.h"
 
-#pragma GCC diagnostic pop
+
 
 ribi::bnkn::Game::Game(
   const ArenaSettings& arena_settings,

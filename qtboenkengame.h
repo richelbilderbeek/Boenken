@@ -4,7 +4,7 @@
 #include <vector>
 
 
-#pragma GCC diagnostic push
+
 
 #include "boenkenarenasettings.h"
 #include "qtboenkenspriteplayer.h"
@@ -13,7 +13,7 @@
 #include "qtboenkenspriteball.h"
 #include "qtboenkenspritenonmoving.h"
 
-#pragma GCC diagnostic pop
+
 
 struct QPainter;
 

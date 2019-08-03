@@ -1,4 +1,4 @@
-#pragma GCC diagnostic push
+
 
 
 #include "qtboenkensprite.h"
@@ -14,7 +14,7 @@
 #include <QPixmap>
 
 #include "geometry.h"
-#pragma GCC diagnostic pop
+
 
 ///The maximum x coordinat a Sprite can have
 int ribi::bnkn::Sprite::m_maxx = 320;

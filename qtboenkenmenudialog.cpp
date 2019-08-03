@@ -1,4 +1,4 @@
-#pragma GCC diagnostic push
+
 
 
 #include "qtboenkenmenudialog.h"
@@ -24,7 +24,7 @@
 #include "qtboenkenspriteplayer.h"
 #include "ui_qtboenkenmenudialog.h"
 
-#pragma GCC diagnostic pop
+
 
 ribi::bnkn::QtMenuDialog::QtMenuDialog(QWidget *parent)
   : QtHideAndShowDialog(parent),

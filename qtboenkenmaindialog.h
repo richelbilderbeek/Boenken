@@ -3,13 +3,13 @@
 
 #include <vector>
 
-#pragma GCC diagnostic push
+
 
 #include "qtboenkengame.h"
 #include "qthideandshowdialog.h"
 #include <QPixmap>
 #include <QTimer>
-#pragma GCC diagnostic pop
+
 
 namespace Ui {
   class QtBoenkenMainDialog;

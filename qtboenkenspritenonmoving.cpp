@@ -1,4 +1,4 @@
-#pragma GCC diagnostic push
+
 
 
 #include "qtboenkenspritenonmoving.h"
@@ -11,7 +11,7 @@
 #include "qtboenkenspritemoving.h"
 #include "qtboenkenspriteplayer.h"
 
-#pragma GCC diagnostic pop
+
 
 ribi::bnkn::SpriteNonMoving::SpriteNonMoving(
   const double x,

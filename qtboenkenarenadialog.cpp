@@ -1,4 +1,4 @@
-#pragma GCC diagnostic push
+
 
 #include "qtboenkenarenadialog.h"
 
@@ -8,7 +8,7 @@
 #include <QDesktopWidget>
 
 #include "ui_qtboenkenarenadialog.h"
-#pragma GCC diagnostic pop
+
 
 ribi::bnkn::QtArenaDialog::QtArenaDialog(QWidget *parent) noexcept :
     QtHideAndShowDialog(parent),

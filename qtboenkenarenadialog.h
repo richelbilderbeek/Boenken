@@ -1,11 +1,11 @@
 #ifndef QTBOENKENARENADIALOG_H
 #define QTBOENKENARENADIALOG_H
 
-#pragma GCC diagnostic push
+
 
 #include "qthideandshowdialog.h"
 #include "boenkenarenasettings.h"
-#pragma GCC diagnostic pop
+
 
 namespace Ui {
   class QtBoenkenArenaDialog;

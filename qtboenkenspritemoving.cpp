@@ -1,4 +1,4 @@
-#pragma GCC diagnostic push
+
 
 
 #include "qtboenkenspritemoving.h"
@@ -9,7 +9,7 @@
 #include <boost/math/constants/constants.hpp>
 
 #include "geometry.h"
-#pragma GCC diagnostic pop
+
 
 int ribi::bnkn::SpriteMoving::sm_n_moving_sprites = 0;
 

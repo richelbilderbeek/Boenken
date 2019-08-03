@@ -25,12 +25,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <string>
 #include <vector>
 
-#pragma GCC diagnostic push
+
 
 #include "qthideandshowdialog.h"
 
 #include "boenkencontrols.h"
-#pragma GCC diagnostic pop
+
 
 namespace Ui {
   class QtBoenkenControlsDialog;

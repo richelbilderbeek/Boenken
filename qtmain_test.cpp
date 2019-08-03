@@ -1,10 +1,10 @@
 #include <iostream>
 
-#pragma GCC diagnostic push
+
 
 
 #include <QtTest/QtTest>
-#pragma GCC diagnostic pop
+
 
 #include "qtboenkenmaindialog_test.h"
 #include "qtboenkenspritenonmoving_test.h"
