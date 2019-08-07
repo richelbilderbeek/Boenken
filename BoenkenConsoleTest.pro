@@ -16,7 +16,7 @@ SOURCES += main_test.cpp
 # Qt resourse files generate an unused variable warning
 QMAKE_CXXFLAGS += -Wno-unused-variable
 
-# C++17
+
 CONFIG += c++17
 QMAKE_CXXFLAGS += -std=c++17
 
