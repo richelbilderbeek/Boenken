@@ -42,8 +42,8 @@ script:
   - make clean
   - ./BoenkenDesktop &
   # Code coverage
-  - ./get_code_cov
-  - codecov
+  - ./get_code_cov >/dev/null
+  - codecov >/dev/null
   # OCLint
   - ./do_oclint
 
