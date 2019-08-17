@@ -15,8 +15,6 @@ install:
   # Others
   - ./download_other_githubs
 
-
-# Xenial
 services:
  - xvfb
 
