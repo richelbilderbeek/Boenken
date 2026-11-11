@@ -110,6 +110,19 @@ void DoPerfectElasticCollision(
 
 bool IsCollision(const Sprite& p1, const Sprite& p2) noexcept;
 
+constexpr double pi() noexcept { return 3.14159265358979323846; }
+
+///Obtain the angle in radians between two deltas, on a screen
+///(where the y-axis points down) and following a clock:
+///12 o'clock is 0.0 * pi
+/// 3 o'clock is 0.5 * pi
+/// 6 o'clock is 1.0 * pi
+/// 9 o'clock is 1.5 * pi
+double GetAngleClockScreen(const double dx, const double dy) noexcept;
+
+///Obtain the length of a delta
+double GetDistance(const double dx, const double dy) noexcept;
+
 } //~namespace bnkn
 } //~namespace ribi
 

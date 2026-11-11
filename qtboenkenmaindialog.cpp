@@ -6,10 +6,8 @@
 #include <cassert>
 #include <cstdlib>
 
-#include <boost/lexical_cast.hpp>
-#include <boost/numeric/conversion/cast.hpp>
 
-#include <QDesktopWidget>
+#include <QScreen>
 #include <QKeyEvent>
 #include <QPainter>
 
@@ -39,16 +37,17 @@ ribi::bnkn::QtMainDialog::QtMainDialog(
   ///Size the black background
 
   Paint(m_background,1,1,1); //Black
+#ifndef Q_OS_WASM
   ///Put the dialog in the screen center
-  const QRect screen = QApplication::desktop()->screenGeometry();
+  const QRect screen = this->screen()->availableGeometry();
   this->move( screen.center() - this->rect().center() );
+#endif
 
   ///Disallow resize from now on
   this->setFixedWidth(m_game.getWidth());
   this->setFixedHeight(m_game.getHeight());
 
   ///Start the timer
-  #ifdef QT5_TODO_FIND_THE_RIGHT_DEFINE
   QObject::connect(
     m_timer,&QTimer::timeout,
     this,&ribi::bnkn::QtMainDialog::onTimer
@@ -57,16 +56,6 @@ ribi::bnkn::QtMainDialog::QtMainDialog(
     m_timer_countdown,&QTimer::timeout,
     this,&ribi::bnkn::QtMainDialog::onCountdownTimer
   );
-  #else
-  QObject::connect(
-    m_timer,SIGNAL(timeout()),
-    this,SLOT(onTimer())
-  );
-  QObject::connect(
-    m_timer_countdown,SIGNAL(timeout()),
-    this,SLOT(onCountdownTimer())
-  );
-  #endif
   m_timer_countdown->start(1000);
 }
 
@@ -76,84 +65,6 @@ ribi::bnkn::QtMainDialog::~QtMainDialog() noexcept
   m_timer_countdown->stop();
   delete ui;
 }
-
-/*
-void golf::QtGameOfLifeFighterWidget::OnJoystickCheck()
-{
-  sf::Joystick::update();
-  const int key_activate{0};
-  const int key_build{2};
-  const int key_glider{3};
-  const int key_spaceship{1};
-  const int key_grower{4};
-
-  if (sf::Joystick::isConnected(0))
-  {
-    //First move, then build
-    RemoveKey(Key::up2);
-    RemoveKey(Key::right2);
-    RemoveKey(Key::down2);
-    RemoveKey(Key::left2);
-    if (sf::Joystick::hasAxis(0, sf::Joystick::X))
-    {
-      const double dx{sf::Joystick::getAxisPosition(0, sf::Joystick::X)};
-      if (dx < -50.0) { AddKey(Key::left2 ); }
-      if (dx >  50.0) { AddKey(Key::right2); }
-    }
-    if (sf::Joystick::hasAxis(0, sf::Joystick::Y))
-    {
-      const double dy{sf::Joystick::getAxisPosition(0, sf::Joystick::Y)};
-      if (dy < -50.0) { AddKey(Key::up2  );  }
-      if (dy >  50.0) { AddKey(Key::down2);  }
-    }
-
-    const bool pressed0{sf::Joystick::isButtonPressed(0,key_activate)};
-    if (pressed0) { AddKey(Key::toggle_hangar2); }
-    const bool pressed1{sf::Joystick::isButtonPressed(0,key_build)};
-    if ( pressed1) { AddKey(Key::toggle_cell2); }
-    if (!pressed1) { RemoveKey(Key::toggle_cell2); }
-    const bool pressed2{sf::Joystick::isButtonPressed(0,key_glider)};
-    if ( pressed2) { AddKey(Key::pattern_a2); }
-    const bool pressed3{sf::Joystick::isButtonPressed(0,key_spaceship)};
-    if ( pressed3) { AddKey(Key::pattern_b2); }
-    const bool pressed4{sf::Joystick::isButtonPressed(0,key_grower)};
-    if ( pressed4) { AddKey(Key::pattern_c2); }
-  }
-
-  if (sf::Joystick::isConnected(1))
-  {
-    //First move, then build
-    RemoveKey(Key::up1);
-    RemoveKey(Key::right1);
-    RemoveKey(Key::down1);
-    RemoveKey(Key::left1);
-    if (sf::Joystick::hasAxis(1, sf::Joystick::X))
-    {
-      const double dx{sf::Joystick::getAxisPosition(1, sf::Joystick::X)};
-      if (dx < -50.0) { AddKey(Key::left1 ); }
-      if (dx >  50.0) { AddKey(Key::right1); }
-    }
-    if (sf::Joystick::hasAxis(1, sf::Joystick::Y))
-    {
-      const double dy{sf::Joystick::getAxisPosition(1, sf::Joystick::Y)};
-      if (dy < -50.0) { AddKey(Key::up1  );  }
-      if (dy >  50.0) { AddKey(Key::down1);  }
-    }
-
-    const bool pressed0{sf::Joystick::isButtonPressed(1,key_activate)};
-    if (pressed0) { AddKey(Key::toggle_hangar1); }
-    const bool pressed1{sf::Joystick::isButtonPressed(1,key_build)};
-    if ( pressed1) { AddKey(Key::toggle_cell1); }
-    if (!pressed1) { RemoveKey(Key::toggle_cell1); }
-    const bool pressed2{sf::Joystick::isButtonPressed(1,key_glider)};
-    if ( pressed2) { AddKey(Key::pattern_a1); }
-    const bool pressed3{sf::Joystick::isButtonPressed(1,key_spaceship)};
-    if ( pressed3) { AddKey(Key::pattern_b1); }
-    const bool pressed4{sf::Joystick::isButtonPressed(1,key_grower)};
-    if ( pressed4) { AddKey(Key::pattern_c1); }
-  }
-}
-*/
 
 void ribi::bnkn::QtMainDialog::paintEvent(QPaintEvent*)
 {
@@ -180,9 +91,9 @@ void ribi::bnkn::QtMainDialog::paintEvent(QPaintEvent*)
     painter.setFont(font);
     const std::pair<int,int> scores = m_game.GetScore();
     const QString score_left
-      = QString(boost::lexical_cast<std::string>(scores.first).c_str());
+      = QString::number(scores.first);
     const QString score_right
-      = boost::lexical_cast<std::string>(scores.second).c_str();
+      = QString::number(scores.second);
     painter.drawText(120,0,80,20,0,score_left);
     painter.drawText(440,0,80,20,0,score_right);
   }
@@ -191,6 +102,11 @@ void ribi::bnkn::QtMainDialog::paintEvent(QPaintEvent*)
 void ribi::bnkn::QtMainDialog::keyPressEvent(QKeyEvent * e)
 {
   assert(e->type() == QEvent::KeyPress);
+  if (e->key() == Qt::Key_Escape)
+  {
+    close();
+    return;
+  }
   m_game.pressKey(e->key());
 }
 

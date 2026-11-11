@@ -1,0 +1,140 @@
+# Build the Linux, Windows and WebAssembly versions of the game
+#
+# All versions are uploaded as artifacts of this workflow.
+# This workflow is also called by create_zensical_website.yaml,
+# which puts the WebAssembly and Windows versions on the website.
+name: Build game
+
+on:
+  push:
+  pull_request:
+  workflow_call:
+
+env:
+  # A version of Qt only works with one version of Emscripten, see
+  # https://doc.qt.io/qt-6/wasm.html#installing-emscripten
+  QT_VERSION: 6.8.3
+  EMSCRIPTEN_VERSION: 3.1.56
+
+jobs:
+  build_desktop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ env.QT_VERSION }}
+          cache: true
+
+      - run: qmake Boenken.pro
+      - run: make --silent
+
+      - name: The game must start and keep running
+        run: |
+          status=0
+          QT_QPA_PLATFORM=offscreen timeout 5 ./boenken || status=$?
+          test "${status}" -eq 124
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: boenken_desktop
+          path: boenken
+          if-no-files-found: error
+
+  build_windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ env.QT_VERSION }}
+          arch: win64_msvc2022_64
+          cache: true
+
+      - uses: ilammy/msvc-dev-cmd@v1
+
+      - run: qmake Boenken.pro
+      - run: nmake /nologo
+
+      - name: Collect the files needed to run the game
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory boenken_windows
+          Copy-Item release/boenken.exe boenken_windows/
+          windeployqt --release --no-translations --no-system-d3d-compiler --no-opengl-sw boenken_windows/boenken.exe
+          Get-ChildItem "$env:VCToolsRedistDir/x64/Microsoft.VC*.CRT/*.dll" | Copy-Item -Destination boenken_windows/
+
+      - name: The game must start and keep running without Qt being installed
+        shell: pwsh
+        run: |
+          $env:PATH = "C:\Windows\System32;C:\Windows"
+          Remove-Item Env:QT_PLUGIN_PATH, Env:QML2_IMPORT_PATH -ErrorAction Ignore
+          $game = Start-Process -PassThru -FilePath boenken_windows/boenken.exe
+          Start-Sleep -Seconds 5
+          if ($game.HasExited) { exit 1 }
+          Stop-Process -Id $game.Id
+          Get-ChildItem boenken_windows -Name
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: boenken_windows
+          path: boenken_windows
+          if-no-files-found: error
+
+  build_wasm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ env.QT_VERSION }}
+          host: all_os
+          target: wasm
+          arch: wasm_singlethread
+          cache: true
+
+      - uses: mymindstorm/setup-emsdk@v14
+        with:
+          version: ${{ env.EMSCRIPTEN_VERSION }}
+
+      - run: qmake Boenken.pro
+      - run: make --silent
+
+      - name: Collect the files needed to run the game
+        run: |
+          mkdir wasm
+          cp boenken.html boenken.js boenken.wasm qtloader.js qtlogo.svg wasm/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: boenken_wasm
+          path: wasm
+          if-no-files-found: error
+
+  test_play_page:
+    needs: build_wasm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: boenken_wasm
+          path: docs/game
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
+      - run: pip install pillow playwright zensical
+      - run: playwright install --with-deps chromium
+      - run: zensical build --clean --strict
+
+      - name: Play the game on the website
+        run: |
+          python -m http.server 8000 --directory site &
+          sleep 1
+          python scripts/test_play_page.py http://localhost:8000/play/

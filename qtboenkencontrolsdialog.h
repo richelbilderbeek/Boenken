@@ -61,6 +61,9 @@ private:
   std::vector<int> m_keys_accel;
   std::vector<int> m_keys_turn;
 
+  ///Let the user press a key, which is then stored in 'key'
+  void AskKey(int& key) noexcept;
+
 private slots:
   void onAccelerate1() noexcept;
   void onAccelerate2() noexcept;

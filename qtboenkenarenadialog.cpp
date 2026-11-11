@@ -5,7 +5,7 @@
 #include <cassert>
 #include <stdexcept>
 
-#include <QDesktopWidget>
+#include <QScreen>
 
 #include "ui_qtboenkenarenadialog.h"
 
@@ -15,12 +15,7 @@ ribi::bnkn::QtArenaDialog::QtArenaDialog(QWidget *parent) noexcept :
     ui(new Ui::QtBoenkenArenaDialog)
 {
   ui->setupUi(this);
-  #ifdef QT5_TODO_FIND_THE_RIGHT_DEFINE
-  QObject::connect(
-    ui->button_done,&QPushButton::clicked,this,&QtArenaDialog::close);
-  #else
   QObject::connect(ui->button_done,SIGNAL(clicked(bool)),this,SLOT(close()));
-  #endif
 }
 
 ribi::bnkn::QtArenaDialog::~QtArenaDialog() noexcept
@@ -49,14 +44,15 @@ std::pair<int,int> ribi::bnkn::QtArenaDialog::GetScreenSize() const noexcept
   if (b->currentIndex() == 0)
   {
     assert(b->currentText() == "Full screen");
-    // -8, because of the application fame
-    const int width
-      = QApplication::desktop()->width()
-      - 8;
-    // -50, because of the app's title bar and those Ubuntu panels
-    const int height
-      = QApplication::desktop()->height() - 96;
-    return std::make_pair(width,height);
+    const QRect screen{this->screen()->availableGeometry()};
+#ifdef Q_OS_WASM
+    // The screen is the canvas on the web page
+    return std::make_pair(screen.width(), screen.height());
+#else
+    // -8, because of the application frame
+    // -50, because of the app's title bar
+    return std::make_pair(screen.width() - 8, screen.height() - 50);
+#endif
   }
   assert(b->currentIndex() == 1);
   assert(b->currentText() == "640x400");

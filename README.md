@@ -1,30 +1,35 @@
 # Boenken
 
-Branch|[![Travis CI logo](TravisCI.png)](https://travis-ci.org)|[![Codecov logo](Codecov.png)](https://www.codecov.io)
----|---|---
-master|[![Build Status](https://travis-ci.org/richelbilderbeek/Boenken.svg?branch=master)](https://travis-ci.org/richelbilderbeek/Boenken)|[![codecov.io](https://codecov.io/github/richelbilderbeek/Boenken/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/Boenken/branch/master)
-develop|[![Build Status](https://travis-ci.org/richelbilderbeek/Boenken.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/Boenken)|[![codecov.io](https://codecov.io/github/richelbilderbeek/Boenken/coverage.svg?branch=develop)](https://codecov.io/github/richelbilderbeek/Boenken/branch/develop)
+[Go to the nicely rendered website](https://richelbilderbeek.github.io/Boenken/),
+where you can also play the game in your browser.
 
-Boenken is a 20-player game that is a mix between soccer and billiards, programmed in C++ using Qt (see 'About the program' for more details).
+Boenken is a two-player game that is a mix between soccer and billiards,
+programmed in C++ using Qt.
 
-# Downloads
+## Build
 
- * [Download the Windows executable](http://richelbilderbeek.nl/GameBoenkenExe.zip)
+Boenken needs Qt 6:
 
-# About the program
+```bash
+qmake Boenken.pro
+make
+```
 
-Boenken is programmed in C++14 using the STL, [Boost](http://www.boost.org), [Qt](http://www.qt.io) (for the desktop version) and [Wt](http://www.webtoolkit.eu/wt) (for the website version) libraries.
+To build the WebAssembly version, do the same with the `qmake` of
+Qt for WebAssembly and the matching version of Emscripten.
+[build_game.yaml](.github/workflows/build_game.yaml)
+shows which versions are used and builds the Linux, Windows and WebAssembly versions.
+[create_zensical_website.yaml](.github/workflows/create_zensical_website.yaml)
+puts the WebAssembly and Windows versions on the website.
 
-Boenken is cross-compiled using [MXE](http://mxe.cc) in the bash shell scripts.
-
-# I want to contribute!
+## I want to contribute!
 
 Awesome!
 
 You can collaborate by
- * email richelbilderbeek (at [Richel Bilderbeek's webpage its 'Contact Me' section](http://www.richelbilderbeek.nl/Contact.htm))
+
  * add a GitHub issue: this can be a question, suggestion, or whatever
- * fork this repository, make the changes, and submit a pull request. 
+ * fork this repository, make the changes, and submit a pull request.
 
 # Screenshot archive
 

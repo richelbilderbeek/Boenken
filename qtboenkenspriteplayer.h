@@ -3,7 +3,6 @@
 
 
 
-#include <boost/checked_delete.hpp>
 #include "qtboenkenspritemoving.h"
 
 
@@ -11,7 +10,7 @@ namespace ribi {
 namespace bnkn {
 
 ///SpritePlayer is a MovingSprite that can respond to input
-///and can only be deleted by boost::checked_delete
+///and can only be deleted by its owner
 struct SpritePlayer final : public SpriteMoving
 {
   SpritePlayer(

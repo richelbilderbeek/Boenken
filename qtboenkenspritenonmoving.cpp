@@ -5,9 +5,6 @@
 
 #include <cassert>
 
-#include <boost/numeric/conversion/cast.hpp>
-#include <boost/math/constants/constants.hpp>
-#include "geometry.h"
 #include "qtboenkenspritemoving.h"
 #include "qtboenkenspriteplayer.h"
 
@@ -43,7 +40,7 @@ void ribi::bnkn::SpriteNonMoving::Collision(
   const double dx = moving.getX() - obstacle.getX();
   const double dy = moving.getY() - obstacle.getY();
   //const double collision_distance
-  //  = boost::numeric_cast<double>(obstacle.m_size + moving.m_size) / 2.0;
+  //  = static_cast<double>(obstacle.m_size + moving.m_size) / 2.0;
   //Obtain the relative angle between the players
 
   /*
@@ -57,13 +54,13 @@ void ribi::bnkn::SpriteNonMoving::Collision(
   angle_players in this case 135 degrees
 
   */
-  const double angle_players = Geometry().GetAngleClockScreen(dx,dy);
+  const double angle_players = GetAngleClockScreen(dx,dy);
 
   //Obtain the moving sprite's current impulse
   double moving_angle = moving.CalcImpulseAngle();
   double moving_speed = moving.CalcImpulseSpeed();
   //Obstacles have opposite impulse
-  const double pi = boost::math::constants::pi<double>();
+  const double pi = ribi::bnkn::pi();
   double obstacle_angle = moving_angle + pi;
   double obstancle_speed = moving_speed;
   //Obtain the new impulses

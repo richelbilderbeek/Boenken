@@ -4,16 +4,14 @@
 #include "qtboenkensprite.h"
 
 #include <cassert>
+#include <cmath>
 
-#include <boost/numeric/conversion/cast.hpp>
-#include <boost/math/constants/constants.hpp>
 
 #include <QBitmap>
 #include <QImage>
 #include <QPainter>
 #include <QPixmap>
 
-#include "geometry.h"
 
 
 ///The maximum x coordinat a Sprite can have
@@ -71,7 +69,7 @@ bool ribi::bnkn::IsCollision(const Sprite& p1, const Sprite& p2) noexcept
   const double dy = p2.getY() - p1.getY();
   const double distance = std::sqrt((dy * dy) + (dx * dx));
   const double collision_distance
-    = boost::numeric_cast<double>(p1.GetSize() + p2.GetSize()) / 2.0;
+    = static_cast<double>(p1.GetSize() + p2.GetSize()) / 2.0;
   return distance < collision_distance;
 }
 
@@ -95,11 +93,11 @@ QPixmap ribi::bnkn::Sprite::DrawGlobe(
   assert(image.bytesPerLine() / width == 4
     && "Assume there are 4 bytes per pixel");
 
-  const double r_max = boost::numeric_cast<double>(r);
-  const double g_max = boost::numeric_cast<double>(g);
-  const double b_max = boost::numeric_cast<double>(b);
-  const double midX = boost::numeric_cast<double>(width ) / 2.0;
-  const double midY = boost::numeric_cast<double>(height) / 2.0;
+  const double r_max = static_cast<double>(r);
+  const double g_max = static_cast<double>(g);
+  const double b_max = static_cast<double>(b);
+  const double midX = static_cast<double>(width ) / 2.0;
+  const double midY = static_cast<double>(height) / 2.0;
   const double max_dist = std::min(midX,midY);
 
   for (int y=0; y!=height; ++y)
@@ -107,10 +105,10 @@ QPixmap ribi::bnkn::Sprite::DrawGlobe(
 
     unsigned char * const line
       = static_cast<unsigned char *>(image.scanLine(y));
-    const double y_d = boost::numeric_cast<double>(y);
+    const double y_d = static_cast<double>(y);
     for (int x=0; x!=width; ++x)
     {
-      const double x_d = boost::numeric_cast<double>(x);
+      const double x_d = static_cast<double>(x);
       const double dist
         = std::sqrt(
             ((x_d - midX) * (x_d - midX))
@@ -152,7 +150,7 @@ QPixmap ribi::bnkn::Sprite::DrawGlobe(
 
 //double ribi::bnkn::Sprite::GetAngle(const double dx, const double dy) noexcept
 //{
-//  return Geometry().GetAngleClockScreen(dx,dy);
+//  return GetAngleClockScreen(dx,dy);
 //}
 
 //From http://www.richelbilderbeek.nl/CppDoPerfectElasticCollision.htm
@@ -163,7 +161,7 @@ void ribi::bnkn::DoPerfectElasticCollision(
   double& angle2,
   double& speed2) noexcept
 {
-  const double pi{boost::math::constants::pi<double>()};
+  const double pi{ribi::bnkn::pi()};
   //The length of the impulse of player 1 (assumes both players have equal mass!)
   const double A{speed1};
   //The length of the impulse of player 2 (assumes both players have equal mass!)
@@ -206,8 +204,23 @@ void ribi::bnkn::DoPerfectElasticCollision(
   const double HdY{BdY + GdY};
 
   //Write the final results
-  angle1 = Geometry().GetAngleClockScreen(DdX, DdY);
-  angle2 = Geometry().GetAngleClockScreen(HdX, HdY);
+  angle1 = GetAngleClockScreen(DdX, DdY);
+  angle2 = GetAngleClockScreen(HdX, HdY);
   speed1 = std::sqrt( (DdX * DdX) + (DdY * DdY) ); //Pythagoras
   speed2 = std::sqrt( (HdX * HdX) + (HdY * HdY) ); //Pythagoras
+}
+
+double ribi::bnkn::GetAngleClockScreen(const double dx, const double dy) noexcept
+{
+  const double tau{2.0 * pi()};
+  double angle{std::fmod(pi() - std::atan2(dx, dy), tau)};
+  if (angle < 0.0) angle += tau;
+  assert(angle >= 0.0);
+  assert(angle < tau);
+  return angle;
+}
+
+double ribi::bnkn::GetDistance(const double dx, const double dy) noexcept
+{
+  return std::sqrt((dx * dx) + (dy * dy));
 }

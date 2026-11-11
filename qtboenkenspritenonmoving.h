@@ -3,7 +3,6 @@
 
 
 
-#include <boost/checked_delete.hpp>
 #include "qtboenkensprite.h"
 
 

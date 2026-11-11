@@ -5,10 +5,7 @@
 
 #include <cassert>
 
-#include <boost/numeric/conversion/cast.hpp>
-#include <boost/math/constants/constants.hpp>
 
-#include "geometry.h"
 
 
 int ribi::bnkn::SpriteMoving::sm_n_moving_sprites = 0;
@@ -40,13 +37,13 @@ ribi::bnkn::SpriteMoving::~SpriteMoving()
 
 double ribi::bnkn::SpriteMoving::CalcImpulseAngle() const noexcept
 {
-  return Geometry().GetAngleClockScreen(m_dx,m_dy);
+  return GetAngleClockScreen(m_dx,m_dy);
 }
 
 double ribi::bnkn::SpriteMoving::CalcImpulseSpeed() const noexcept
 {
 
-  return Geometry().GetDistance(m_dx,m_dy);
+  return GetDistance(m_dx,m_dy);
 }
 
 void ribi::bnkn::SpriteMoving::SetFriction(const double friction)
@@ -64,12 +61,12 @@ void ribi::bnkn::SpriteMoving::Collision(SpriteMoving * const p1, SpriteMoving *
   const double dy = p2->getY() - p1->getY();
   const double distance = std::sqrt((dy * dy) + (dx * dx));
   const double collision_distance
-    = boost::numeric_cast<double>(p1->GetSize() + p2->GetSize()) / 2.0;
+    = static_cast<double>(p1->GetSize() + p2->GetSize()) / 2.0;
   if (distance < collision_distance)
   {
     //A collision!
     //Obtain the relative angle between the players
-    const double a = Geometry().GetAngleClockScreen(dx,dy);
+    const double a = GetAngleClockScreen(dx,dy);
     //Obtain the players' current impulses
     double p1_a = p1->CalcImpulseAngle();
     double p1_s = p1->CalcImpulseSpeed();
@@ -90,7 +87,7 @@ void ribi::bnkn::SpriteMoving::Collision(SpriteMoving * const p1, SpriteMoving *
     {
       const double go_away_distance = collision_distance - distance;
       assert(go_away_distance > 0);
-      const double pi = boost::math::constants::pi<double>();
+      const double pi = ribi::bnkn::pi();
       const double go_away_dx1 =  std::sin(a + pi) * (go_away_distance / 2.0);
       const double go_away_dy1 = -std::cos(a + pi) * (go_away_distance / 2.0);
       const double go_away_dx2 =  std::sin(a + 0.0) * (go_away_distance / 2.0);
@@ -110,7 +107,7 @@ void ribi::bnkn::SpriteMoving::Draw(QPainter& painter) const
   Sprite::Draw(painter);
   #ifdef DRAW_MOVING_SPRITE_IMPULSES
   //Determine the player center
-  const double half_size = boost::numeric_cast<double>(m_size) / 2.0;
+  const double half_size = static_cast<double>(m_size) / 2.0;
   const double x_mid = m_x + half_size;
   const double y_mid = m_y + half_size;
   //Draw the moving sprite's impulse

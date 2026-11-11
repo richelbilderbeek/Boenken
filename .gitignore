@@ -34,3 +34,19 @@ object_script*
 debug/
 release/
 ui_*
+
+# Qt build output
+.qmake.stash
+moc_*
+qrc_*
+/boenken
+boenken.html
+boenken.js
+boenken.wasm
+qtloader.js
+qtlogo.svg
+
+# Generated when building the website
+/docs/boenken_windows.zip
+/docs/game/
+/site/

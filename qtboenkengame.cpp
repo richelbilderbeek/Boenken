@@ -131,7 +131,9 @@ void ribi::bnkn::Game::pressKey(const int key)
       m_players[i].TurnRight();
     }
   }
+#ifndef Q_OS_WASM
   if (key == Qt::Key_F2) std::exit(1);
+#endif
 }
 
 

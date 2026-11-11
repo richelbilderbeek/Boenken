@@ -1,6 +1,7 @@
 #ifndef QTBOENKENMENUDIALOG_H
 #define QTBOENKENMENUDIALOG_H
 
+#include <string>
 #include <vector>
 
 
@@ -54,6 +55,12 @@ private slots:
 std::vector<SpritePlayer> CreatePlayers(const ArenaSettings& a);
 std::vector<SpriteBall> CreateBalls(const ArenaSettings& a) noexcept;
 std::vector<SpriteNonMoving> CreateObstacles(const ArenaSettings& a);
+
+///The version of Boenken
+std::string GetVersion() noexcept;
+
+///The version history of Boenken
+std::vector<std::string> GetVersionHistory() noexcept;
 
 } //~namespace bnkn
 } //~namespace ribi

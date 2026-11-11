@@ -24,7 +24,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "qtboenkencontrolsdialog.h"
 
-#include <boost/lexical_cast.hpp>
+
+#include <QKeySequence>
 
 #include "qtboenkenpresskeydialog.h"
 #include "ui_qtboenkencontrolsdialog.h"
@@ -78,50 +79,46 @@ ribi::bnkn::QtControlsDialog::~QtControlsDialog() noexcept
 void ribi::bnkn::QtControlsDialog::showKeys() noexcept
 {
   ui->button_accelerate_1->setText(
-    boost::lexical_cast<std::string>(m_keys_accel[0]).c_str() );
+    QKeySequence(m_keys_accel[0]).toString() );
   ui->button_accelerate_2->setText(
-    boost::lexical_cast<std::string>(m_keys_accel[1]).c_str() );
+    QKeySequence(m_keys_accel[1]).toString() );
   ui->button_turn_1->setText(
-    boost::lexical_cast<std::string>(m_keys_turn[0]).c_str() );
+    QKeySequence(m_keys_turn[0]).toString() );
   ui->button_turn_2->setText(
-    boost::lexical_cast<std::string>(m_keys_turn[1]).c_str() );
+    QKeySequence(m_keys_turn[1]).toString() );
 
 }
 
 void ribi::bnkn::QtControlsDialog::onAccelerate1() noexcept
 {
-  QtPressKeyDialog d;
-  this->ShowChild(&d);
-  const int key = d.GetKey();
-  m_keys_accel[0] = key;
-  showKeys();
+  AskKey(m_keys_accel[0]);
 }
 
 void ribi::bnkn::QtControlsDialog::onAccelerate2() noexcept
 {
-  QtPressKeyDialog d;
-  this->ShowChild(&d);
-  const int key = d.GetKey();
-  m_keys_accel[1] = key;
-  showKeys();
+  AskKey(m_keys_accel[1]);
 }
 
 void ribi::bnkn::QtControlsDialog::onTurn1() noexcept
 {
-  QtPressKeyDialog d;
-  this->ShowChild(&d);
-  const int key = d.GetKey();
-  m_keys_turn[0] = key;
-  showKeys();
+  AskKey(m_keys_turn[0]);
 }
 
 void ribi::bnkn::QtControlsDialog::onTurn2() noexcept
 {
-  QtPressKeyDialog d;
-  this->ShowChild(&d);
-  const int key = d.GetKey();
-  m_keys_turn[1] = key;
-  showKeys();
+  AskKey(m_keys_turn[1]);
+}
+
+void ribi::bnkn::QtControlsDialog::AskKey(int& key) noexcept
+{
+  QtPressKeyDialog * const d{new QtPressKeyDialog(this)};
+  d->setAttribute(Qt::WA_DeleteOnClose);
+  this->ShowChild(d, [this, d, &key]()
+    {
+      if (d->GetKey() != 0) key = d->GetKey();
+      showKeys();
+    }
+  );
 }
 
 std::vector<int> ribi::bnkn::QtControlsDialog::getKeysAccel() const noexcept

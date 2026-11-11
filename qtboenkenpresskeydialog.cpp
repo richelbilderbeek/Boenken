@@ -47,6 +47,6 @@ void ribi::bnkn::QtPressKeyDialog::keyPressEvent(QKeyEvent * e)
 {
   //According to the Qt doc, the assert below is always true
   assert(e->type() == QEvent::KeyPress);
-  m_key = e->key();
+  if (e->key() != Qt::Key_Escape) m_key = e->key();
   close();
 }

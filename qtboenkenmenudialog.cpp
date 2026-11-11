@@ -4,15 +4,13 @@
 #include "qtboenkenmenudialog.h"
 
 #include <cassert>
+#include <cmath>
+
+#include <QMessageBox>
 
 
-#include <boost/math/constants/constants.hpp>
-#include <boost/numeric/conversion/cast.hpp>
-#include <boost/timer.hpp>
 
 #include "boenkenarenasettings.h"
-#include "boenkenmenudialog.h"
-#include "qtaboutdialog.h"
 #include "qtboenkenarenadialog.h"
 #include "qtboenkencontrolsdialog.h"
 #include "qtboenkengame.h"
@@ -40,6 +38,10 @@ ribi::bnkn::QtMenuDialog::QtMenuDialog(QWidget *parent)
   QObject::connect(ui->button_start       ,SIGNAL(clicked(bool)),this,SLOT(onStartClick())   );
   QObject::connect(ui->button_about       ,SIGNAL(clicked(bool)),this,SLOT(onAboutClick())   );
   QObject::connect(ui->button_quit        ,SIGNAL(clicked(bool)),this,SLOT(close())          );
+#ifdef Q_OS_WASM
+  // A web page cannot be quit
+  ui->button_quit->hide();
+#endif
 }
 
 ribi::bnkn::QtMenuDialog::~QtMenuDialog() noexcept
@@ -56,9 +58,9 @@ std::vector<ribi::bnkn::SpritePlayer> ribi::bnkn::CreatePlayers(
   const int size = 32;
 
   const double mid_x
-    = boost::numeric_cast<double>(a.screen_size.first) / 2.0;
+    = static_cast<double>(a.screen_size.first) / 2.0;
   const double mid_y
-    = boost::numeric_cast<double>(a.screen_size.second) / 2.0;
+    = static_cast<double>(a.screen_size.second) / 2.0;
 
   if (a.formation == Formation::straight_line)
   {
@@ -69,7 +71,7 @@ std::vector<ribi::bnkn::SpritePlayer> ribi::bnkn::CreatePlayers(
     for (int i=0; i!=n_players; ++i,y+=(size/2))
     {
       const int x = (i % 2 ? x_right : x_left);
-      const double pi = boost::math::constants::pi<double>();
+      const double pi = ribi::bnkn::pi();
       const double face_angle = i % 2 ? 1.5 * pi : 0.5 * pi;
       const unsigned char r = (i % 2 ?   0 : 255);
       const unsigned char g = 0;
@@ -84,18 +86,18 @@ std::vector<ribi::bnkn::SpritePlayer> ribi::bnkn::CreatePlayers(
     assert(a.formation == Formation::circle_inward || a.formation == Formation::circle_outward);
     const double ray_x = mid_x / 2.0;
     const double ray_y = mid_y / 2.0;
-    const double pi = boost::math::constants::pi<double>();
-    const double d_angle = (2.0 * pi) / boost::numeric_cast<double>(n_players);
+    const double pi = ribi::bnkn::pi();
+    const double d_angle = (2.0 * pi) / static_cast<double>(n_players);
     double angle = 1.5 * pi;
 
     for (int i=0; i!=n_players; ++i,angle+=d_angle)
     {
       const double x
        = mid_x + (std::sin(angle) * ray_x)
-       - (boost::numeric_cast<double>(size) / 2.0);
+       - (static_cast<double>(size) / 2.0);
       const double y
         = mid_y - (std::cos(angle) * ray_y)
-        - (boost::numeric_cast<double>(size) / 2.0);
+        - (static_cast<double>(size) / 2.0);
       const unsigned char r = (i % 2 ?   0 : 255);
       const unsigned char g = 0;
       const unsigned char b = (i % 2 ? 255 :   0);
@@ -222,19 +224,62 @@ void ribi::bnkn::QtMenuDialog::onStartClick()
   const std::vector<SpriteBall> balls{CreateBalls(a)};
   const std::vector<SpriteNonMoving> obstacles{CreateObstacles(a)};
   const Game b{a,c,players,balls,obstacles};
-  QtMainDialog d{b};
-
-  this->hide();
-  d.exec();
-  this->show();
+  QtMainDialog * const d{new QtMainDialog(b, this)};
+  d->setAttribute(Qt::WA_DeleteOnClose);
+  this->ShowChild(d);
 }
 
 void ribi::bnkn::QtMenuDialog::onAboutClick()
 {
-  About a = bnkn::MenuDialog().GetAbout();
-  a.AddLibrary("QtHideAndShowDialog version: " + QtHideAndShowDialog::GetVersion());
-  QtAboutDialog d(a);
-  d.setStyleSheet(this->styleSheet());
-  d.setWindowIcon(this->windowIcon());
-  this->ShowChild(&d);
+  QMessageBox * const box{new QMessageBox(this)};
+  box->setAttribute(Qt::WA_DeleteOnClose);
+  box->setWindowTitle("About Boenken");
+  box->setTextFormat(Qt::RichText);
+  box->setText(
+    "<b>Boenken</b> version " + QString::fromStdString(GetVersion()) + "<br>"
+    "A multiplayer soccer/billiards game<br>"
+    "Copyright 2007-2026 Richel Bilderbeek<br>"
+    "<a href=\"https://github.com/richelbilderbeek/Boenken\">"
+    "https://github.com/richelbilderbeek/Boenken</a><br>"
+    "Licensed under the GPL-3.0"
+  );
+  box->setDetailedText(QString::fromStdString(
+    [](){
+      std::string s;
+      for (const auto& line: GetVersionHistory()) s += line + "\n";
+      return s;
+    }()
+  ));
+  box->setFont(QFont());
+  box->open();
+}
+
+std::string ribi::bnkn::GetVersion() noexcept
+{
+  return "6.0";
+}
+
+std::vector<std::string> ribi::bnkn::GetVersionHistory() noexcept
+{
+  return {
+    "2000-xx-xx: version 0.0: wrote QBASIC version of Boenken",
+    "2007-10-18: version 1.0: port from QBASIC to C++ Builder",
+    "2007-12-30: version 2.0: added old-school-graphics mode, "
+      "two-button control and option to set the friction of the players",
+    "2010-08-14: version 3.0: initial port to cross-platform, "
+      "using Qt Creator. Added doxygen support",
+    "2010-08-15: version 3.1: created basic menu functionality, "
+      "improved doxygen documentation, "
+      "improved code (seperated GUI from game rules)",
+    "2012-03-07: version 4.0: conformized naming and architecture "
+      "for ProjectRichelBilderbeek",
+    "2012-11-17: version 4.1: added a fancy color gradient to the main menu",
+    "2015-01-02: version 4.2: fixed bug in collision between player and object",
+    "2015-11-15: version 5.0: moved to own GitHub",
+    "2015-11-28: version 5.1: made many types regular",
+    "2016-01-09: version 5.2: crosscompiles again",
+    "2026-11-11: version 6.0: port to Qt 6, "
+      "without dependencies on other repositories, "
+      "playable online as WebAssembly",
+  };
 }

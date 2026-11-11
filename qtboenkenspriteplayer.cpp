@@ -5,12 +5,9 @@
 
 #include <cassert>
 
-#include <boost/numeric/conversion/cast.hpp>
-#include <boost/math/constants/constants.hpp>
 
 #include <QPainter>
 
-#include "geometry.h"
 
 
 constexpr double ribi::bnkn::GetAcceleration()
@@ -19,7 +16,7 @@ constexpr double ribi::bnkn::GetAcceleration()
 }
 constexpr double ribi::bnkn::GetTurnSpeed()
 {
-  return boost::math::constants::pi<double>() / 10.0;
+  return pi() / 10.0;
 }
 
 ///The number of SpritePlayers.
@@ -110,7 +107,7 @@ void ribi::bnkn::SpritePlayer::SetSpeed(const double dx, const double dy) noexce
 
   //Don't set the angle of the player!
   //The angle is where the player 'looks to'
-  //this->m_angle = Geometry().GetAngleClockScreen(dx,dy);
+  //this->m_angle = GetAngleClockScreen(dx,dy);
 }
 
 void ribi::bnkn::SpritePlayer::TurnRight() noexcept
@@ -123,7 +120,7 @@ void ribi::bnkn::SpritePlayer::Draw(QPainter& painter) const
   //Draw the globe and possibly impulse
   SpriteMoving::Draw(painter);
   //Determine the player center
-  const double half_size = boost::numeric_cast<double>(GetSize()) / 2.0;
+  const double half_size = static_cast<double>(GetSize()) / 2.0;
   const double x_mid = m_x + half_size;
   const double y_mid = m_y + half_size;
   //Draw the line the player looks at
