@@ -5,7 +5,7 @@ name: Create Zensical website
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - .github/workflows/build_game.yaml
       - .github/workflows/create_zensical_website.yaml
