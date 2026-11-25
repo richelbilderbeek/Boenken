@@ -22,16 +22,16 @@ shows which versions are used and builds the Linux, Windows and WebAssembly vers
 [create_zensical_website.yaml](.github/workflows/create_zensical_website.yaml)
 puts the WebAssembly and Windows versions on the website.
 
-## I want to contribute!
+## I want to contribute
 
 Awesome!
 
 You can collaborate by
 
- * add a GitHub issue: this can be a question, suggestion, or whatever
- * fork this repository, make the changes, and submit a pull request.
+* add a GitHub issue: this can be a question, suggestion, or whatever
+* fork this repository, make the changes, and submit a pull request.
 
-# Screenshot archive
+## Screenshot archive
 
 Most recent at the top.
 
@@ -53,4 +53,4 @@ Most recent at the top.
 
 ## External links
 
- * [Richel Bilderbeek's games](https://github.com/richelbilderbeek/Games)
+* [Richel Bilderbeek's games](https://github.com/richelbilderbeek/Games)
