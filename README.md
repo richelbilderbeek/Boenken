@@ -1,5 +1,7 @@
 # Boenken
 
+[![codecov](https://codecov.io/gh/richelbilderbeek/Boenken/branch/main/graph/badge.svg)](https://codecov.io/gh/richelbilderbeek/Boenken)
+
 [Go to the nicely rendered website](https://richelbilderbeek.github.io/Boenken/),
 where you can also play the game in your browser.
 

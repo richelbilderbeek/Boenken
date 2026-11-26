@@ -4,5 +4,6 @@ Emscripten
 Richel
 Richèl
 WebAssembly
+codecov
 yaml
 zensical
