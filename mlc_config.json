@@ -1,0 +1,16 @@
+{
+  "aliveStatusCodes": [
+    0,
+    200,
+    403,
+    418,
+    429,
+    500,
+    503
+  ],
+  "ignorePatterns": [
+    {
+      "pattern": "^game/"
+    }
+  ]
+}
